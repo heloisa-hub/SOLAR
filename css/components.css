@@ -581,10 +581,10 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 
 .footer-legal {
   padding-top: 10px;
-  font-size: 0.66rem;
+  font-size: 0.58rem;
   font-weight: 300;
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.45;
   color: rgba(255,255,255,0.4);
 }
 
@@ -1640,10 +1640,10 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .fund-card-mockup-row span { color: var(--color-muted); }
 .fund-card-mockup-row strong { color: var(--color-navy-900); font-weight: 700; }
 
-/* ===== CTA de fechamento (dark, com marca d'água e barra final) ===== */
+/* ===== CTA de fechamento (fundo laranja, com marca d'água) ===== */
 .cta-final {
-  background: var(--color-navy-900);
-  border-top: 3px solid var(--color-gold-500);
+  background: var(--color-gold-500);
+  border-top: 3px solid var(--color-navy-900);
   padding: 64px 0;
   position: relative;
   overflow: hidden;
@@ -1656,14 +1656,15 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   font-weight: 800;
   font-size: 26rem;
   line-height: 1;
-  color: rgba(255,255,255,0.03);
+  color: rgba(7,2,34,0.06);
   pointer-events: none;
   user-select: none;
 }
 .cta-final .container { position: relative; }
-.cta-final .eyebrow { color: var(--color-gold-500); }
+.cta-final .eyebrow { color: var(--color-navy-900); }
+.cta-final .eyebrow::before { background: var(--color-navy-900); }
 .cta-final h2 {
-  color: var(--color-white);
+  color: var(--color-navy-900);
   max-width: 18ch;
   font-size: 1.7rem;
   margin-top: 4px;
@@ -1671,33 +1672,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 @media (min-width: 768px) {
   .cta-final h2 { font-size: 2.2rem; }
 }
-.cta-final h2 .accent { color: var(--color-gold-500); }
+.cta-final h2 .accent { color: var(--color-white); }
 .cta-final p {
-  color: rgba(255,255,255,0.6);
+  color: rgba(7,2,34,0.65);
   margin-top: 16px;
   max-width: 50ch;
 }
 .cta-final .btn { margin-top: 28px; border-radius: 4px; }
-
-.cta-final-bottom {
-  border-top: 1px solid rgba(255,255,255,0.15);
-  margin-top: 48px;
-  padding-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
-}
-.cta-final-bottom .brand-name {
-  color: var(--color-white);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  font-size: 0.82rem;
-}
-.cta-final-bottom .services {
-  color: rgba(255,255,255,0.45);
-  font-size: 0.82rem;
-}
 
 /* ===== Título de dois tons (parte forte + parte suave) ===== */
 .heading-duo .tone-soft { color: var(--color-muted); font-weight: 700; }
