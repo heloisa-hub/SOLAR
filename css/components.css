@@ -548,6 +548,11 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   padding: 22px 0 12px;
   margin-top: 32px;
 }
+/* Sem vão quando o rodapé vem colado num CTA de largura total (evita tira clara indesejada) */
+.cta-final + .site-footer,
+.cta-light + .site-footer {
+  margin-top: 0;
+}
 
 .footer-grid {
   display: grid;
