@@ -586,14 +586,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 
 .footer-legal {
   padding-top: 10px;
-  font-size: 0.58rem;
   font-weight: 300;
   font-style: italic;
   line-height: 1.45;
   color: rgba(255,255,255,0.4);
 }
 
-.footer-legal p { color: inherit; margin-bottom: 6px; }
+.footer-legal p { color: inherit; margin-bottom: 6px; font-size: 0.29rem; }
 
 .footer-bottom {
   display: flex;
