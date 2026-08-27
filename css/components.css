@@ -1648,7 +1648,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .cta-final {
   background: var(--color-gold-500);
   border-top: 3px solid var(--color-navy-900);
-  padding: 64px 0;
+  padding: 44px 0;
   position: relative;
   overflow: hidden;
 }
@@ -1667,12 +1667,12 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .cta-final .eyebrow::before { background: var(--color-navy-900); }
 .cta-final h2 {
   color: var(--color-navy-900);
-  max-width: 18ch;
-  font-size: 1.7rem;
+  max-width: 34ch;
+  font-size: 1.5rem;
   margin-top: 4px;
 }
 @media (min-width: 768px) {
-  .cta-final h2 { font-size: 2.2rem; }
+  .cta-final h2 { font-size: 1.9rem; }
 }
 .cta-final h2 .accent { color: var(--color-white); }
 .cta-final p {
@@ -2016,7 +2016,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   border-bottom: 2px solid var(--color-gold-500);
   display: inline-block;
 }
-.footer-brand-mark { width: 20px; height: auto; margin-bottom: 8px; }
+.footer-brand-mark { width: 26px; height: auto; margin-bottom: 10px; }
 .footer-social--outline a {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.25);
