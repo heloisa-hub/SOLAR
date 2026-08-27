@@ -347,8 +347,8 @@
     if (niceMax === niceMin) niceMax = niceMin + step;
 
     var singlePoint = data.length === 1;
-    var width = 640, height = singlePoint ? 150 : 210;
-    var padding = { top: 26, right: 16, bottom: 30, left: 48 };
+    var width = 640, height = singlePoint ? 130 : 170;
+    var padding = { top: 20, right: 20, bottom: 26, left: 44 };
     var plotW = width - padding.left - padding.right;
     var plotH = height - padding.top - padding.bottom;
 
@@ -397,7 +397,7 @@
     var circles = values.map(function (v, i) {
       var cx = xFor(i).toFixed(1);
       var cy = yFor(v).toFixed(1);
-      return '<circle cx="' + cx + '" cy="' + cy + '" r="2.5" fill="#E89A14" stroke="' + dotStrokeColor + '" stroke-width="1.2" />';
+      return '<circle cx="' + cx + '" cy="' + cy + '" r="2" fill="#E89A14" stroke="' + dotStrokeColor + '" stroke-width="1" />';
     }).join("");
 
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
@@ -413,7 +413,7 @@
       gridSvg +
       '<line x1="' + padding.left + '" y1="' + (padding.top + plotH).toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + (padding.top + plotH).toFixed(1) + '" stroke="' + gridColor + '" stroke-width="1" />' +
       (singlePoint ? '' : '<path d="' + areaPath + '" fill="url(#' + gradientId + ')" />' +
-      '<path d="' + path + '" fill="none" stroke="#E89A14" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />') +
+      '<path d="' + path + '" fill="none" stroke="#E89A14" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" />') +
       circles + xLabelsSvg;
 
     if (box) {

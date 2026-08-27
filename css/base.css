@@ -77,7 +77,15 @@ body {
   background: var(--color-cream);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
+/* Empurra o rodapé para o fim da viewport quando o conteúdo da aba/página
+   é mais curto que a tela — sem isso sobra uma tira clara abaixo do rodapé. */
+.page-body { flex: 1 0 auto; }
+.site-footer { flex-shrink: 0; }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
