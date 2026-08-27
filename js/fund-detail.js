@@ -199,13 +199,120 @@
     return MONTHS_PT[parseInt(parts[1], 10) - 1] + "-" + parts[0].slice(2);
   }
 
+  var MONTHS_PT_LONG = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
+  function formatMonthLong(iso) {
+    var parts = iso.split("-");
+    return MONTHS_PT_LONG[parseInt(parts[1], 10) - 1] + " de " + parts[0];
+  }
+
+  function ensureTooltip(box, dark) {
+    var tooltip = box.querySelector(".chart-tooltip");
+    if (!tooltip) {
+      tooltip = document.createElement("div");
+      tooltip.className = "chart-tooltip";
+      box.appendChild(tooltip);
+    }
+    tooltip.classList.toggle("chart-tooltip--dark", !!dark);
+    return tooltip;
+  }
+
+  function attachChartInteractivity(svg, box, opts) {
+    var data = opts.data, values = opts.values, xFor = opts.xFor, yFor = opts.yFor;
+    var width = opts.width, height = opts.height, padding = opts.padding;
+    var dark = opts.dark, formatLabelValue = opts.formatLabelValue, formatMonthLong = opts.formatMonthLong;
+    var dotStrokeColor = opts.dotStrokeColor;
+
+    var ns = "http://www.w3.org/2000/svg";
+    var guide = document.createElementNS(ns, "line");
+    guide.setAttribute("y1", padding.top);
+    guide.setAttribute("y2", padding.top + opts.plotH);
+    guide.setAttribute("stroke", dark ? "rgba(255,255,255,0.35)" : "rgba(7,2,34,0.25)");
+    guide.setAttribute("stroke-width", "1");
+    guide.setAttribute("stroke-dasharray", "3,3");
+    guide.style.opacity = "0";
+    svg.appendChild(guide);
+
+    var highlight = document.createElementNS(ns, "circle");
+    highlight.setAttribute("r", "5");
+    highlight.setAttribute("fill", "#E89A14");
+    highlight.setAttribute("stroke", dotStrokeColor);
+    highlight.setAttribute("stroke-width", "2");
+    highlight.style.opacity = "0";
+    svg.appendChild(highlight);
+
+    var overlay = document.createElementNS(ns, "rect");
+    overlay.setAttribute("x", padding.left);
+    overlay.setAttribute("y", 0);
+    overlay.setAttribute("width", Math.max(width - padding.left - padding.right, 1));
+    overlay.setAttribute("height", height);
+    overlay.setAttribute("fill", "#000000");
+    overlay.setAttribute("fill-opacity", "0");
+    overlay.style.pointerEvents = "all";
+    overlay.style.cursor = "crosshair";
+    svg.appendChild(overlay);
+
+    var tooltip = ensureTooltip(box, dark);
+
+    function nearestIndex(svgX) {
+      var best = 0, bestDist = Infinity;
+      for (var i = 0; i < data.length; i++) {
+        var d = Math.abs(xFor(i) - svgX);
+        if (d < bestDist) { bestDist = d; best = i; }
+      }
+      return best;
+    }
+
+    function showAt(idx) {
+      var cx = xFor(idx), cy = yFor(values[idx]);
+      guide.setAttribute("x1", cx); guide.setAttribute("x2", cx);
+      guide.style.opacity = "1";
+      highlight.setAttribute("cx", cx); highlight.setAttribute("cy", cy);
+      highlight.style.opacity = "1";
+
+      var rect = svg.getBoundingClientRect();
+      var scale = rect.width / width;
+      var boxRect = box.getBoundingClientRect();
+      var leftPx = (cx * scale) + (rect.left - boxRect.left);
+      var topPx = (cy * scale) + (rect.top - boxRect.top);
+
+      tooltip.innerHTML =
+        '<span class="chart-tooltip-date">' + formatMonthLong(data[idx].mes) + '</span>' +
+        '<span class="chart-tooltip-value">' + formatLabelValue(values[idx]) + '</span>';
+      tooltip.style.opacity = "1";
+      var tw = tooltip.offsetWidth || 120;
+      var clampedLeft = Math.min(Math.max(leftPx, tw / 2 + 4), boxRect.width - tw / 2 - 4);
+      tooltip.style.left = clampedLeft + "px";
+      tooltip.style.top = Math.max(topPx - 14, 4) + "px";
+    }
+
+    function hide() {
+      guide.style.opacity = "0";
+      highlight.style.opacity = "0";
+      tooltip.style.opacity = "0";
+    }
+
+    function onMove(evt) {
+      var point = evt.touches ? evt.touches[0] : evt;
+      var rect = svg.getBoundingClientRect();
+      var scale = width / rect.width;
+      var svgX = (point.clientX - rect.left) * scale;
+      showAt(nearestIndex(svgX));
+    }
+
+    overlay.addEventListener("mousemove", onMove);
+    overlay.addEventListener("mouseleave", hide);
+    overlay.addEventListener("touchstart", onMove, { passive: true });
+    overlay.addEventListener("touchmove", onMove, { passive: true });
+    overlay.addEventListener("touchend", hide);
+  }
+
   function drawChartInto(svgId, boxId, nameElId, cls, dark) {
     var box = document.getElementById(boxId);
     var svg = document.getElementById(svgId);
     var data = cls ? cls.historicoMensal : null;
     var gridColor = dark ? "rgba(255,255,255,0.14)" : "#E4DFD3";
     var axisTextColor = dark ? "rgba(255,255,255,0.5)" : "#7A7568";
-    var labelTextColor = dark ? "#FFFFFF" : "#282420";
     var dotStrokeColor = dark ? "#070222" : "#FFFDF6";
 
     if (!svg) return false;
@@ -285,27 +392,12 @@
     var areaPath = path + ' L' + xFor(values.length - 1).toFixed(1) + ',' + (padding.top + plotH).toFixed(1) + ' L' + xFor(0).toFixed(1) + ',' + (padding.top + plotH).toFixed(1) + ' Z';
     var gradientId = 'gradient-' + svgId;
 
-    // Rótulo de valor apenas no primeiro, último e nos extremos (min/max) —
-    // com muitos pontos, rotular cada um deixava o gráfico "abarrotado" e
-    // ilegível; assim ele comunica tendência e os números-chave sem poluir.
-    var minIdx = values.indexOf(dataMin);
-    var maxIdx = values.indexOf(dataMax);
-    var labelIndices = data.length <= 5
-      ? values.map(function (_, i) { return i; })
-      : Array.from(new Set([0, minIdx, maxIdx, values.length - 1]));
-
+    // Os valores não ficam mais escritos fixos no gráfico — aparecem
+    // no hover (tooltip), evitando poluir a curva com números permanentes.
     var circles = values.map(function (v, i) {
       var cx = xFor(i).toFixed(1);
-      var cy = yFor(v);
-      var showLabel = labelIndices.indexOf(i) !== -1;
-      var r = showLabel ? 3.5 : 2.5;
-      var dot = '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="' + r + '" fill="#E89A14" stroke="' + dotStrokeColor + '" stroke-width="1.2" />';
-      if (!showLabel) return dot;
-      var nearTop = cy - padding.top < 20;
-      var labelY = nearTop ? cy + 18 : cy - 10;
-      var anchor = i === 0 ? "start" : (i === values.length - 1 ? "end" : "middle");
-      var labelX = i === 0 ? Number(cx) - 4 : (i === values.length - 1 ? Number(cx) + 4 : Number(cx));
-      return dot + '<text x="' + labelX.toFixed(1) + '" y="' + labelY.toFixed(1) + '" text-anchor="' + anchor + '" font-size="10.5" font-weight="700" fill="' + labelTextColor + '">' + formatLabelValue(v) + '</text>';
+      var cy = yFor(v).toFixed(1);
+      return '<circle cx="' + cx + '" cy="' + cy + '" r="2.5" fill="#E89A14" stroke="' + dotStrokeColor + '" stroke-width="1.2" />';
     }).join("");
 
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
@@ -323,6 +415,15 @@
       (singlePoint ? '' : '<path d="' + areaPath + '" fill="url(#' + gradientId + ')" />' +
       '<path d="' + path + '" fill="none" stroke="#E89A14" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />') +
       circles + xLabelsSvg;
+
+    if (box) {
+      attachChartInteractivity(svg, box, {
+        data: data, values: values, xFor: xFor, yFor: yFor,
+        width: width, height: height, padding: padding, plotH: plotH,
+        dark: dark, formatLabelValue: formatLabelValue, formatMonthLong: formatMonthLong,
+        dotStrokeColor: dotStrokeColor
+      });
+    }
     return true;
   }
 

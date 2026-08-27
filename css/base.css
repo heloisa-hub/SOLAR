@@ -95,11 +95,17 @@ h3 { font-size: 1.1rem; }
 
 p { color: var(--color-ink); font-size: 0.96rem; }
 
+/* Um único sistema de largura — todas as seções (header, hero, conteúdo)
+   usam a mesma largura máxima fluida, para que logo/texto fiquem sempre
+   alinhados às mesmas margens esquerda/direita em qualquer tamanho de tela. */
 .container {
   width: 100%;
-  max-width: var(--container-max);
+  max-width: clamp(1180px, 84vw, 1800px);
   margin: 0 auto;
   padding: 0 20px;
+}
+@media (min-width: 640px) {
+  .container { padding: 0 32px; }
 }
 
 .container.container--wide {
@@ -139,7 +145,7 @@ p { color: var(--color-ink); font-size: 0.96rem; }
 @media (min-width: 768px) {
   h1 { font-size: 2.9rem; }
   h2 { font-size: 1.8rem; }
-  .section { padding: 72px 0; }
+  .section { padding: 60px 0; }
 }
 
 @media (min-width: 1024px) {

@@ -22,7 +22,6 @@
       <li><a href="servicos.html" data-page="servicos">Soluções</a></li>
       <li><a href="fundos.html" data-page="fundos">Fundos</a></li>
       <li><a href="sobre.html" data-page="sobre">Sobre</a></li>
-      <li><a href="contato.html" data-page="contato">Divulgações</a></li>
       <li><a href="contato.html" class="nav-cta" data-page="contato">Fale com a Solar</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
@@ -34,7 +33,9 @@
 <div class="hero-fold">
   <section class="hero-video">
     <div class="hero-video-media">
-      <iframe class="hero-video-yt" src="https://www.youtube.com/embed/u3VV-6VU6ZY?autoplay=1&mute=1&loop=1&playlist=u3VV-6VU6ZY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3" title="" frameborder="0" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
+      <video autoplay muted loop playsinline preload="auto" poster="img/hero-sp-skyline.jpg">
+        <source src="video/hero-solar-web.mp4" type="video/mp4">
+      </video>
       <div class="hero-video-overlay"></div>
     </div>
     <div class="container container--wide hero-video-content reveal">
@@ -76,12 +77,31 @@
 
 <div class="define-band">
   <div class="container">
-    <span class="eyebrow">O que nos define</span>
+    <div class="define-band-head">
+      <span class="eyebrow">O que nos define</span>
+      <h2>Princípios que orientam cada operação.</h2>
+    </div>
     <div class="define-grid">
-      <div class="define-item"><span class="tick"></span><span class="num">01</span><span class="label">Disciplina de crédito</span></div>
-      <div class="define-item"><span class="tick"></span><span class="num">02</span><span class="label">Proximidade com o negócio</span></div>
-      <div class="define-item"><span class="tick"></span><span class="num">03</span><span class="label">Segurança jurídica</span></div>
-      <div class="define-item"><span class="tick"></span><span class="num">04</span><span class="label">Alinhamento de interesses</span></div>
+      <div class="define-item">
+        <span class="num">01</span>
+        <h4>Disciplina de crédito</h4>
+        <p>Análise individual de cada operação, sem produto de prateleira.</p>
+      </div>
+      <div class="define-item">
+        <span class="num">02</span>
+        <h4>Proximidade com o negócio</h4>
+        <p>Entendimento profundo da dinâmica de caixa e dos ativos de cada empresa.</p>
+      </div>
+      <div class="define-item">
+        <span class="num">03</span>
+        <h4>Segurança jurídica</h4>
+        <p>Garantias, covenants e mecanismos de proteção bem desenhados.</p>
+      </div>
+      <div class="define-item">
+        <span class="num">04</span>
+        <h4>Alinhamento de interesses</h4>
+        <p>Governança e incentivos organizados entre empresa, gestor e investidores.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -160,43 +180,40 @@
   </div>
 </section>
 
-<section class="section">
+<section class="section section--orange reveal">
   <div class="container">
     <span class="eyebrow">Estratégias de investimento</span>
     <h2 style="margin-bottom: 8px;">Fundos de Crédito Estruturado</h2>
     <p style="max-width: 64ch; margin-bottom: 32px;">Gerimos FIDCs com estratégias construídas a partir de direitos creditórios e operações de crédito, com acompanhamento contínuo da carteira e de seus principais indicadores de risco.</p>
     <div class="grid grid--4col" data-fund-listing="4"></div>
-    <a href="fundos.html" class="btn btn-outline" style="margin-top: 36px;">Ver todos os fundos</a>
-    <p style="font-size: 0.72rem; color: var(--color-muted); margin-top: 24px;">Rentabilidade passada não representa garantia de rentabilidade futura. Leia o regulamento antes de investir.</p>
+    <a href="fundos.html" class="btn btn-dark" style="margin-top: 36px;">Ver todos os fundos</a>
+    <p style="font-size: 0.72rem; color: rgba(7,2,34,0.55); margin-top: 24px;">Rentabilidade passada não representa garantia de rentabilidade futura. Leia o regulamento antes de investir.</p>
   </div>
 </section>
 
 <section class="section section--alt reveal">
-  <div class="container split-2col" style="align-items: stretch;">
-    <div style="display:flex; flex-direction:column; justify-content:center;">
-      <span class="eyebrow">Sobre a Solar</span>
-      <h2 class="heading-duo"><span>Experiência em crédito.</span><br><span class="tone-soft">Visão de longo prazo.</span></h2>
-      <p style="margin-top: 16px; max-width: 62ch;">Desde 2018, a Solar Capital desenvolve soluções de crédito para empresas e gere veículos de investimento ligados à economia real. Nossa atuação combina experiência de mercado, proximidade com as empresas investidas e disciplina na análise e acompanhamento de cada operação.</p>
-      <a href="sobre.html" class="btn btn-outline" style="margin-top: 24px; align-self: flex-start;">Conheça a Solar →</a>
+  <div class="container">
+    <span class="eyebrow">Sobre a Solar</span>
+    <h2 class="heading-duo"><span>Experiência em crédito.</span> <span class="tone-soft">Visão de longo prazo.</span></h2>
+    <p style="margin-top: 16px; max-width: 62ch;">Desde 2018, desenvolvemos soluções de crédito para empresas e gerimos veículos de investimento ligados à economia real, combinando experiência de mercado e disciplina de crédito.</p>
+    <div class="inline-stats">
+      <div class="inline-stats-item"><span class="value">R$ 7,4<span class="unit">bn</span></span><span class="label">Operado desde 2018</span></div>
+      <div class="inline-stats-item"><span class="value">R$ 6,2<span class="unit">bn</span></span><span class="label">Liquidados</span></div>
+      <div class="inline-stats-item inline-stats-item--accent"><span class="value">R$ 55<span class="unit">mi</span></span><span class="label">Capital próprio</span></div>
     </div>
-    <div class="stats-panel">
-      <span class="eyebrow">Solar em números</span>
-      <div class="stats-stack">
-        <div class="stats-stack-item"><span class="label">Operado desde 2018</span><span class="value">R$ 7,4<span class="unit">bn</span></span></div>
-        <div class="stats-stack-item"><span class="label">Liquidados</span><span class="value">R$ 6,2<span class="unit">bn</span></span></div>
-        <div class="stats-stack-item accent"><span class="label">Capital próprio</span><span class="value">R$ 55<span class="unit">mi</span></span></div>
-      </div>
-      <p style="font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 20px;">Números conforme materiais institucionais da Solar Capital, base jul/2026.</p>
-    </div>
+    <a href="sobre.html" class="btn btn-outline" style="margin-top: 32px;">Conheça a Solar →</a>
+    <p style="font-size: 0.72rem; color: var(--color-muted); margin-top: 20px;">Números conforme materiais institucionais da Solar Capital, base jul/2026.</p>
   </div>
 </section>
 
-<section class="cta-final">
+<section class="cta-band">
   <img class="cta-final-mark" src="logo/simbolo-navy.png" alt="">
   <div class="container">
-    <span class="eyebrow">Vamos conversar</span>
-    <h2>Capital e empresas conectados <span class="accent">por estruturas melhores.</span></h2>
-    <p>Fale com a nossa equipe sobre crédito, FIDCs ou fundos de investimento.</p>
+    <div>
+      <span class="eyebrow">Vamos conversar</span>
+      <h2>Capital e empresas conectados <span class="accent">por estruturas melhores.</span></h2>
+      <p>Fale com a nossa equipe sobre crédito, FIDCs ou fundos de investimento.</p>
+    </div>
     <a href="contato.html" class="btn btn-dark">Fale com a Solar →</a>
   </div>
 </section>
