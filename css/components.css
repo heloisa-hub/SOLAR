@@ -2135,3 +2135,81 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 }
 .cross-grid-item h4 { font-size: 1rem; margin-bottom: 8px; }
 .cross-grid-item p { font-size: 0.9rem; color: var(--color-muted); }
+
+/* ===== Liderança: cabeçalho com rótulo à direita ===== */
+.leaders-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+.leaders-header .plain-label-right {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  margin-bottom: 0;
+}
+
+/* ===== Liderança: 3 colunas com divisores e traço de acabamento ===== */
+.leaders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 32px;
+  border-top: 1px solid var(--color-border);
+  margin-top: 28px;
+}
+@media (max-width: 900px) {
+  .leaders-grid { grid-template-columns: 1fr; }
+}
+.leaders-col {
+  position: relative;
+  padding-top: 24px;
+}
+@media (min-width: 901px) {
+  .leaders-col:not(:first-child) { border-left: 1px solid var(--color-border); padding-left: 32px; }
+}
+.leaders-col .tick {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--color-gold-500);
+}
+@media (min-width: 901px) {
+  .leaders-col:not(:first-child) .tick { left: 32px; }
+}
+.leaders-col .role-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gold-600);
+  margin-bottom: 6px;
+}
+.leaders-col h3 { font-size: 1.3rem; margin-bottom: 14px; }
+.leaders-col > p { font-size: 0.9rem; color: var(--color-muted); }
+.leaders-divider { border-top: 1px solid var(--color-border); margin: 24px 0; }
+.leaders-col .plain-label { font-size: 0.68rem; margin-bottom: 14px; }
+.career-item { margin-bottom: 14px; }
+.career-item:last-child { margin-bottom: 0; }
+.career-item strong { display: block; font-size: 0.95rem; color: var(--color-navy-900); font-weight: 700; }
+.career-item span { display: block; font-size: 0.85rem; color: var(--color-muted); }
+.education-note { font-size: 0.85rem; color: var(--color-muted); }
+.career-linkedin { display: inline-block; margin-top: 12px; font-size: 0.82rem; font-weight: 600; color: var(--color-blue-500); }
+
+/* ===== Faixa laranja (timeline "Nossa história") ===== */
+.section--orange {
+  background: var(--color-gold-500);
+}
+.section--orange .eyebrow { color: var(--color-navy-900); }
+.section--orange .eyebrow::before { background: var(--color-navy-900); }
+.section--orange h2 { color: var(--color-navy-900); }
+.section--orange .timeline-h-steps::before { background: rgba(7,2,34,0.25); }
+.section--orange .timeline-h-step::before { background: var(--color-navy-900); }
+.section--orange .timeline-h-step .num { color: rgba(7,2,34,0.6); }
+.section--orange .timeline-h-step h4 { color: var(--color-navy-900); }
+.section--orange .timeline-h-step p { color: rgba(7,2,34,0.65); }
