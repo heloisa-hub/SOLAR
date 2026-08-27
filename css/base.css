@@ -114,7 +114,7 @@ p { color: var(--color-ink); font-size: 0.96rem; }
 }
 
 .section--alt {
-  background: var(--color-cream-alt);
+  background: var(--color-cream);
 }
 
 .text-center { text-align: center; }

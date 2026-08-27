@@ -104,13 +104,17 @@
       container.innerHTML = "<p>" + NA + "</p>";
       return;
     }
-    container.innerHTML =
-      "<div><dt>Mês</dt><dd class=\"" + percentClass(cls.mes) + "\">" + formatPercent(cls.mes) + "</dd></div>" +
-      "<div><dt>Ano</dt><dd class=\"" + percentClass(cls.ano) + "\">" + formatPercent(cls.ano) + "</dd></div>" +
-      "<div><dt>12 meses</dt><dd class=\"" + percentClass(cls.dozeMeses) + "\">" + formatPercent(cls.dozeMeses) + "</dd></div>" +
-      "<div><dt>Desde o início</dt><dd class=\"" + percentClass(cls.desdeInicio) + "\">" + formatPercent(cls.desdeInicio) + "</dd></div>" +
-      (isEmpty(cls.dozeMeses) ? "" : "<div><dt>% do CDI (12m)</dt><dd>" + formatCdiPercent(cls.cdi12m) + "</dd></div>") +
+    var primaryRow =
+      "<div class=\"stat-primary\"><dt>Mês</dt><dd>" + formatPercent(cls.mes) + "</dd></div>" +
+      "<div><dt>Ano</dt><dd>" + formatPercent(cls.ano) + "</dd></div>" +
+      "<div><dt>12 meses</dt><dd>" + formatPercent(cls.dozeMeses) + "</dd></div>";
+    var secondaryRow =
+      (isEmpty(cls.dozeMeses) ? "" : "<div><dt>% do CDI (12M)</dt><dd>" + formatCdiPercent(cls.cdi12m) + "</dd></div>") +
+      "<div><dt>Desde o início</dt><dd>" + formatPercent(cls.desdeInicio) + "</dd></div>" +
       (isEmpty(cls.rating) ? "" : "<div><dt>Rating</dt><dd>" + cls.rating + "</dd></div>");
+    container.innerHTML =
+      "<div class=\"overview-stats-row overview-stats-row--primary\">" + primaryRow + "</div>" +
+      "<div class=\"overview-stats-row overview-stats-row--secondary\">" + secondaryRow + "</div>";
   }
 
   function renderRetornoAlvo(fund) {
@@ -195,10 +199,14 @@
     return MONTHS_PT[parseInt(parts[1], 10) - 1] + "-" + parts[0].slice(2);
   }
 
-  function drawChartInto(svgId, boxId, nameElId, cls) {
+  function drawChartInto(svgId, boxId, nameElId, cls, dark) {
     var box = document.getElementById(boxId);
     var svg = document.getElementById(svgId);
     var data = cls ? cls.historicoMensal : null;
+    var gridColor = dark ? "rgba(255,255,255,0.14)" : "#E4DFD3";
+    var axisTextColor = dark ? "rgba(255,255,255,0.5)" : "#7A7568";
+    var labelTextColor = dark ? "#FFFFFF" : "#282420";
+    var dotStrokeColor = dark ? "#070222" : "#FFFDF6";
 
     if (!svg) return false;
 
@@ -253,8 +261,8 @@
       var v = niceMin + (niceMax - niceMin) * (g / gridCount);
       var y = yFor(v);
       gridSvg +=
-        '<line x1="' + padding.left + '" y1="' + y.toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + y.toFixed(1) + '" stroke="#E4DFD3" stroke-width="1" />' +
-        '<text x="' + (padding.left - 10) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="#7A7568">' + formatAxisValue(v) + '</text>';
+        '<line x1="' + padding.left + '" y1="' + y.toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + y.toFixed(1) + '" stroke="' + gridColor + '" stroke-width="1" />' +
+        '<text x="' + (padding.left - 10) + '" y="' + (y + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="' + axisTextColor + '">' + formatAxisValue(v) + '</text>';
     }
 
     var xLabelIndices = [];
@@ -266,7 +274,7 @@
       if (xLabelIndices[xLabelIndices.length - 1] !== data.length - 1) xLabelIndices.push(data.length - 1);
     }
     var xLabelsSvg = xLabelIndices.map(function (i) {
-      return '<text x="' + xFor(i).toFixed(1) + '" y="' + (height - 8) + '" text-anchor="middle" font-size="9.5" fill="#7A7568">' + formatMonthShort(data[i].mes) + '</text>';
+      return '<text x="' + xFor(i).toFixed(1) + '" y="' + (height - 8) + '" text-anchor="middle" font-size="9.5" fill="' + axisTextColor + '">' + formatMonthShort(data[i].mes) + '</text>';
     }).join("");
 
     var path = "M" + xFor(0).toFixed(1) + "," + yFor(values[0]).toFixed(1);
@@ -291,13 +299,13 @@
       var cy = yFor(v);
       var showLabel = labelIndices.indexOf(i) !== -1;
       var r = showLabel ? 3.5 : 2.5;
-      var dot = '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="' + r + '" fill="#E89A14" stroke="#FFFDF6" stroke-width="1.2" />';
+      var dot = '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="' + r + '" fill="#E89A14" stroke="' + dotStrokeColor + '" stroke-width="1.2" />';
       if (!showLabel) return dot;
       var nearTop = cy - padding.top < 20;
       var labelY = nearTop ? cy + 18 : cy - 10;
       var anchor = i === 0 ? "start" : (i === values.length - 1 ? "end" : "middle");
       var labelX = i === 0 ? Number(cx) - 4 : (i === values.length - 1 ? Number(cx) + 4 : Number(cx));
-      return dot + '<text x="' + labelX.toFixed(1) + '" y="' + labelY.toFixed(1) + '" text-anchor="' + anchor + '" font-size="10.5" font-weight="700" fill="#282420">' + formatLabelValue(v) + '</text>';
+      return dot + '<text x="' + labelX.toFixed(1) + '" y="' + labelY.toFixed(1) + '" text-anchor="' + anchor + '" font-size="10.5" font-weight="700" fill="' + labelTextColor + '">' + formatLabelValue(v) + '</text>';
     }).join("");
 
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
@@ -311,7 +319,7 @@
         '</linearGradient>' +
       '</defs>' +
       gridSvg +
-      '<line x1="' + padding.left + '" y1="' + (padding.top + plotH).toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + (padding.top + plotH).toFixed(1) + '" stroke="#E4DFD3" stroke-width="1" />' +
+      '<line x1="' + padding.left + '" y1="' + (padding.top + plotH).toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + (padding.top + plotH).toFixed(1) + '" stroke="' + gridColor + '" stroke-width="1" />' +
       (singlePoint ? '' : '<path d="' + areaPath + '" fill="url(#' + gradientId + ')" />' +
       '<path d="' + path + '" fill="none" stroke="#E89A14" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />') +
       circles + xLabelsSvg;
@@ -323,8 +331,8 @@
     var hasData = !!(cls && cls.historicoMensal && cls.historicoMensal.length);
     var emptyState = document.getElementById("rentabilidade-empty");
     if (emptyState) emptyState.style.display = (!hasData && fund.classes && fund.classes.length) ? "block" : "none";
-    drawChartInto("rentabilidade-chart", "rentabilidade-chart-box", "chart-class-name", cls);
-    var overviewHasChart = drawChartInto("overview-chart", "overview-chart-box", "overview-chart-class-name", cls);
+    drawChartInto("rentabilidade-chart", "rentabilidade-chart-box", "chart-class-name", cls, false);
+    var overviewHasChart = drawChartInto("overview-chart", "overview-chart-box", "overview-chart-class-name", cls, true);
     var overviewEmpty = document.getElementById("overview-chart-empty");
     if (overviewEmpty) overviewEmpty.style.display = overviewHasChart ? "none" : "block";
   }

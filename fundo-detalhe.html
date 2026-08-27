@@ -65,7 +65,7 @@
       <!-- Overview -->
       <div class="tab-panel is-active" data-tab-panel="overview">
         <div class="overview-flow">
-          <div class="overview-main">
+          <div class="overview-main overview-main--dark">
             <div class="overview-headline">
               <span class="eyebrow">Rentabilidade</span>
               <dl class="overview-stats" id="overview-rentabilidade"></dl>
@@ -73,49 +73,32 @@
             <div class="chart-box" id="overview-chart-box" style="display:none;">
               <svg id="overview-chart"></svg>
             </div>
-            <p id="overview-chart-empty" style="font-size: 0.88rem; color: var(--color-muted);">Histórico de rentabilidade ainda insuficiente para exibir gráfico.</p>
+            <p id="overview-chart-empty" style="font-size: 0.88rem; color: rgba(255,255,255,0.5);">Histórico de rentabilidade ainda insuficiente para exibir gráfico.</p>
           </div>
 
           <div class="overview-side">
             <span class="eyebrow">Ficha do fundo</span>
-            <ul class="fact-list">
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="coin"></span>
-                <span><span class="fact-list-label">Patrimônio líquido</span><span class="fact-list-value" data-field="plAtual"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="calendar"></span>
-                <span><span class="fact-list-label">Data base</span><span class="fact-list-value" data-field="dataBase"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="calendar"></span>
-                <span><span class="fact-list-label">Início do fundo</span><span class="fact-list-value" data-field-date="dataInicio"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="person"></span>
-                <span><span class="fact-list-label">Público-alvo</span><span class="fact-list-value" data-field="publicoAlvo"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="layers"></span>
-                <span><span class="fact-list-label">Condomínio</span><span class="fact-list-value" data-field="condominio"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="layers"></span>
-                <span><span class="fact-list-label">Classificação ANBIMA</span><span class="fact-list-value" data-field="classificacaoAnbima"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="building"></span>
-                <span><span class="fact-list-label">Gestor</span><span class="fact-list-value" data-field="gestor"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="building"></span>
-                <span><span class="fact-list-label">Administrador</span><span class="fact-list-value" data-field="administrador"></span></span>
-              </li>
-              <li class="fact-list-item">
-                <span class="fact-icon" data-icon="building"></span>
-                <span><span class="fact-list-label">Custodiante</span><span class="fact-list-value" data-field="custodiante"></span></span>
-              </li>
-            </ul>
+            <div class="fund-facts">
+              <div class="fund-fact">
+                <dt>Patrimônio líquido</dt><dd data-field="plAtual"></dd>
+              </div>
+              <div class="fund-fact">
+                <dt>Classificação ANBIMA</dt><dd data-field="classificacaoAnbima"></dd>
+              </div>
+              <div class="fund-fact-row">
+                <div class="fund-fact"><dt>Data base</dt><dd data-field="dataBase"></dd></div>
+                <div class="fund-fact"><dt>Início do fundo</dt><dd data-field-date="dataInicio"></dd></div>
+              </div>
+              <div class="fund-fact-row">
+                <div class="fund-fact"><dt>Gestor</dt><dd data-field="gestor"></dd></div>
+                <div class="fund-fact"><dt>Administrador</dt><dd data-field="administrador"></dd></div>
+              </div>
+              <div class="fund-fact-row" style="border-bottom: none;">
+                <div class="fund-fact" style="border-bottom: none;"><dt>Custodiante</dt><dd data-field="custodiante"></dd></div>
+                <div class="fund-fact" style="border-bottom: none;"><dt>Público-alvo</dt><dd data-field="publicoAlvo"></dd></div>
+              </div>
+            </div>
+            <p class="fund-facts-note">Rentabilidade passada não representa garantia de rentabilidade futura.</p>
           </div>
         </div>
       </div>

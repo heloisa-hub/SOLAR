@@ -992,6 +992,61 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .fact-list-item > span:last-child { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
 .fact-list-label { font-size: 0.66rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.03em; }
 .fact-list-value { font-size: 0.82rem; font-weight: 600; color: var(--color-navy-900); }
+
+/* ===== Painel escuro "Rentabilidade" (overview do fundo) ===== */
+.overview-main--dark {
+  background: var(--color-navy-900);
+  border-top: 3px solid var(--color-gold-500);
+  padding: 28px 26px;
+}
+.overview-main--dark .eyebrow { color: var(--color-gold-500); }
+.overview-main--dark .overview-stats { display: block; }
+.overview-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+}
+.overview-stats-row--secondary {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+.overview-stats-row dt {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.overview-stats-row dd {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0;
+  line-height: 1;
+}
+.overview-stats-row .stat-primary dd { font-size: 2.2rem; color: var(--color-gold-500); }
+.overview-main--dark .chart-box { margin-top: 24px; }
+
+/* ===== Ficha do fundo (sem ícones, pares em 2 colunas) ===== */
+.fund-facts { margin-top: 4px; }
+.fund-fact,
+.fund-fact-row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.fund-fact-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 20px;
+}
+.fund-fact-row .fund-fact { padding: 0; border-bottom: none; }
+.fund-facts dt,
+.fund-fact dt { font-size: 0.68rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; }
+.fund-facts dd,
+.fund-fact dd { font-size: 0.92rem; font-weight: 700; color: var(--color-navy-900); margin: 0; }
+.fund-facts-note { font-size: 0.78rem; color: var(--color-muted); margin-top: 16px; }
 .detail-col-list dt { font-size: 0.7rem; color: var(--color-muted); margin-bottom: 3px; }
 .detail-col-list dd { font-size: 0.85rem; font-weight: 700; color: var(--color-navy-900); margin: 0; }
 
@@ -2022,3 +2077,61 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   border: 1px solid rgba(255,255,255,0.25);
 }
 .footer-social--outline a:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.08); }
+
+/* ===== Texto com barra de destaque à esquerda (sem caixa) ===== */
+.text-accent-bar {
+  border-left: 3px solid var(--color-gold-500);
+  padding-left: 24px;
+}
+.text-accent-bar p { margin-bottom: 14px; }
+.text-accent-bar p:last-child { margin-bottom: 0; }
+
+/* ===== Rótulo plano (maiúsculas, sem tracinho do eyebrow) ===== */
+.plain-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+  margin-bottom: 20px;
+}
+
+/* ===== Grade 2x2 com divisores em cruz ===== */
+.cross-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 480px) {
+  .cross-grid { grid-template-columns: 1fr; }
+}
+.cross-grid-item {
+  padding: 0 28px 24px 0;
+}
+.cross-grid-item:nth-child(2n) { padding-left: 28px; padding-right: 0; }
+.cross-grid-item:nth-child(1),
+.cross-grid-item:nth-child(2) {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 24px;
+}
+@media (min-width: 481px) {
+  .cross-grid-item:nth-child(odd) { border-right: 1px solid var(--color-border); }
+}
+@media (max-width: 480px) {
+  .cross-grid-item {
+    padding: 0 0 20px 0 !important;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 20px !important;
+  }
+  .cross-grid-item:last-child { border-bottom: none; margin-bottom: 0 !important; }
+}
+.cross-grid-item .num {
+  display: block;
+  color: var(--color-gold-600);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+.cross-grid-item h4 { font-size: 1rem; margin-bottom: 8px; }
+.cross-grid-item p { font-size: 0.9rem; color: var(--color-muted); }
