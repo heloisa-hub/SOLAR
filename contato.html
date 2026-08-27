@@ -30,67 +30,73 @@
   </div>
 </header>
 
-<section class="page-banner">
-  <img class="page-banner-mark" src="logo/simbolo-navy.png" alt="">
-  <div class="container">
+<section class="contact-split">
+  <div class="contact-split-left">
+    <span class="plain-label-orange">Contato</span>
     <h1>Fale com a Solar</h1>
     <p>Para empresas, investidores e parceiros que desejam conhecer nossas soluções, fundos ou discutir uma potencial operação.</p>
+    <div class="accent-rule-full"></div>
+    <h2 style="margin-bottom: 24px;">Como podemos ajudar?</h2>
+    <form id="contact-form" class="contact-form">
+      <div class="form-row two-col">
+        <div class="form-field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Nome completo" required>
+        </div>
+        <div class="form-field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+        </div>
+      </div>
+      <div class="form-row two-col">
+        <div class="form-field">
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(11) 00000-0000">
+        </div>
+        <div class="form-field">
+          <label for="assunto">Assunto</label>
+          <select id="assunto" name="assunto">
+            <option value="Operações de Crédito">Operações de Crédito</option>
+            <option value="Estruturação de FIDC">Estruturação de FIDC</option>
+            <option value="Fundos de Investimento">Fundos de Investimento</option>
+            <option value="Relacionamento Institucional">Relacionamento Institucional</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva brevemente a operação ou o assunto de interesse." required></textarea>
+      </div>
+      <div class="contact-form-submit">
+        <button type="submit" class="btn">Enviar mensagem →</button>
+        <p class="contact-form-note">Seus dados são usados apenas para retorno do contato.</p>
+      </div>
+    </form>
   </div>
-</section>
 
-<section class="section section--tight-top">
-  <div class="container">
-    <div class="two-col">
-      <div>
-        <h2 style="margin-bottom: 20px;">Como podemos ajudar?</h2>
-        <form id="contact-form">
-          <div class="form-row two-col">
-            <div class="form-field">
-              <label for="nome">Nome</label>
-              <input type="text" id="nome" name="nome" required>
-            </div>
-            <div class="form-field">
-              <label for="email">E-mail</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-          </div>
-          <div class="form-row two-col">
-            <div class="form-field">
-              <label for="telefone">Telefone</label>
-              <input type="tel" id="telefone" name="telefone">
-            </div>
-            <div class="form-field">
-              <label for="assunto">Assunto</label>
-              <select id="assunto" name="assunto">
-                <option value="Operações de Crédito">Operações de Crédito</option>
-                <option value="Estruturação de FIDC">Estruturação de FIDC</option>
-                <option value="Fundos de Investimento">Fundos de Investimento</option>
-                <option value="Relacionamento Institucional">Relacionamento Institucional</option>
-                <option value="Outros">Outros</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-block">Enviar mensagem</button>
-        </form>
-      </div>
-
-      <div>
-        <h2 style="margin-bottom: 20px;">Contato</h2>
-        <div class="fact-grid" style="grid-template-columns: 1fr;">
-          <div><dt>E-mail</dt><dd>contato@solarcapital.com.br</dd></div>
-          <div><dt>Telefone</dt><dd><a href="tel:+551138561545" style="color:inherit;">+55 11 3856-1545</a></dd></div>
-          <div><dt>Endereço</dt><dd>Rua Dr. Eduardo de Souza Aranha, 153 · 6º andar · São Paulo/SP</dd></div>
-          <div><dt>Atendimento</dt><dd>Segunda a sexta-feira, das 9h às 18h.</dd></div>
-        </div>
-        <div class="footer-social" style="margin-top: 24px;">
-          <a href="#" aria-label="LinkedIn" style="background: var(--color-blue-100); color: var(--color-blue-600);"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3C4.01 3 3 4.01 3 5.25S4.01 7.5 5.25 7.5 7.5 6.49 7.5 5.25 6.49 3 5.25 3zM20.5 20h-3.37v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96V20H9.74V8.5h3.24v1.57h.05c.45-.85 1.56-1.75 3.21-1.75 3.44 0 4.26 2.26 4.26 5.2V20z"/></svg></a>
-          <a href="#" aria-label="Instagram" style="background: var(--color-blue-100); color: var(--color-blue-600);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg></a>
-        </div>
-      </div>
+  <div class="contact-split-right">
+    <img class="cta-final-mark" src="logo/hero-symbol-white.png" alt="">
+    <span class="plain-label-orange">Canais diretos</span>
+    <div class="contact-channel">
+      <dt>E-mail</dt>
+      <dd><a href="mailto:contato@solarcapital.com.br">contato@solarcapital.com.br</a></dd>
+    </div>
+    <div class="contact-channel">
+      <dt>Telefone</dt>
+      <dd><a href="tel:+551138561545">+55 11 3856-1545</a></dd>
+    </div>
+    <div class="contact-channel">
+      <dt>Endereço</dt>
+      <dd>Rua Dr. Eduardo de Souza Aranha, 153<br>6º andar · São Paulo/SP</dd>
+    </div>
+    <div class="contact-channel">
+      <dt>Atendimento</dt>
+      <dd>Segunda a sexta, das 9h às 18h</dd>
+    </div>
+    <div class="contact-channel">
+      <dt>Redes</dt>
+      <dd><a href="#">LinkedIn</a> · <a href="#">Instagram</a></dd>
     </div>
   </div>
 </section>
