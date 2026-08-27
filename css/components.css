@@ -592,7 +592,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   color: rgba(255,255,255,0.4);
 }
 
-.footer-legal p { color: inherit; margin-bottom: 6px; font-size: 0.29rem; }
+.footer-legal p { color: inherit; margin-bottom: 6px; font-size: 0.64rem; }
 
 .footer-bottom {
   display: flex;
@@ -1654,13 +1654,11 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 }
 .cta-final-mark {
   position: absolute;
-  top: -0.22em;
+  top: -60px;
   right: 24px;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 26rem;
-  line-height: 1;
-  color: rgba(7,2,34,0.06);
+  width: 420px;
+  height: auto;
+  opacity: 0.08;
   pointer-events: none;
   user-select: none;
 }
