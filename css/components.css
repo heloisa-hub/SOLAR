@@ -592,11 +592,11 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .footer-grid h4 {
   color: var(--color-white);
   font-size: 0.8rem;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 
 .footer-grid p { color: rgba(255,255,255,0.6); }
-.footer-grid ul { display: flex; flex-direction: column; gap: 6px; }
+.footer-grid ul { display: flex; flex-direction: column; gap: 10px; }
 .footer-grid a { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
 .footer-grid a:hover { color: var(--color-white); }
 .footer-grid li { font-size: 0.8rem; }
@@ -1597,6 +1597,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+  flex-shrink: 0;
 }
 .inline-stats--plain .value {
   font-family: var(--font-display);
@@ -1604,6 +1605,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   font-weight: 700;
   color: var(--color-navy-900);
   line-height: 1.1;
+  white-space: nowrap;
 }
 .inline-stats--plain .value .unit {
   font-size: 1.05rem;
@@ -1822,6 +1824,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 /* ===== Card de fundo (mockup) ===== */
 .fund-card-mockup {
   display: block;
+  min-width: 0;
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-top: 3px solid var(--color-navy-900);
@@ -1845,14 +1848,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .fund-card-mockup h3 { margin-bottom: 18px; font-size: 1.15rem; }
 .fund-card-mockup-row {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 4px;
   padding: 10px 0;
   border-top: 1px solid var(--color-border);
-  font-size: 0.86rem;
 }
-.fund-card-mockup-row span { color: var(--color-muted); }
-.fund-card-mockup-row strong { color: var(--color-navy-900); font-weight: 700; }
+.fund-card-mockup-row span { color: var(--color-muted); font-size: 0.74rem; white-space: nowrap; }
+.fund-card-mockup-row strong { color: var(--color-navy-900); font-weight: 700; font-size: 0.94rem; white-space: nowrap; }
 
 /* ===== CTA de fechamento — barra amarela compacta, padrão único em todas as páginas ===== */
 .cta-final-mark {
@@ -1926,13 +1928,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   .define-grid { grid-template-columns: 1fr; }
 }
 .define-item {
-  background: rgba(7, 2, 34, 0.9);
+  background: rgba(7, 2, 34, 0.8);
   border-radius: 14px;
   padding: 26px 24px;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .define-item:hover {
-  background: rgba(7, 2, 34, 0.96);
+  background: rgba(7, 2, 34, 0.88);
   transform: translateY(-4px);
 }
 .define-item .num {
@@ -1954,7 +1956,24 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   margin: 0;
 }
 
-/* ===== FIDCs: texto à esquerda | lista "o que a estrutura entrega" à direita ===== */
+/* ===== FIDCs: texto à esquerda | lista "o que a estrutura entrega" à direita =====
+   Os dois mini-títulos ficam numa linha própria (fidc-headings-row), com o
+   MESMO grid de colunas da linha de conteúdo, para continuarem alinhados
+   com as colunas abaixo. Na linha de conteúdo, .fidc-left-content e
+   .fidc-split-right esticam para a mesma altura (grid stretch) — a altura
+   real de referência é a da grade de cards, já que .fidc-split-right só
+   contém a grade (sem título próprio). Dentro de .fidc-left-content, um
+   grid de 3 linhas (auto 1fr auto) ancora título no topo, texto no meio
+   e botão na base — batendo exatamente com o topo/base da grade de cards. */
+.fidc-headings-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-bottom: 28px;
+}
+@media (min-width: 900px) {
+  .fidc-headings-row { grid-template-columns: 1fr 1.5fr; gap: 56px; }
+}
 .fidc-split {
   display: grid;
   grid-template-columns: 1fr;
@@ -1963,7 +1982,14 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 @media (min-width: 900px) {
   .fidc-split { grid-template-columns: 1fr 1.5fr; gap: 56px; }
 }
-.fidc-intro-block { max-width: 72ch; display: flex; flex-direction: column; justify-content: space-between; }
+.fidc-left-content {
+  max-width: 72ch;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.fidc-left-content h2 { align-self: start; margin: 0; }
+.fidc-left-content p { align-self: center; margin: 20px 0; }
+.fidc-left-content a { align-self: end; justify-self: start; }
 .fidc-split-right {
   display: flex;
   flex-direction: column;
@@ -1972,7 +1998,6 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin-top: 22px;
 }
 @media (max-width: 700px) {
   .fidc-entrega-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2327,11 +2352,6 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .detail-list-item p { font-size: 0.88rem; color: var(--color-muted); }
 
 /* ===== Rodapé: cabeçalho de coluna com sublinhado laranja + símbolo acima do nome ===== */
-.footer-grid h4.underline {
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--color-gold-500);
-  display: inline-block;
-}
 .footer-brand-mark { width: 26px; height: auto; margin-bottom: 10px; }
 .footer-social--outline a {
   background: transparent;
