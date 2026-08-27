@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="css/components.css">
 </head>
 <body data-page="fundos">
-<div class="page-body">
+<div class="page-body page-body--flush">
 
 <header class="site-header">
   <div class="container">
@@ -147,19 +147,21 @@
       <div class="tab-panel" data-tab-panel="rentabilidade">
         <h3 style="margin-bottom: 16px;">Rentabilidade por classe de cota</h3>
         <p id="rentabilidade-empty" style="display:none; margin-bottom: 24px;">Este fundo ainda não iniciou suas operações — o histórico de rentabilidade será publicado aqui assim que houver dados a divulgar.</p>
-        <div class="chart-box" id="rentabilidade-chart-box" style="margin-bottom: 32px; display:none;">
-          <p style="font-size: 0.85rem; color: var(--color-muted); margin-bottom: 12px;">Rentabilidade acumulada — classe <span id="chart-class-name"></span></p>
-          <svg id="rentabilidade-chart"></svg>
-        </div>
-        <div class="table-scroll">
-          <table class="data-table" id="classes-table">
-            <thead>
-              <tr>
-                <th>Classe</th><th>% PL</th><th>Rating</th><th>Mês</th><th>Ano</th><th>3M</th><th>6M</th><th>12M</th><th>Desde início</th>
-              </tr>
-            </thead>
-            <tbody id="classes-table-body"></tbody>
-          </table>
+        <div class="rentab-grid">
+          <div class="chart-box" id="rentabilidade-chart-box" style="display:none; max-width: none;">
+            <p style="font-size: 0.85rem; color: var(--color-muted); margin-bottom: 12px;">Rentabilidade acumulada — classe <span id="chart-class-name"></span></p>
+            <svg id="rentabilidade-chart"></svg>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" id="classes-table">
+              <thead>
+                <tr>
+                  <th>Classe</th><th>% PL</th><th>Rating</th><th>Mês</th><th>Ano</th><th>3M</th><th>6M</th><th>12M</th><th>Desde início</th>
+                </tr>
+              </thead>
+              <tbody id="classes-table-body"></tbody>
+            </table>
+          </div>
         </div>
         <p style="margin-top: 16px; font-size: 0.82rem; color: var(--color-muted);">Linhas em itálico mostram o percentual do CDI equivalente a cada período.</p>
       </div>
