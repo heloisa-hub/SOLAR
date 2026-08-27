@@ -583,6 +583,11 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   padding-bottom: 14px;
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
+/* Todas as colunas esticam para a mesma altura (grid stretch); dentro de
+   cada uma, a lista fica "colada" na base para que o fim do texto de
+   todas as colunas termine na mesma linha. */
+.footer-grid > div { display: flex; flex-direction: column; }
+.footer-grid > div > ul { margin-top: auto; }
 
 .footer-grid h4 {
   color: var(--color-white);
@@ -596,14 +601,14 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .footer-grid a:hover { color: var(--color-white); }
 .footer-grid li { font-size: 0.8rem; }
 
-.footer-social { display: flex; gap: 8px; margin-top: 18px; }
+.footer-social { display: flex; gap: 10px; margin-top: 18px; }
 .footer-social a {
-  width: 26px; height: 26px;
-  border-radius: 7px;
+  width: 32px; height: 32px;
+  border-radius: 8px;
   background: rgba(255,255,255,0.08);
   display: flex; align-items: center; justify-content: center;
 }
-.footer-social a svg { width: 12px; height: 12px; }
+.footer-social a svg { width: 15px; height: 15px; }
 .footer-social a:hover { background: rgba(255,255,255,0.18); }
 
 .footer-legal {
@@ -1595,10 +1600,10 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 }
 .inline-stats--plain .value {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.8rem;
   font-weight: 700;
   color: var(--color-navy-900);
-  line-height: 1.15;
+  line-height: 1.1;
 }
 .inline-stats--plain .value .unit {
   font-size: 1.05rem;
@@ -1921,13 +1926,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   .define-grid { grid-template-columns: 1fr; }
 }
 .define-item {
-  background: var(--color-navy-900);
+  background: rgba(7, 2, 34, 0.9);
   border-radius: 14px;
   padding: 26px 24px;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 .define-item:hover {
-  background: #100a34;
+  background: rgba(7, 2, 34, 0.96);
   transform: translateY(-4px);
 }
 .define-item .num {
