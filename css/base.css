@@ -65,8 +65,6 @@ input, textarea, select { font: inherit; }
   --font-display: "Montserrat", "Inter", Arial, sans-serif;
   --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
 
-  --container-max: 1180px;
-  --container-wide: 1560px;
   --radius: 6px;
   --shadow-card: none;
 }
@@ -95,24 +93,21 @@ h3 { font-size: 1.1rem; }
 
 p { color: var(--color-ink); font-size: 0.96rem; }
 
-/* Um único sistema de largura — todas as seções (header, hero, conteúdo)
-   usam a mesma largura máxima fluida, para que logo/texto fiquem sempre
-   alinhados às mesmas margens esquerda/direita em qualquer tamanho de tela. */
+/* Container fluido, sem teto de largura — o conteúdo acompanha a largura
+   real da viewport (só com paddings laterais responsivos), para que em
+   telas grandes/ultrawide os elementos se espalhem em vez de ficarem
+   presos num miolo central. Logo/menu/hero/métricas usam este mesmo
+   padding lateral, então tudo fica sempre alinhado à mesma margem. */
 .container {
   width: 100%;
-  max-width: clamp(1180px, 84vw, 1800px);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-@media (min-width: 640px) {
-  .container { padding: 0 32px; }
+  padding-left: clamp(20px, 4vw, 120px);
+  padding-right: clamp(20px, 4vw, 120px);
 }
 
 .container.container--wide {
   width: 100%;
-  max-width: clamp(1180px, 84vw, 1800px);
-  margin: 0 auto;
-  padding: 0 32px;
+  padding-left: clamp(20px, 5vw, 140px);
+  padding-right: clamp(20px, 5vw, 140px);
 }
 
 .section {
