@@ -1558,17 +1558,17 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 
 /* Variante "plain": números no mesmo peso tipográfico do texto ao lado,
    sem funcionar como número de destaque grande. */
-.inline-stats--plain { gap: 20px 40px; margin-top: 28px; }
-.inline-stats--plain .inline-stats-item { gap: 4px; }
+.inline-stats--plain { gap: 20px 44px; margin-top: 4px; }
+.inline-stats--plain .inline-stats-item { gap: 6px; }
 .inline-stats--plain .value {
-  font-family: var(--font-base);
-  font-size: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-navy-900);
-  line-height: 1.4;
+  line-height: 1.2;
 }
 .inline-stats--plain .value .unit {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--color-gold-600);
 }
@@ -1910,25 +1910,29 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 }
 
 /* ===== FIDCs: texto à esquerda | lista "o que a estrutura entrega" à direita ===== */
+.fidc-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+@media (min-width: 900px) {
+  .fidc-split { grid-template-columns: 1fr 1.5fr; gap: 56px; }
+}
 .fidc-intro-block { max-width: 72ch; }
 .fidc-split-right {
-  margin-top: 40px;
+  padding-top: 8px;
 }
 .fidc-entrega-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   margin-top: 22px;
 }
+@media (max-width: 700px) {
+  .fidc-entrega-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 480px) {
   .fidc-entrega-grid { grid-template-columns: 1fr; }
-}
-.fidc-entrega-grid--row { grid-template-columns: repeat(3, 1fr); }
-@media (min-width: 900px) {
-  .fidc-entrega-grid--row { grid-template-columns: repeat(6, 1fr); }
-}
-@media (max-width: 560px) {
-  .fidc-entrega-grid--row { grid-template-columns: repeat(2, 1fr); }
 }
 .fidc-entrega-item {
   background: var(--color-white);
