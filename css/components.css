@@ -586,7 +586,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .footer-grid a:hover { color: var(--color-white); }
 .footer-grid li { font-size: 0.8rem; }
 
-.footer-social { display: flex; gap: 8px; margin-top: 4px; }
+.footer-social { display: flex; gap: 8px; margin-top: 18px; }
 .footer-social a {
   width: 26px; height: 26px;
   border-radius: 7px;
@@ -789,17 +789,27 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-bottom: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.eyebrow::before {
-  content: "";
-  width: 18px;
-  height: 1.5px;
-  background: var(--color-gold-500);
   display: inline-block;
 }
+
+/* ===== Cabeçalho de seção com rótulo à direita (ex: "Base Jul/2026") ===== */
+.section-head-split {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.plain-label-right {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  white-space: nowrap;
+  margin-top: 4px;
+}
+.section--orange .plain-label-right { color: rgba(7,2,34,0.5); }
 
 .not-found {
   text-align: center;
@@ -1323,7 +1333,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   z-index: 3;
 }
 .stat-bar {
-  padding: 36px 0;
+  padding: 48px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1501,6 +1511,8 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   color: var(--color-navy-900);
   max-width: 44ch;
   margin-top: 56px;
+  margin-left: auto;
+  text-align: right;
 }
 .quote-statement span { color: var(--color-gold-600); }
 @media (min-width: 768px) {
@@ -1537,13 +1549,6 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.inline-stats-item--accent {
-  background: var(--color-gold-tint);
-  border-radius: 12px;
-  padding: 16px 22px;
-  margin: -16px 0;
-}
-.inline-stats-item--accent .value { color: var(--color-gold-600); }
 
 /* ===== Statement grande (título em escala maior, momento de destaque) ===== */
 .statement-lg {
@@ -1612,22 +1617,19 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .split-card h3 { margin: 8px 0 12px; font-size: 1.1rem; }
 .split-card p { color: var(--color-muted); font-size: 0.88rem; flex-grow: 1; }
 .split-card .btn { margin-top: 22px; align-self: flex-start; }
-.split-card--dark {
-  background: var(--color-navy-900);
-  border-top: none;
+.split-card--outline {
+  background: transparent;
+  border: 1.5px solid var(--color-gold-500);
+  border-top: 1.5px solid var(--color-gold-500);
   border-radius: 18px;
-  padding: 32px 28px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  padding: 34px 30px;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
-.split-card--dark:hover {
+.split-card--outline:hover {
   transform: translateY(-4px);
-  background: #100a34;
+  background: var(--color-gold-tint);
+  border-color: var(--color-gold-600);
 }
-.split-card--dark h3 { color: var(--color-white); }
-.split-card--dark p { color: rgba(255,255,255,0.65); }
-.split-card--dark .eyebrow { color: var(--color-gold-500); }
-.split-card--dark .btn-outline { border-color: rgba(255,255,255,0.5); color: var(--color-white); border-radius: 999px; }
-.split-card--dark .btn-outline:hover { border-color: var(--color-white); }
 
 .split-card--tint {
   background: var(--color-gold-tint);
@@ -1798,7 +1800,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .cta-band {
   background: var(--color-gold-500);
   border-top: 3px solid var(--color-navy-900);
-  padding: 40px 0;
+  padding: 56px 0;
   position: relative;
   overflow: hidden;
 }
@@ -1811,7 +1813,6 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   gap: 24px;
 }
 .cta-band .eyebrow { color: var(--color-navy-900); margin-bottom: 6px; }
-.cta-band .eyebrow::before { background: var(--color-navy-900); }
 .cta-band h2 {
   color: var(--color-navy-900);
   max-width: 34ch;
@@ -1842,7 +1843,7 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 /* ===== Faixa escura "O que nos define" ===== */
 .define-band {
   background: var(--color-navy-900);
-  padding: 56px 0;
+  padding: 76px 0;
 }
 .define-band .eyebrow { color: var(--color-gold-500); }
 .define-band-head { max-width: 46ch; margin-bottom: 36px; }
@@ -1901,38 +1902,45 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .fidc-split-right {
   padding-top: 8px;
 }
-@media (min-width: 900px) {
-  .fidc-split-right { border-left: 1px solid var(--color-border); padding-left: 56px; }
-}
 .fidc-entrega-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 22px;
+}
+@media (max-width: 480px) {
+  .fidc-entrega-grid { grid-template-columns: 1fr; }
 }
 .fidc-entrega-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-gold-500);
+  border-radius: 10px;
+  padding: 18px 18px 16px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.fidc-entrega-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(7,2,34,0.07);
 }
 .fidc-entrega-item .num {
-  flex-shrink: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--color-gold-tint);
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
   color: var(--color-gold-600);
-  font-weight: 700;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 0.78rem;
+  margin-bottom: 8px;
 }
-.fidc-entrega-item .label {
-  font-weight: 700;
+.fidc-entrega-item h4 {
+  font-size: 0.88rem;
+  margin-bottom: 6px;
   color: var(--color-navy-900);
-  font-size: 0.95rem;
+}
+.fidc-entrega-item p {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin: 0;
+  line-height: 1.45;
 }
 
 .btn-dark { background: var(--color-navy-900); color: var(--color-white); }
@@ -2278,9 +2286,9 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 /* ===== Faixa laranja (timeline "Nossa história") ===== */
 .section--orange {
   background: var(--color-gold-500);
+  padding: 76px 0;
 }
 .section--orange .eyebrow { color: var(--color-navy-900); }
-.section--orange .eyebrow::before { background: var(--color-navy-900); }
 .section--orange h2 { color: var(--color-navy-900); }
 .section--orange .timeline-h-steps::before { background: rgba(7,2,34,0.25); }
 .section--orange .timeline-h-step::before { background: var(--color-navy-900); }

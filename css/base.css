@@ -140,7 +140,7 @@ p { color: var(--color-ink); font-size: 0.96rem; }
 @media (min-width: 768px) {
   h1 { font-size: 2.9rem; }
   h2 { font-size: 1.8rem; }
-  .section { padding: 60px 0; }
+  .section { padding: 72px 0; }
 }
 
 @media (min-width: 1024px) {

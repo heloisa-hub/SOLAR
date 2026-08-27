@@ -1,12 +1,29 @@
 (function () {
   var NA = "—";
 
+  function principalClass(fund) {
+    if (!fund.classes || !fund.classes.length) return null;
+    if (fund.classePrincipal) {
+      var found = fund.classes.filter(function (c) { return c.nome === fund.classePrincipal; })[0];
+      if (found) return found;
+    }
+    return fund.classes[0];
+  }
+
+  function rentabilidadeLtm(fund) {
+    var cls = principalClass(fund);
+    if (!cls || cls.dozeMeses === null || cls.dozeMeses === undefined) return NA;
+    var num = Number(cls.dozeMeses);
+    return (num > 0 ? "+" : "") + num.toFixed(2).replace(".", ",") + "%";
+  }
+
   function fundCardHtml(fund) {
     return (
       '<a class="fund-card-mockup" href="fundo-detalhe.html?fundo=' + fund.slug + '">' +
         '<span class="fund-card-mockup-category">' + (fund.estrategiaResumo || fund.classificacaoAnbima) + "</span>" +
         "<h3>" + fund.nome + "</h3>" +
         '<div class="fund-card-mockup-row"><span>Patrimônio líquido</span><strong>' + (fund.plAtual || NA) + "</strong></div>" +
+        '<div class="fund-card-mockup-row"><span>Rentabilidade LTM</span><strong>' + rentabilidadeLtm(fund) + "</strong></div>" +
         '<div class="fund-card-mockup-row"><span>Data-base</span><strong>' + (fund.dataBase || NA) + "</strong></div>" +
       "</a>"
     );
