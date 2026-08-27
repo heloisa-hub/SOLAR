@@ -348,7 +348,7 @@
 
     var singlePoint = data.length === 1;
     var width = 640, height = singlePoint ? 130 : 170;
-    var padding = { top: 20, right: 20, bottom: 26, left: 44 };
+    var padding = { top: 24, right: 20, bottom: 28, left: 46 };
     var plotW = width - padding.left - padding.right;
     var plotH = height - padding.top - padding.bottom;
 
@@ -406,7 +406,7 @@
     svg.innerHTML =
       '<defs>' +
         '<linearGradient id="' + gradientId + '" x1="0" y1="0" x2="0" y2="1">' +
-          '<stop offset="0%" stop-color="#E89A14" stop-opacity="0.24" />' +
+          '<stop offset="0%" stop-color="#E89A14" stop-opacity="0.12" />' +
           '<stop offset="100%" stop-color="#E89A14" stop-opacity="0" />' +
         '</linearGradient>' +
       '</defs>' +

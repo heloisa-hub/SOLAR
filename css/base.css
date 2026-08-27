@@ -83,8 +83,18 @@ body {
 }
 
 /* Empurra o rodapé para o fim da viewport quando o conteúdo da aba/página
-   é mais curto que a tela — sem isso sobra uma tira clara abaixo do rodapé. */
-.page-body { flex: 1 0 auto; }
+   é mais curto que a tela. .page-body cresce (flex:1) para preencher o
+   espaço restante do body, e dentro dele o ÚLTIMO elemento (seja o cta-band,
+   seja outra seção) recebe margin-top:auto — assim a sobra de espaço vai
+   sempre para a borda entre o conteúdo e o rodapé, nunca criando um vão
+   "no meio" do próprio .page-body. Quando a página já é mais alta que a
+   tela, margin-top:auto não sobra nada e não afeta o espaçamento normal. */
+.page-body {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.page-body > *:last-child { margin-top: auto; }
 .site-footer { flex-shrink: 0; }
 
 h1, h2, h3, h4 {
