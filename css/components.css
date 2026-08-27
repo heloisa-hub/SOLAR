@@ -870,6 +870,12 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .section--dark .eyebrow { color: var(--color-gold-500); }
 .section--dark h2, .section--dark h3, .section--dark h4 { color: var(--color-white); }
 .section--dark p { color: rgba(255,255,255,0.65); }
+.section--dark .timeline-h-steps::before { background: rgba(255,255,255,0.15); }
+.section--dark .timeline-h-step .num { color: rgba(255,255,255,0.4); }
+.section--dark .timeline-h-step h4 { color: var(--color-white); }
+.section--dark .timeline-h-step p { color: rgba(255,255,255,0.6); }
+.section--dark .quote-statement { color: var(--color-white); }
+.section--dark .quote-statement span { color: var(--color-gold-500); }
 
 .dark-card {
   background: var(--color-navy-700);
@@ -1550,6 +1556,23 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   letter-spacing: 0.04em;
 }
 
+/* Variante "plain": números no mesmo peso tipográfico do texto ao lado,
+   sem funcionar como número de destaque grande. */
+.inline-stats--plain { gap: 20px 40px; margin-top: 28px; }
+.inline-stats--plain .inline-stats-item { gap: 4px; }
+.inline-stats--plain .value {
+  font-family: var(--font-base);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-navy-900);
+  line-height: 1.4;
+}
+.inline-stats--plain .value .unit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-gold-600);
+}
+
 /* ===== Statement grande (título em escala maior, momento de destaque) ===== */
 .statement-lg {
   font-size: 1.5rem;
@@ -1840,14 +1863,12 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   margin-top: 22px;
 }
 
-/* ===== Faixa escura "O que nos define" ===== */
+/* ===== "O que nos define": sem faixa de fundo, só os cards preenchidos em azul ===== */
 .define-band {
-  background: var(--color-navy-900);
-  padding: 76px 0;
+  padding: 16px 0 64px;
 }
-.define-band .eyebrow { color: var(--color-gold-500); }
-.define-band-head { max-width: 46ch; margin-bottom: 36px; }
-.define-band-head h2 { color: var(--color-white); margin: 0; }
+.define-band-head { margin-bottom: 36px; }
+.define-band-head h2 { margin: 0; }
 .define-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1860,16 +1881,14 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   .define-grid { grid-template-columns: 1fr; }
 }
 .define-item {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--color-navy-900);
   border-radius: 14px;
   padding: 26px 24px;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 .define-item:hover {
-  background: rgba(255,255,255,0.07);
-  border-color: rgba(255,178,43,0.4);
-  transform: translateY(-3px);
+  background: #100a34;
+  transform: translateY(-4px);
 }
 .define-item .num {
   display: block;
@@ -1891,16 +1910,9 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 }
 
 /* ===== FIDCs: texto à esquerda | lista "o que a estrutura entrega" à direita ===== */
-.fidc-split {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-}
-@media (min-width: 900px) {
-  .fidc-split { grid-template-columns: 1fr 1fr; gap: 64px; }
-}
+.fidc-intro-block { max-width: 72ch; }
 .fidc-split-right {
-  padding-top: 8px;
+  margin-top: 40px;
 }
 .fidc-entrega-grid {
   display: grid;
@@ -1910,6 +1922,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 }
 @media (max-width: 480px) {
   .fidc-entrega-grid { grid-template-columns: 1fr; }
+}
+.fidc-entrega-grid--row { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 900px) {
+  .fidc-entrega-grid--row { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 560px) {
+  .fidc-entrega-grid--row { grid-template-columns: repeat(2, 1fr); }
 }
 .fidc-entrega-item {
   background: var(--color-white);
