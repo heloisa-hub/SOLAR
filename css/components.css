@@ -162,6 +162,13 @@ body[data-page="home"] .site-header.is-scrolled .nav-links a:hover,
 body[data-page="home"] .site-header.is-scrolled .nav-links a.is-active { color: var(--color-blue-500); }
 body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: var(--color-navy-900); }
 
+/* O painel mobile (.is-open) tem fundo sólido cream sempre — os links
+   dentro dele devem ser sempre escuros, independente da variante
+   transparente/branca do header da home, para continuarem legíveis. */
+body[data-page="home"] .site-header.is-open .nav-links a { color: var(--color-gray-900); }
+body[data-page="home"] .site-header.is-open .nav-links a:hover,
+body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(--color-blue-500); }
+
 /* ===== Buttons ===== */
 .btn {
   display: inline-flex;
@@ -1588,6 +1595,9 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
   margin-top: 0;
   align-items: stretch;
 }
+@media (min-width: 900px) {
+  .inline-stats--plain { flex-wrap: nowrap; }
+}
 .inline-stats--plain .inline-stats-item {
   display: flex;
   flex-direction: column;
@@ -2296,6 +2306,36 @@ body[data-page="home"] .site-header.is-scrolled .nav-toggle span { background: v
 .agents-columns--col .agents-column:last-child { padding-bottom: 0; }
 .agents-column h3 { font-size: 1rem; margin-bottom: 8px; }
 .agents-column p { font-size: 0.9rem; color: var(--color-muted); }
+
+/* ===== Estrutura | Agentes: os dois lados usam subgrid para compartilhar as
+   mesmas 5 linhas (passo 1, seta, passo 2, seta, passo 3) — assim cada bloco
+   da esquerda fica com a MESMA altura do bloco correspondente à direita,
+   sem depender de margens/alturas fixas. Abaixo de 900px as colunas
+   simplesmente empilham (comportamento padrão de cada componente). */
+.structure-pairs-spacer { display: none; }
+@media (min-width: 900px) {
+  .structure-pairs {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    grid-template-rows: repeat(5, auto);
+    column-gap: 56px;
+  }
+  .structure-pairs .flow-v2--col {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / span 5;
+    grid-column: 1;
+    align-items: stretch;
+  }
+  .structure-pairs .agents-columns--col {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: 1 / span 5;
+    grid-column: 2;
+    align-items: stretch;
+  }
+  .structure-pairs-spacer { display: block; }
+}
 
 /* ===== Linha de progresso com pontos (decorativa) =====
    Usa a MESMA grade de 5 colunas + padding-left da .detail-list logo abaixo,
