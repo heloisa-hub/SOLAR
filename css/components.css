@@ -2276,8 +2276,8 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
 }
 .flow-v2--col .flow-v2-step--dark h4 { color: var(--color-navy-900); }
 .flow-v2--col .flow-v2-step--dark p { color: var(--color-muted); }
-.flow-v2--col .flow-v2-step:first-child { padding-top: 0; }
-.flow-v2--col .flow-v2-step:last-child { padding-bottom: 0; }
+.flow-v2--col .flow-v2-step:first-of-type { padding-top: 0; }
+.flow-v2--col .flow-v2-step:last-of-type { padding-bottom: 0; }
 .flow-v2--col .flow-v2-arrow {
   align-self: flex-start;
   margin: 0 0 0 20px;
@@ -2306,35 +2306,38 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
   border-top: 1px solid var(--color-border);
   padding: 20px 0;
 }
-.agents-columns--col .agents-column:first-child { border-top: none; padding-top: 0; }
-.agents-columns--col .agents-column:last-child { padding-bottom: 0; }
+.agents-columns--col .agents-column:first-of-type { border-top: none; padding-top: 0; }
+.agents-columns--col .agents-column:last-of-type { padding-bottom: 0; }
 .agents-column h3 { font-size: 1rem; margin-bottom: 8px; }
 .agents-column p { font-size: 0.9rem; color: var(--color-muted); }
 
 /* ===== Estrutura | Agentes: os dois lados usam subgrid para compartilhar as
-   mesmas 5 linhas (passo 1, seta, passo 2, seta, passo 3) — assim cada bloco
-   da esquerda fica com a MESMA altura do bloco correspondente à direita,
-   sem depender de margens/alturas fixas. Abaixo de 900px as colunas
-   simplesmente empilham (comportamento padrão de cada componente). */
+   mesmas 6 linhas (mini-título, passo 1, seta, passo 2, seta, passo 3) —
+   assim cada bloco da esquerda fica com a MESMA altura do bloco
+   correspondente à direita, e os mini-títulos ficam alinhados no topo,
+   sem depender de margens/alturas fixas. Os eyebrows ficam DENTRO de cada
+   coluna (não em uma linha separada) para que, abaixo de 900px, quando as
+   colunas empilham, cada um continue aparecendo logo acima do seu próprio
+   conteúdo em vez de os dois juntos no topo da seção. */
 .structure-pairs-spacer { display: none; }
 @media (min-width: 900px) {
   .structure-pairs {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(6, auto);
     column-gap: 56px;
   }
   .structure-pairs .flow-v2--col {
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: 1 / span 5;
+    grid-row: 1 / span 6;
     grid-column: 1;
     align-items: stretch;
   }
   .structure-pairs .agents-columns--col {
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: 1 / span 5;
+    grid-row: 1 / span 6;
     grid-column: 2;
     align-items: stretch;
   }

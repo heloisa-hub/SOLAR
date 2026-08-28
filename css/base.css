@@ -197,7 +197,7 @@ p { color: var(--color-ink); font-size: 0.96rem; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce), (max-width: 900px) {
   .reveal, .reveal-group, .reveal-group > * {
     opacity: 1 !important;
     transform: none !important;
