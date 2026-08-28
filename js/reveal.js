@@ -1,11 +1,12 @@
 (function () {
   var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isNarrowViewport = window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
 
   document.addEventListener("DOMContentLoaded", function () {
     var items = document.querySelectorAll(".reveal, .reveal-group");
     if (!items.length) return;
 
-    if (prefersReduced || typeof IntersectionObserver === "undefined") {
+    if (prefersReduced || isNarrowViewport || typeof IntersectionObserver === "undefined") {
       items.forEach(function (el) { el.classList.add("is-visible"); });
       return;
     }

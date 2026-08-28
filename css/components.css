@@ -492,6 +492,10 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
 .tab-panel.is-active { display: block; }
 
 /* ===== Tables (fino, editorial — sem caixa de fundo no cabeçalho) ===== */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -1994,8 +1998,8 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
-.fidc-left-content h2 { align-self: start; margin: 0; font-size: 1.8rem; }
-@media (min-width: 768px) {
+.fidc-left-content h2 { align-self: start; margin: 0; }
+@media (min-width: 900px) {
   .fidc-left-content h2 { font-size: 2.1rem; }
 }
 .fidc-left-content p { align-self: center; margin: 20px 0; }
