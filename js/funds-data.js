@@ -10,13 +10,14 @@ var SOLAR_CAPITAL_FUNDS = [
     slug: "solar-br-fidc",
     nome: "Solar I FIDC",
     cnpj: "51.045.717/0001-90",
+    fraseEstrategia: "Fundo feeder que aloca capital sênior e mezanino entre os FIDCs da família Solar geridos por Fram Capital ou Iggy Investimentos, com a Solar Capital como consultora de crédito.",
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Multicedente / multissacado",
     classeCvm: "Fundo de Investimento em Direitos Creditórios",
     publicoAlvo: "Investidor profissional",
     gestor: "Fram Capital",
     administrador: "Q.I. Tech",
-    custodiante: null,
+    custodiante: "QI Corretora de Títulos e Valores Mobiliários S.A.",
     consultora: "Solar Capital",
     condominio: "Fechado",
     dataInicio: "2025-12-30",
@@ -30,13 +31,37 @@ var SOLAR_CAPITAL_FUNDS = [
     disponibilidade: null,
     percentDcSobrePl: null,
     classePrincipal: "Sênior",
+    // percentPL/plReais das 3 classes: NÃO vêm do parser automático (o
+    // template Fram Capital só extrai rentabilidade) — foram calculados a
+    // partir da tabela "PL por subclasse (Passivo)" da página 2 do PDF
+    // oficial (20260728 Relatório Solar BR_Junho.pdf, dado de 06/2026:
+    // Cotas Senior R$37,3mi / Mezanino R$7,2mi / Subordinadas R$17,3mi,
+    // total R$61,9mi). Precisão limitada pelo arredondamento de 1 casa
+    // decimal da fonte. benchmark da Sênior ("CDI + 3% a.a.") vem do
+    // apêndice do regulamento (não do demonstrativo mensal, que não tem
+    // coluna de meta) — citado pelo dossiê do Tomé (agentetome.com) com
+    // referência ao documento específico (doc 1082162); Mezanino/Subordinada
+    // seguem sem meta divulgada nessa mesma fonte.
     classes: [
-      { nome: "Sênior", percentPL: null, rating: null, benchmark: null, dataInicioCota: null, plReais: null, mes: 1.37, ano: 5.6, tresMeses: null, seisMeses: null, dozeMeses: null, desdeInicio: 5.6, cdiMes: null, cdiAno: 122.0, cdi3m: null, cdi6m: null, cdi12m: null, cdiInicio: 122.0, historicoMensal: [{ mes: "2026-03", rentabilidade: 1.47 }, { mes: "2026-04", rentabilidade: 1.33 }, { mes: "2026-05", rentabilidade: 1.31 }, { mes: "2026-06", rentabilidade: 1.37 }] },
-      { nome: "Mezanino", percentPL: null, rating: null, benchmark: null, dataInicioCota: null, plReais: null, mes: 1.61, ano: 4.78, tresMeses: null, seisMeses: null, dozeMeses: null, desdeInicio: 4.78, cdiMes: null, cdiAno: 144.0, cdi3m: null, cdi6m: null, cdi12m: null, cdiInicio: 144.0, historicoMensal: [{ mes: "2026-04", rentabilidade: 1.55 }, { mes: "2026-05", rentabilidade: 1.54 }, { mes: "2026-06", rentabilidade: 1.61 }] },
-      { nome: "Subordinada", percentPL: null, rating: null, benchmark: null, dataInicioCota: null, plReais: null, mes: -2.14, ano: 0.5, tresMeses: null, seisMeses: null, dozeMeses: null, desdeInicio: 0.5, cdiMes: null, cdiAno: 7.0, cdi3m: null, cdi6m: null, cdi12m: null, cdiInicio: 7.0, historicoMensal: [{ mes: "2026-01", rentabilidade: 4.73 }, { mes: "2026-02", rentabilidade: -1.81 }, { mes: "2026-03", rentabilidade: 0.13 }, { mes: "2026-04", rentabilidade: -0.42 }, { mes: "2026-05", rentabilidade: 0.15 }, { mes: "2026-06", rentabilidade: -2.14 }] }
+      { nome: "Sênior", percentPL: 60.26, rating: null, benchmark: "CDI + 3,00% a.a.", dataInicioCota: null, plReais: "R$ 37,30 milhões", mes: 1.37, ano: 5.6, tresMeses: null, seisMeses: null, dozeMeses: null, desdeInicio: 5.6, cdiMes: null, cdiAno: 122.0, cdi3m: null, cdi6m: null, cdi12m: null, cdiInicio: 122.0, historicoMensal: [{ mes: "2026-03", rentabilidade: 1.47 }, { mes: "2026-04", rentabilidade: 1.33 }, { mes: "2026-05", rentabilidade: 1.31 }, { mes: "2026-06", rentabilidade: 1.37 }] },
+      { nome: "Mezanino", percentPL: 11.63, rating: null, benchmark: null, dataInicioCota: null, plReais: "R$ 7,20 milhões", mes: 1.61, ano: 4.78, tresMeses: null, seisMeses: null, dozeMeses: null, desdeInicio: 4.78, cdiMes: null, cdiAno: 144.0, cdi3m: null, cdi6m: null, cdi12m: null, cdiInicio: 144.0, historicoMensal: [{ mes: "2026-04", rentabilidade: 1.55 }, { mes: "2026-05", rentabilidade: 1.54 }, { mes: "2026-06", rentabilidade: 1.61 }] },
+      { nome: "Subordinada", percentPL: 27.95, rating: null, benchmark: null, dataInicioCota: null, plReais: "R$ 17,30 milhões", mes: -2.14, ano: 0.5, tresMeses: null, seisMeses: null, dozeMeses: null, desdeInicio: 0.5, cdiMes: null, cdiAno: 7.0, cdi3m: null, cdi6m: null, cdi12m: null, cdiInicio: 7.0, historicoMensal: [{ mes: "2026-01", rentabilidade: 4.73 }, { mes: "2026-02", rentabilidade: -1.81 }, { mes: "2026-03", rentabilidade: 0.13 }, { mes: "2026-04", rentabilidade: -0.42 }, { mes: "2026-05", rentabilidade: 0.15 }, { mes: "2026-06", rentabilidade: -2.14 }] }
     ],
     descricao: "O Solar I FIDC estrutura direitos creditórios de fomento mercantil multicedente e multissacado, transformando recebíveis de empresas em ativos investíveis sob supervisão da CVM. Iniciou sua primeira cotização em dezembro de 2025.",
     estrategia: "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação (Sênior, Mezanino e Subordinada).",
+    tese: {
+      originacao: "Não origina diretamente: aloca capital, via cotas, nos FIDCs Puglia, Vialoc e Belmonte — que originam duplicatas de fomento mercantil multicedente/multissacado. O regulamento restringe o investimento a fundos geridos ou cogeridos por Fram Capital ou Iggy Investimentos, com a Solar Capital como consultora de crédito.",
+      protecao: "Estrutura própria de Sênior, Mezanino e Subordinada — a Subordinada absorve primeiro as oscilações de valor das cotas que o fundo detém nos FIDCs-alvo.",
+      geracaoRetorno: "O retorno vem do spread entre o que os FIDCs-alvo pagam às cotas detidas pelo Solar I e o que o Solar I paga às próprias classes Sênior e Mezanino."
+    },
+    // "Parcelas inadimplentes/PL" é um campo do informe CVM/FNET distinto do
+    // saldo de "Créditos em Atraso" mostrado em Carteira & Crédito (que vem
+    // do demonstrativo mensal do administrador) — a própria Tomé (agentetome.
+    // com) documenta essa diferença. Não temos como conferir esse número
+    // contra o PDF oficial (ele não traz esse campo específico); mantido
+    // separado e datado por transparência de fonte.
+    inadimplenciaCvmPercentPL: 0.0,
+    fonteInadimplenciaCvm: "Tomé / informe CVM-FNET, competência jul/2026",
     composicaoPortfolio: [],
     documentos: [
       { nome: "Regulamento", disponivel: false },
@@ -50,6 +75,7 @@ var SOLAR_CAPITAL_FUNDS = [
     slug: "solar-puglia-fidc-rl",
     nome: "Solar Puglia FIDC",
     cnpj: "52.498.421/0001-98",
+    fraseEstrategia: "O maior fundo da família Solar em patrimônio líquido — duplicatas de fomento mercantil multicedente, prazo médio de carteira curto e sacados diversificados.",
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Proprietário",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Resolução CVM 175)",
@@ -75,6 +101,16 @@ var SOLAR_CAPITAL_FUNDS = [
     ],
     descricao: "O Solar Puglia FIDC estrutura direitos creditórios de fomento mercantil, com classe sênior e subordinada. É o maior fundo da família Solar em patrimônio líquido.",
     estrategia: "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
+    tese: {
+      originacao: "Duplicatas de fomento mercantil originadas de múltiplos cedentes, com prazo de até 180 dias e prazo médio de carteira de até 80 dias.",
+      protecao: "Subordinada de ~45% do PL protege a Sênior1; critérios de elegibilidade limitam concentração por cedente e por sacado.",
+      geracaoRetorno: "Retorno vem do desconto na aquisição das duplicatas frente ao valor de face, líquido de inadimplência — Sênior1 busca CDI + 4,00% a.a., a Subordinada captura o resíduo."
+    },
+    // Ver nota equivalente no Solar I FIDC sobre a distinção entre este campo
+    // (informe CVM/FNET) e "Créditos em Atraso" (demonstrativo do
+    // administrador, Carteira & Crédito) — são declarações separadas.
+    inadimplenciaCvmPercentPL: 1.88,
+    fonteInadimplenciaCvm: "Tomé / informe CVM-FNET, competência jul/2026",
     composicaoPortfolio: [],
     documentos: [
       { nome: "Regulamento", disponivel: false },
@@ -88,6 +124,7 @@ var SOLAR_CAPITAL_FUNDS = [
     slug: "solar-vialoc-fidc",
     nome: "Solar Vialoc FIDC",
     cnpj: "39.680.495/0001-82",
+    fraseEstrategia: "Em operação desde abril de 2021 — a estrutura com FIDC próprio mais madura e o maior histórico de rentabilidade da família Solar, com quatro camadas de subordinação.",
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Proprietário · Grupo Supporte",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Padronizado)",
@@ -115,6 +152,16 @@ var SOLAR_CAPITAL_FUNDS = [
     ],
     descricao: "O Solar Vialoc FIDC Padronizado estrutura direitos creditórios de fomento mercantil, com quatro classes de cota ativas desde 2021.",
     estrategia: "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
+    tese: {
+      originacao: "Direitos creditórios de fomento mercantil, com histórico operacional desde abril de 2021 — a base de dados mais longa entre os fundos com FIDC próprio da família Solar.",
+      protecao: "Quatro camadas de subordinação (Sênior3, Sênior2, Mezanino, Subordinada) dão à camada mais sênior proteção de cerca de 43% do PL.",
+      geracaoRetorno: "Cada camada tem meta própria (de CDI + 4,0% a CDI + 5,5% a.a.); a Subordinada captura o retorno residual da carteira."
+    },
+    // Ver nota equivalente no Solar I FIDC sobre a distinção entre este campo
+    // (informe CVM/FNET) e "Créditos em Atraso" (demonstrativo do
+    // administrador, Carteira & Crédito) — são declarações separadas.
+    inadimplenciaCvmPercentPL: 0.29,
+    fonteInadimplenciaCvm: "Tomé / informe CVM-FNET, competência jul/2026",
     composicaoPortfolio: [],
     documentos: [
       { nome: "Regulamento", disponivel: false },
@@ -127,7 +174,8 @@ var SOLAR_CAPITAL_FUNDS = [
   {
     slug: "solar-belmonte-fidc",
     nome: "Solar Belmonte FIDC",
-    cnpj: null,
+    cnpj: "58.347.004/0001-20",
+    fraseEstrategia: "O fundo com FIDC próprio mais recente da família Solar, em operação desde fevereiro de 2025, com estrutura sênior/mezanino/subordinada ainda em consolidação.",
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Proprietário",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Padronizado)",
@@ -154,6 +202,16 @@ var SOLAR_CAPITAL_FUNDS = [
     ],
     descricao: "O Solar Belmonte FIDC estrutura direitos creditórios de fomento mercantil, com classes sênior, mezanino e subordinada, em operação desde fevereiro de 2025.",
     estrategia: "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
+    tese: {
+      originacao: "Direitos creditórios de fomento mercantil — fundo proprietário (não-feeder) em operação desde fevereiro de 2025, o mais novo com FIDC próprio da família Solar.",
+      protecao: "Subordinação de cerca de 60% do PL (Subordinada + Mezanino) protege a classe Sênior — carteira ainda em fase de originação e diversificação.",
+      geracaoRetorno: "Sênior busca CDI + 4,25% a.a. e Mezanino CDI + 6,00% a.a.; a Subordinada captura o retorno residual da carteira de recebíveis."
+    },
+    // Ver nota equivalente no Solar I FIDC sobre a distinção entre este campo
+    // (informe CVM/FNET) e "Créditos em Atraso" (demonstrativo do
+    // administrador, Carteira & Crédito) — são declarações separadas.
+    inadimplenciaCvmPercentPL: 0.0,
+    fonteInadimplenciaCvm: "Tomé / informe CVM-FNET, competência jul/2026",
     composicaoPortfolio: [],
     documentos: [
       { nome: "Regulamento", disponivel: false },

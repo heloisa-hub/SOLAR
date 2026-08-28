@@ -47,7 +47,14 @@
     <div class="container">
       <span class="eyebrow" data-field="classificacaoAnbima"></span>
       <h1 data-field="nome"></h1>
-      <p class="cnpj">CNPJ: <span data-field="cnpj"></span> · <span data-field="classeCvm"></span> · Data base <span data-field="dataBase"></span></p>
+      <p class="hero-tagline" data-field="fraseEstrategia"></p>
+      <p class="cnpj">CNPJ: <span data-field="cnpj"></span> · <span data-field="classeCvm"></span> · Início em <span data-field-date="dataInicio"></span> · Data-base <span data-field="dataBase"></span></p>
+      <dl class="hero-stats" id="hero-stats">
+        <div><dt>Patrimônio líquido</dt><dd data-field="plAtual"></dd></div>
+        <div><dt>Retorno-alvo (Sênior)</dt><dd id="hero-retorno-alvo-senior"></dd></div>
+        <div><dt>Parcelas inadimplentes / PL</dt><dd id="hero-inadimplencia"></dd></div>
+        <div><dt>Índice de subordinação</dt><dd id="hero-subordinacao"></dd></div>
+      </dl>
     </div>
   </section>
 
@@ -57,10 +64,9 @@
       <div class="tab-bar" role="tablist">
         <button class="tab-btn is-active" role="tab" aria-selected="true" data-tab="overview">Visão Geral</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="descricao">Estratégia</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="retorno-alvo">Retorno-alvo</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="estrutura">Estrutura</button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="carteira-credito">Carteira &amp; Crédito</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="rentabilidade">Rentabilidade</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="estatistica">Indicadores de Crédito</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="portfolio">Portfólio</button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="documentos">Documentos</button>
         <span class="tab-fade" aria-hidden="true"></span>
       </div>
@@ -126,20 +132,24 @@
             </dl>
           </div>
         </div>
+
+        <h3 style="margin: 36px 0 6px;">A tese em três pontos</h3>
+        <p style="margin-bottom: 20px; max-width: none; font-size: 0.92rem; color: var(--color-muted); text-wrap: balance;">Vem do regulamento e do objetivo do fundo — o que ele se propõe a fazer, não uma leitura da carteira num único mês. A composição real de cada data-base está em Carteira &amp; Crédito.</p>
+        <div class="thesis-grid" id="thesis-grid"></div>
       </div>
 
-      <!-- Retorno-Alvo -->
-      <div class="tab-panel" data-tab-panel="retorno-alvo">
-        <h3 style="margin-bottom: 16px;">Retorno-alvo por classe de cota</h3>
-        <p style="margin-bottom: 20px; max-width: none; font-size: 0.92rem; color: var(--color-muted); text-wrap: balance;">Meta de rentabilidade (benchmark) definida no regulamento de cada classe de cota, quando aplicável. Classes subordinadas não possuem retorno-alvo fixo — seu retorno é residual, após o pagamento das classes seniores e mezanino.</p>
+      <!-- Estrutura -->
+      <div class="tab-panel" data-tab-panel="estrutura">
+        <h3 style="margin-bottom: 16px;">Estrutura de capital</h3>
+        <p style="margin-bottom: 20px; max-width: none; font-size: 0.92rem; color: var(--color-muted); text-wrap: balance;">Como o patrimônio do fundo se divide entre classes de cota, da mais protegida (Sênior) até a que absorve primeiro as oscilações da carteira (Subordinada). Meta de rentabilidade (retorno-alvo) definida no regulamento de cada classe, quando aplicável — classes subordinadas não têm meta fixa: seu retorno é residual, após o pagamento das classes seniores e mezanino.</p>
         <div class="table-scroll">
-          <table class="data-table" id="retorno-alvo-table">
+          <table class="data-table" id="estrutura-table">
             <thead>
               <tr>
-                <th>Classe</th><th>% do PL</th><th>Retorno-alvo</th><th>Rating</th>
+                <th>Classe</th><th>Participação no PL</th><th>Retorno-alvo</th><th>Rating</th><th>Prazo / amortização</th>
               </tr>
             </thead>
-            <tbody id="retorno-alvo-table-body"></tbody>
+            <tbody id="estrutura-table-body"></tbody>
           </table>
         </div>
       </div>
@@ -151,6 +161,7 @@
         <div class="rentab-grid">
           <div class="chart-box" id="rentabilidade-chart-box" style="display:none; max-width: none;">
             <p style="font-size: 0.85rem; color: var(--color-muted); margin-bottom: 12px;">Rentabilidade acumulada — classe <span id="chart-class-name"></span></p>
+            <div class="chart-class-picker" id="rentabilidade-class-picker" role="group" aria-label="Escolher classe de cota do gráfico"></div>
             <svg id="rentabilidade-chart"></svg>
           </div>
           <div class="table-scroll">
@@ -167,8 +178,13 @@
         <p style="margin-top: 16px; font-size: 0.82rem; color: var(--color-muted);">Linhas em itálico mostram o percentual do CDI equivalente a cada período.</p>
       </div>
 
-      <!-- Estatística -->
-      <div class="tab-panel" data-tab-panel="estatistica">
+      <!-- Carteira & Crédito -->
+      <div class="tab-panel" data-tab-panel="carteira-credito">
+        <h3 style="margin-bottom: 12px;">No que o fundo está investido</h3>
+        <div id="portfolio-content"></div>
+
+        <h3 style="margin: 36px 0 6px;">Como essa carteira está se comportando</h3>
+        <p style="margin-bottom: 20px; max-width: none; font-size: 0.92rem; color: var(--color-muted); text-wrap: balance;">Indicadores de qualidade e saúde da carteira de direitos creditórios na data-base do informe mais recente.</p>
         <div class="fact-grid">
           <div><dt>Carteira de crédito</dt><dd data-field="carteiraCredito"></dd></div>
           <div><dt>Créditos em atraso</dt><dd data-field="creditosAtraso"></dd></div>
@@ -177,12 +193,6 @@
           <div><dt>% direitos creditórios / PL</dt><dd data-field="percentDcSobrePl"></dd></div>
           <div><dt>Agência de rating</dt><dd data-field="agenciaRating"></dd></div>
         </div>
-      </div>
-
-      <!-- Portfólio -->
-      <div class="tab-panel" data-tab-panel="portfolio">
-        <h3 style="margin-bottom: 12px;">Composição da carteira</h3>
-        <div id="portfolio-content"></div>
       </div>
 
       <!-- Documentos -->

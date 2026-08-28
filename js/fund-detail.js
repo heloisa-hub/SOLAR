@@ -117,23 +117,96 @@
       "<div class=\"overview-stats-row overview-stats-row--secondary\">" + secondaryRow + "</div>";
   }
 
-  function renderRetornoAlvo(fund) {
-    var tbody = document.getElementById("retorno-alvo-table-body");
+  // Subordinada/Júnior é residual por desenho (recebe o que sobra depois das
+  // classes seniores/mezanino — não tem meta fixa por definição). Outras
+  // classes que não tenham benchmark declarado nas fontes disponíveis não são
+  // "residuais": só não temos o número. Rotular as duas situações da mesma
+  // forma sugeriria (errado) que uma classe sênior sem meta divulgada não tem
+  // prioridade de pagamento, quando na verdade só falta o dado na fonte.
+  function isResidualClass(nome) {
+    var n = (nome || "").toLowerCase();
+    return n.indexOf("subordinada") !== -1 || n.indexOf("júnior") !== -1 || n.indexOf("junior") !== -1;
+  }
+
+  // Estrutura de capital (era a aba "Retorno-alvo" — agora vive dentro de
+  // Estrutura, com uma coluna a mais de prazo/amortização quando divulgado).
+  function renderEstrutura(fund) {
+    var tbody = document.getElementById("estrutura-table-body");
     if (!tbody) return;
     if (!fund.classes || !fund.classes.length) {
-      tbody.innerHTML = '<tr><td colspan="4">' + NA + "</td></tr>";
+      tbody.innerHTML = '<tr><td colspan="5">' + NA + "</td></tr>";
       return;
     }
     tbody.innerHTML = fund.classes.map(function (c) {
+      var benchmarkLabel = c.benchmark
+        ? c.benchmark
+        : (isResidualClass(c.nome) ? "Residual (sem meta fixa)" : "Não divulgado nas fontes disponíveis");
       return (
         "<tr>" +
           "<td><strong>" + c.nome + "</strong></td>" +
           "<td>" + (isEmpty(c.percentPL) ? NA : Number(c.percentPL).toFixed(2).replace(".", ",") + "%") + "</td>" +
-          "<td>" + (isEmpty(c.benchmark) ? "Residual (sem meta fixa)" : c.benchmark) + "</td>" +
+          "<td>" + benchmarkLabel + "</td>" +
           "<td>" + (isEmpty(c.rating) ? NA : c.rating) + "</td>" +
+          "<td>" + (isEmpty(c.prazo) ? "Não divulgado" : c.prazo) + "</td>" +
         "</tr>"
       );
     }).join("");
+  }
+
+  // "A tese em três pontos" (Estratégia) — texto vem de fund.tese, que por
+  // sua vez vem do regulamento/objetivo do fundo (dados-fundos/manifest.json
+  // e js/funds-data.js), nunca de composicaoPortfolio: a estratégia é o que
+  // o fundo se propõe a fazer, não uma leitura do portfólio numa data-base.
+  function renderThesis(fund) {
+    var container = document.getElementById("thesis-grid");
+    if (!container) return;
+    var t = fund.tese;
+    if (!t) { container.innerHTML = ""; return; }
+    var items = [
+      { label: "Originação", text: t.originacao },
+      { label: "Estrutura de proteção", text: t.protecao },
+      { label: "Geração de retorno", text: t.geracaoRetorno }
+    ];
+    container.innerHTML = items.map(function (it) {
+      return (
+        '<div class="thesis-card">' +
+          '<span class="eyebrow">' + it.label + '</span>' +
+          '<p>' + (it.text || NA) + '</p>' +
+        '</div>'
+      );
+    }).join("");
+  }
+
+  // Índice de subordinação = 100% - soma do %PL de todas as classes "Sênior*"
+  // (protege TODAS as camadas seniores juntas, não só a classe principal —
+  // relevante para fundos como o Vialoc, com Sênior3 e Sênior2). Exige %PL
+  // preenchido em toda classe sênior; sem isso, retorna null (mostra "—").
+  function seniorPercentSum(fund) {
+    if (!fund.classes || !fund.classes.length) return null;
+    var senioras = fund.classes.filter(function (c) { return /^s[eê]nior/i.test(c.nome || ""); });
+    if (!senioras.length) return null;
+    var completo = senioras.every(function (c) { return !isEmpty(c.percentPL); });
+    if (!completo) return null;
+    return senioras.reduce(function (soma, c) { return soma + Number(c.percentPL); }, 0);
+  }
+
+  // Os 4 números do topo: PL (já cai em data-field="plAtual"), retorno-alvo
+  // da Sênior, parcelas inadimplentes/PL e índice de subordinação.
+  function renderHeroStats(fund) {
+    var principal = principalClass(fund);
+    var retornoEl = document.getElementById("hero-retorno-alvo-senior");
+    if (retornoEl) retornoEl.textContent = (principal && principal.benchmark) ? principal.benchmark : NA;
+
+    var inadEl = document.getElementById("hero-inadimplencia");
+    if (inadEl) {
+      inadEl.textContent = isEmpty(fund.inadimplenciaCvmPercentPL) ? NA : formatCdiPercent(fund.inadimplenciaCvmPercentPL);
+    }
+
+    var subEl = document.getElementById("hero-subordinacao");
+    if (subEl) {
+      var somaSeniores = seniorPercentSum(fund);
+      subEl.textContent = somaSeniores === null ? NA : formatCdiPercent(Math.max(0, 100 - somaSeniores));
+    }
   }
 
   function renderPortfolio(fund) {
@@ -427,13 +500,56 @@
     return true;
   }
 
+  function classesWithHistory(fund) {
+    return (fund.classes || []).filter(function (c) { return c.historicoMensal && c.historicoMensal.length; });
+  }
+
+  // A aba Rentabilidade já mostra todas as classes lado a lado na tabela de
+  // resumo (Mês/Ano/3M/6M/12M/Desde início), mas o gráfico de série mensal só
+  // cabe uma classe por vez. Para fundos com mais de uma classe com
+  // histórico, um seletor deixa o visitante trocar qual classe o gráfico
+  // mostra — sem isso, o mês a mês completo de Mezanino/Subordinada (por
+  // exemplo) simplesmente não aparecia em lugar nenhum da página.
+  function renderChartClassPicker(fund, selectedNome, onSelect) {
+    var picker = document.getElementById("rentabilidade-class-picker");
+    if (!picker) return;
+    var withHistory = classesWithHistory(fund);
+    if (withHistory.length < 2) {
+      picker.style.display = "none";
+      picker.innerHTML = "";
+      return;
+    }
+    picker.style.display = "flex";
+    picker.innerHTML = withHistory.map(function (c) {
+      var active = c.nome === selectedNome ? " is-active" : "";
+      return '<button type="button" class="chart-class-picker-btn' + active + '" data-classe="' +
+        c.nome.replace(/"/g, "&quot;") + '" aria-pressed="' + (c.nome === selectedNome) + '">' + c.nome + "</button>";
+    }).join("");
+    Array.prototype.forEach.call(picker.querySelectorAll(".chart-class-picker-btn"), function (btn) {
+      btn.addEventListener("click", function () { onSelect(btn.getAttribute("data-classe")); });
+    });
+  }
+
   function renderChart(fund) {
-    var cls = principalClass(fund);
-    var hasData = !!(cls && cls.historicoMensal && cls.historicoMensal.length);
+    var principal = principalClass(fund);
+    var withHistory = classesWithHistory(fund);
+    var hasData = withHistory.length > 0;
     var emptyState = document.getElementById("rentabilidade-empty");
     if (emptyState) emptyState.style.display = (!hasData && fund.classes && fund.classes.length) ? "block" : "none";
-    drawChartInto("rentabilidade-chart", "rentabilidade-chart-box", "chart-class-name", cls, false);
-    var overviewHasChart = drawChartInto("overview-chart", "overview-chart-box", "overview-chart-class-name", cls, true);
+
+    function selectClass(nome) {
+      var cls = withHistory.filter(function (c) { return c.nome === nome; })[0] ||
+        (principal && principal.historicoMensal && principal.historicoMensal.length ? principal : withHistory[0]);
+      drawChartInto("rentabilidade-chart", "rentabilidade-chart-box", "chart-class-name", cls, false);
+      renderChartClassPicker(fund, cls ? cls.nome : null, selectClass);
+    }
+
+    var initial = (principal && principal.historicoMensal && principal.historicoMensal.length) ? principal : withHistory[0];
+    selectClass(initial ? initial.nome : null);
+
+    // A Visão Geral mostra só a classe principal (é um resumo rápido, não a
+    // análise completa) — o seletor fica só na aba Rentabilidade.
+    var overviewHasChart = drawChartInto("overview-chart", "overview-chart-box", "overview-chart-class-name", principal, true);
     var overviewEmpty = document.getElementById("overview-chart-empty");
     if (overviewEmpty) overviewEmpty.style.display = overviewHasChart ? "none" : "block";
   }
@@ -492,8 +608,10 @@
     fillTitleAndMeta(fund);
     fillStatusBadge(fund);
     fillTextFields(document, fund);
+    renderHeroStats(fund);
     renderOverviewRentabilidade(fund);
-    renderRetornoAlvo(fund);
+    renderEstrutura(fund);
+    renderThesis(fund);
     renderClassesTable(fund);
     renderChart(fund);
     renderPortfolio(fund);

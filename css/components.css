@@ -570,7 +570,63 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
 
 .fund-head .cnpj { color: rgba(255,255,255,0.65); font-size: 0.94rem; margin-bottom: 0; }
 
+.hero-tagline {
+  color: rgba(255,255,255,0.85);
+  font-size: 1.05rem;
+  max-width: 62ch;
+  margin-bottom: 14px;
+  text-wrap: balance;
+}
+
+/* ===== Hero stats: os 4 números que respondem "isso é um bom negócio?" em segundos ===== */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px 32px;
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+}
+@media (min-width: 700px) {
+  .hero-stats { grid-template-columns: repeat(4, auto); gap: 22px 44px; }
+}
+.hero-stats dt {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.hero-stats dd {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin: 0;
+  line-height: 1.1;
+}
+
 .fund-head + .section.section--tight-top { padding-top: 20px; }
+
+/* ===== "A tese em três pontos" (Estratégia) ===== */
+.thesis-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+@media (min-width: 800px) {
+  .thesis-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.thesis-card {
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-gold-600);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.thesis-card .eyebrow { margin-bottom: 0; }
+.thesis-card p { font-size: 0.9rem; margin: 0; color: var(--color-ink); }
 
 /* ===== Footer (compacto) ===== */
 .site-footer {
@@ -858,6 +914,30 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
   .rentab-grid { grid-template-columns: 1fr 1fr; }
 }
 .chart-box svg { width: 100%; height: auto; display: block; font-family: var(--font-base); }
+
+/* ===== Seletor de classe do gráfico de rentabilidade (Sênior/Mezanino/Subordinada...) ===== */
+.chart-class-picker {
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.chart-class-picker-btn {
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  background: transparent;
+}
+.chart-class-picker-btn:hover { color: var(--color-navy-900); border-color: var(--color-navy-900); }
+.chart-class-picker-btn.is-active {
+  color: var(--color-navy-900);
+  border-color: var(--color-gold-600);
+  background: var(--color-gold-tint);
+}
+/* dentro do card escuro da Visão Geral não se aplica — o picker só existe na aba Rentabilidade */
 
 /* ===== Tooltip do gráfico (hover) ===== */
 .chart-tooltip {
