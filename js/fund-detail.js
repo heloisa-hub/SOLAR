@@ -479,13 +479,37 @@
     var areaPath = path + ' L' + xFor(values.length - 1).toFixed(1) + ',' + (padding.top + plotH).toFixed(1) + ' L' + xFor(0).toFixed(1) + ',' + (padding.top + plotH).toFixed(1) + ' Z';
     var gradientId = 'gradient-' + svgId;
 
-    // Os valores não ficam mais escritos fixos no gráfico — aparecem
-    // no hover (tooltip), evitando poluir a curva com números permanentes.
+    // Rótulo em todo ponto polui a curva — mas o pedido é explícito por
+    // rótulo de dado visível, não só no hover. Meio-termo: rótulo fixo só
+    // no primeiro e no último ponto (o "de onde partiu" / "onde chegou" —
+    // o que qualquer leitor quer ver de cara), demais valores seguem no
+    // hover via attachChartInteractivity.
     var circles = values.map(function (v, i) {
       var cx = xFor(i).toFixed(1);
       var cy = yFor(v).toFixed(1);
       return '<circle cx="' + cx + '" cy="' + cy + '" r="2" fill="#E89A14" stroke="' + dotStrokeColor + '" stroke-width="1" />';
     }).join("");
+
+    var labelColor = dark ? "#FFFFFF" : "#070222";
+    var endpointLabels = "";
+    if (values.length >= 1) {
+      var lastIdx = values.length - 1;
+      var lastX = xFor(lastIdx);
+      var lastY = yFor(values[lastIdx]);
+      var lastAbove = lastY - padding.top > 14;
+      endpointLabels +=
+        '<text x="' + lastX.toFixed(1) + '" y="' + (lastAbove ? lastY - 9 : lastY + 16).toFixed(1) +
+        '" text-anchor="' + (lastIdx === 0 ? "middle" : "end") + '" font-size="11" font-weight="700" fill="' + labelColor + '">' +
+        formatLabelValue(values[lastIdx]) + '</text>';
+    }
+    if (values.length >= 2) {
+      var firstY = yFor(values[0]);
+      var firstAbove = firstY - padding.top > 14;
+      endpointLabels +=
+        '<text x="' + xFor(0).toFixed(1) + '" y="' + (firstAbove ? firstY - 9 : firstY + 16).toFixed(1) +
+        '" text-anchor="start" font-size="10" fill="' + (dark ? "rgba(255,255,255,0.55)" : "#7A7568") + '">' +
+        formatLabelValue(values[0]) + '</text>';
+    }
 
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
     svg.setAttribute("role", "img");
@@ -502,7 +526,7 @@
       '<line x1="' + padding.left + '" y1="' + (padding.top + plotH).toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + (padding.top + plotH).toFixed(1) + '" stroke="' + gridColor + '" stroke-width="1" />' +
       (singlePoint ? '' : '<path d="' + areaPath + '" fill="url(#' + gradientId + ')" />' +
       '<path d="' + path + '" fill="none" stroke="#E89A14" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" />') +
-      circles + xLabelsSvg;
+      circles + xLabelsSvg + endpointLabels;
 
     if (box) {
       attachChartInteractivity(svg, box, {

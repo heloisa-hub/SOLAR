@@ -1953,6 +1953,40 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
   color: var(--color-muted);
   margin-bottom: 8px;
 }
+.fund-card-mockup-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.fund-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.fund-status-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.fund-status-pill--open {
+  background: rgba(40, 189, 115, 0.12);
+  color: var(--color-success);
+}
+.fund-status-pill--closed {
+  background: var(--color-gray-50);
+  color: var(--color-muted);
+}
 .fund-card-mockup h3 { margin-bottom: 18px; font-size: 1.15rem; }
 .fund-card-mockup-row {
   display: flex;

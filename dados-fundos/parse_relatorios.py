@@ -297,7 +297,7 @@ def build_funds_js(funds):
             "condominio", "dataInicio", "status", "statusLabel", "dataBase",
             "plAtual", "carteiraCredito", "creditosAtraso", "pdd", "disponibilidade",
             "percentDcSobrePl", "aplicacaoCotizacao", "aplicacaoLiquidacao",
-            "resgateCotizacao", "resgateLiquidacao", "classePrincipal",
+            "resgateCotizacao", "resgateLiquidacao", "classePrincipal", "janelaResgate",
         ]
         for key in field_order:
             if key in f:
@@ -412,6 +412,7 @@ def main():
             "disponibilidade": fmt_reais(parsed.get("disponibilidade")),
             "percentDcSobrePl": parsed.get("percentDcSobrePl"),
             "classePrincipal": fund_manifest["classePrincipal"],
+            "janelaResgate": fund_manifest.get("janelaResgate"),
             "classesList": classes_list,
             "descricao": fund_manifest["descricao"],
             "estrategia": fund_manifest["estrategia"],

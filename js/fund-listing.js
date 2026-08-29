@@ -17,10 +17,27 @@
     return (num > 0 ? "+" : "") + num.toFixed(2).replace(".", ",") + "%";
   }
 
+  // Aberto/Fechado aqui é sobre captação (há série aceitando aporte agora?),
+  // não sobre o condomínio do fundo (que já aparece na ficha técnica) — por
+  // isso é lido de janelaResgate, não de fund.condominio.
+  function isRaisingNow(fund) {
+    return !!fund.janelaResgate && !/^sem s[ée]rie/i.test(fund.janelaResgate);
+  }
+
+  function statusPillHtml(fund) {
+    if (!fund.janelaResgate) return "";
+    var open = isRaisingNow(fund);
+    return '<span class="fund-status-pill ' + (open ? "fund-status-pill--open" : "fund-status-pill--closed") + '">' +
+      (open ? "Aberto a aportes" : "Sem série aberta") + "</span>";
+  }
+
   function fundCardHtml(fund) {
     return (
       '<a class="fund-card-mockup" href="fundo-detalhe.html?fundo=' + fund.slug + '">' +
-        '<span class="fund-card-mockup-category">' + (fund.estrategiaResumo || fund.classificacaoAnbima) + "</span>" +
+        '<div class="fund-card-mockup-top">' +
+          '<span class="fund-card-mockup-category">' + (fund.estrategiaResumo || fund.classificacaoAnbima) + "</span>" +
+          statusPillHtml(fund) +
+        "</div>" +
         "<h3>" + fund.nome + "</h3>" +
         '<div class="fund-card-mockup-row"><span>Patrimônio líquido</span><strong>' + (fund.plAtual || NA) + "</strong></div>" +
         '<div class="fund-card-mockup-row"><span>Rentabilidade LTM</span><strong>' + rentabilidadeLtm(fund) + "</strong></div>" +
