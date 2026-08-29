@@ -7,8 +7,8 @@
  */
 var SOLAR_CAPITAL_FUNDS = [
   {
-    slug: "solar-br-fidc",
-    nome: "Solar I FIDC",
+    slug: "solar-fidc-multissetorial",
+    nome: "Solar FIDC Multissetorial",
     cnpj: "29.970.251/0001-80",
     classificacaoAnbima: "Crédito Estruturado",
     classeCvm: "Fundo de Investimento em Direitos Creditórios",
@@ -36,11 +36,11 @@ var SOLAR_CAPITAL_FUNDS = [
       { nome: "Mezanino", percentPL: 0.0, rating: null, benchmark: null, dataInicioCota: "2023-07-03", plReais: "R$ 0", mes: 9.89, ano: 3.33, tresMeses: 8.15, seisMeses: 19.25, dozeMeses: 68.9, desdeInicio: null, cdiMes: 121.5, cdiAno: 96.6, cdi3m: 118.1, cdi6m: 130.9, cdi12m: 151.7, cdiInicio: null },
       { nome: "Subordinada", percentPL: 40.12, rating: null, benchmark: null, dataInicioCota: "2018-10-25", plReais: "R$ 40,34 milhões", mes: 1.47, ano: 11.41, tresMeses: 3.36, seisMeses: 6.28, dozeMeses: 10.35, desdeInicio: 246.71, cdiMes: 120.7, cdiAno: 140.1, cdi3m: 97.6, cdi6m: 91.0, cdi12m: 70.3, cdiInicio: 246.3 }
     ],
-    descricao: "O Solar I FIDC estrutura direitos creditórios de fomento mercantil multicedente e multissacado, transformando recebíveis de empresas em ativos investíveis sob supervisão da CVM. Iniciou sua primeira cotização em dezembro de 2025.",
-    estrategia: "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação (Sênior, Mezanino e Subordinada).",
+    descricao: "O Solar FIDC Multissetorial estrutura direitos creditórios diversificados — incluindo cotas de outros FIDCs, créditos vencidos e renda fixa — sob supervisão da CVM, com histórico de operação desde 2018.",
+    estrategia: "Aquisição e gestão de uma carteira multissetorial de direitos creditórios, cotas de FIDC e renda fixa, com estrutura de cotas segmentada por nível de subordinação.",
     composicaoPortfolio: [],
     documentos: [
-      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-I-fidc.pdf" },
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-fidc-multissetorial.pdf" },
       { nome: "Lâmina de Informações Essenciais", disponivel: false },
       { nome: "Formulário de Ingresso", disponivel: false }
     ],
