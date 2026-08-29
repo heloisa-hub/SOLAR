@@ -1,0 +1,36 @@
+{
+  "_leiaMe": "Investigacao da API oficial do Tome (agentetome.com) para descobrir se os 4 fundos Solar aparecem na base dele, buscando pelo administrador (nao existe endpoint de fundo por CNPJ na API). Gerado manualmente em 2026-08-28 combinando chamadas de /api/v1/export/admin/manifest. NAO e a fonte de js/funds-data.js. Ver scripts/update-fund-data-tome.py para o script que completa esta investigacao (rode de novo quando a cota da API resetar).",
+  "status": "INVESTIGACAO_INCOMPLETA — bloqueada por rate limit (10 req/hora, compartilhado entre manifest e export) antes de conseguir isolar o CNPJ candidato final",
+  "cotaEsgotadaEm": "2026-08-28T17:35:xx-03:00 (aprox.) — Retry-After: 3600s recebido nesse horario. Deve liberar por volta de 2026-08-28T18:35 -03:00. Confirme com uma chamada de manifest antes de rodar o export de verdade.",
+  "licaoAprendida": "A documentacao lista '/export/admin/manifest' como 'chamada barata' separada de '/export/admin', mas na pratica as duas dividem o MESMO limite de 10/hora (a tabela de rate limit da doc já dizia isso: 'Export admin: 10/hora (compartilhado com a ferramenta MCP de export)' — o manifest esta debaixo do mesmo guarda-chuva 'export admin'). Nao trate manifest como gratis; cada variante de nome testada custa uma chamada da cota horaria.",
+
+  "achadosPrincipais": [
+    "admin='singulare' resolve para UM administrador (2 grafias, mesmo CNPJ): CNPJ 62285390000140 ('SINGULARE CORRETORA S/A' / 'SINGULARE CORRETORA DE TITULOS E VALORES MOBILIARIOS S.A'). Para esse CNPJ: fidc_consolidado.csv = 0 linhas, fii_consolidado.csv = 7 linhas. Ou seja: NENHUM FIDC aparece na base do Tome sob esse CNPJ especifico — so fundos imobiliarios (FII).",
+    "admin='QI Corretora de Titulos' (sem acento) e admin='QI' resolvem para uma lista de administradoras que inclui DOIS CNPJs diferentes com nomes quase identicos: 'QI CORRETORA DE TITULOS E VALORES MOBILIARIOS S.A' (CNPJ 62285390000173, SEM acento na grafia) e 'QI CORRETORA DE TÍTULOS E VALORES MOBILIÁRIOS S.A' / 'S.A.' (CNPJ 62285390000140, COM acento — o MESMO CNPJ que 'singulare' resolveu). Agregado dos dois: fidc_consolidado.csv = 952-957 linhas (variando conforme a query tambem incluiu outros administradores parecidos, tipo 'QI DISTRIBUIDORA...' e um FIAGRO nao relacionado).",
+    "Como o CNPJ 62285390000140 sozinho ja da 0 linhas de FIDC (confirmado via 'singulare'), a esmagadora maioria das ~950 linhas de FIDC do agregado 'QI' devem pertencer ao OUTRO CNPJ, 62285390000173 — que ainda NAO consegui isolar sozinho (a chamada bateu no rate limit: HTTP 429, Retry-After 3600).",
+    "Isso sugere fortemente que a Singulare (CNPJ ...140) foi absorvida/rebatizada como 'QI Corretora' apos a aquisicao pela QI Tech, mas o CNPJ operacional que hoje concentra as administracoes de FIDC no Tome e um CNPJ DIFERENTE (...173) que tambem atende por 'QI Corretora de Titulos e Valores Mobiliarios S.A' — duas pessoas juridicas distintas com nomes quase iguais. Isto ainda e uma hipotese, nao confirmado.",
+    "admin='QI Corretora de Títulos e Valores Mobiliários S.A.' (grafia EXATA com acentos, igual ao texto que aparece nos dossies publicos do Tome para os 4 fundos Solar) deu 404 ADMIN_NAO_ENCONTRADA — o casamento de nome do endpoint de export parece ser mais estrito/diferente do que o texto solto nas paginas de dossie individual. admin='Q.I. Tech' tambem deu 404.",
+    "PENDENTE (proxima chamada a fazer quando a cota resetar): admin=62285390000173 sozinho, para isolar o fidc_consolidado.csv desse CNPJ especifico e conferir se os 4 CNPJs dos fundos Solar (51045717000190, 52498421000198, 39680495000182, 58347004000120) aparecem nas linhas."
+  ],
+
+  "cnpjsSolarParaConferir": {
+    "solar-br-fidc": "51045717000190",
+    "solar-puglia-fidc-rl": "52498421000198",
+    "solar-vialoc-fidc": "39680495000182",
+    "solar-belmonte-fidc": "58347004000120"
+  },
+
+  "chamadasFeitas": [
+    { "admin": "singulare", "corte": "recente", "http": 200, "resultado": "cnpj 62285390000140 — fidc=0, fii=7" },
+    { "admin": "QI Corretora de Títulos e Valores Mobiliários S.A.", "corte": "recente", "http": 404, "resultado": "ADMIN_NAO_ENCONTRADA" },
+    { "admin": "Q.I. Tech", "corte": "recente", "http": 404, "resultado": "ADMIN_NAO_ENCONTRADA" },
+    { "admin": "QI", "corte": "recente", "http": 200, "resultado": "5 administradoras casaram, agregado fidc=957" },
+    { "admin": "QI Corretora", "corte": "recente", "http": 200, "resultado": "3 grafias / 2 CNPJs (62285390000173, 62285390000140), agregado fidc=952" },
+    { "admin": "QI SCD", "corte": "recente", "http": 404, "resultado": "ADMIN_NAO_ENCONTRADA" },
+    { "admin": "QI Sociedade de Credito Direto", "corte": "recente", "http": 404, "resultado": "ADMIN_NAO_ENCONTRADA" },
+    { "admin": "QI Tech", "corte": "recente", "http": 404, "resultado": "ADMIN_NAO_ENCONTRADA" },
+    { "admin": "QI Corretora de Titulos", "corte": "recente", "http": 200, "resultado": "mesmo resultado de 'QI Corretora', 3 grafias / 2 CNPJs, agregado fidc=952" },
+    { "admin": "62285390000173", "corte": "recente", "http": 429, "resultado": "RATE_LIMITED — Retry-After 3600" },
+    { "admin": "62285390000140", "corte": "recente", "http": 429, "resultado": "RATE_LIMITED — Retry-After 3600 (nao chegou a processar)" }
+  ]
+}

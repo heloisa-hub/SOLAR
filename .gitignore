@@ -1,0 +1,11 @@
+# Secrets — never commit. Local-only credential files.
+.env
+.env.*
+*.local
+*.local.*
+dados-fundos/.secrets/
+dados-fundos/*secret*
+
+# Python
+__pycache__/
+*.pyc

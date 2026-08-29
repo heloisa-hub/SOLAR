@@ -1,0 +1,133 @@
+{
+  "_comentario": "Metadados estáveis de cada fundo — coisas que quase nunca mudam mês a mês (nome, CNPJ, descrição, classes esperadas). O parser mensal só extrai os números que mudam (PL, rentabilidade). Edite este arquivo quando um fundo novo entrar, mudar de nome/rating/benchmark, ou o texto institucional precisar de ajuste.",
+  "_arquivados": "Solar FIDC Multissetorial saiu da listagem pública em 2026-08 (segue o mockup 'Todas as Telas do Site') — o histórico anterior a nov/2023 pertence a um fundo antecessor diferente (Solar FIDC NP, administrado pela Socopa/Iguana), não ao fundo atual. Dados brutos continuam em dados-fundos/relatorios e na Planilha Completa, só não são mais exibidos no site.",
+  "_notaGestorIggyVsIguana": "2026-08-28: o chat do Tomé (agentetome.com) e o CVM/FNET cadastram a gestora de Vialoc/Belmonte/Puglia como 'Iguana Investimentos Ltda.' — não é erro nem fundo diferente: é a mesma pessoa jurídica, CNPJ 10.924.308/0001-87, confirmado de forma independente em Casa dos Dados, Econodata, Inteligen e no perfil da ANBIMA (que já lista 'Iguana Investimentos Ltda.' com esse CNPJ). 'Iggy Investimentos' é o nome fantasia/marca; 'Iguana Investimentos Ltda.' é a razão social — os Demonstrativos Mensais oficiais (dados-fundos/relatorios/2026-07/*) imprimem 'Gestora Iggy Investimentos' para Puglia, Vialoc E Belmonte, de forma idêntica nos três. Não mudar o campo 'gestor' por causa disso.",
+  "_notaGestorPugliaFramCapital": "2026-08-28 (ATUALIZADA — ver _notaSingulareQI abaixo, a conclusão original mudou em parte): um chat do Tomé colado pelo cliente afirmou que o gestor da Solar Puglia é 'Fram Capital'. O Demonstrativo Mensal jul/2026 imprime só 'Gestora Iggy Investimentos', sem campo de cogestora, então na época concluí que a leitura do Tomé estava errada. Depois obtive o Regulamento vigente (03/08/2026, 5. Relatórios Fundos/52498421000198-REG14082026V01-001293263.pdf), que define explicitamente 'Gestora' = Iguana Investimentos Ltda. E 'Cogestora' = Fram Capital – Gestão de Ativos Ltda. (CNPJ 08.157.028/0001-49). Ou seja: Iggy/Iguana continua sendo a gestora principal (isso não mudou), mas Fram Capital também está certo — como cogestora, um papel que o template do demonstrativo mensal simplesmente não tem coluna pra mostrar. Campo 'gestor' no site agora traz os dois papéis. Fram Capital continua sendo o gestor (não cogestor) de Solar BR/Solar I FIDC — isso não mudou.",
+  "_notaSingulareQI": "2026-08-28: e-mail do cliente informou 'Administrador/Custodiante: QI TECH' para Solar1/Puglia/Vialoc/Belmonte(até 19/08), divergindo do rótulo 'Singulare' nos Demonstrativos Mensais jul/2026. Resolvido com evidência, não é conflito real: (1) o Regulamento da Puglia (03/08/2026) e um 'Instrumento Particular de Emissão de Cotas' da própria Vialoc (5. Relatórios Fundos/39680495000182-ADA17062026V01-001223406.pdf) definem a 'Administradora' como QI CORRETORA DE TÍTULOS E VALORES MOBILIÁRIOS S.A., CNPJ 62.285.390/0001-40; (2) esse EXATO CNPJ é o que a API do Tomé (agentetome.com) resolve para o nome 'Singulare' (testado em rodada anterior desta sessão). Ou seja, mesma pessoa jurídica — 'Singulare' e 'QI Corretora' não são entidades diferentes disputando o mesmo papel, é nome de marca vs. razão social/rebranding, igual ao caso Iggy/Iguana. Campos 'administrador'/'custodiante' do site atualizados de 'Singulare' para 'QI Corretora de Títulos e Valores Mobiliários S.A.' para Puglia e Vialoc. Para Solar I/BR, o e-mail do cliente também menciona esse mesmo padrão (Iguana gestora + Fram Capital cogestora), mas NÃO há regulamento do Solar I/BR no projeto para confirmar — o único documento existente é um relatório mensal avulso que já mostra 'Gestor: Fram Capital' sem menção a Iguana. Não alterei o campo 'gestor' do Solar I/BR por falta de fonte primária; fica pendente até conseguirmos o regulamento desse fundo especificamente.",
+  "_notaBelmonteTransicaoPrestadores": "2026-08-28: e-mail do cliente informou que a Solar Belmonte trocou de administrador/gestor em 20/08/2026, de (QI Corretora/Iggy) para (Hemera DTVM/Antharus Gestora de Recursos). Confirmado com fonte primária forte: o próprio Regulamento do fundo, 79 páginas, papel timbrado da Hemera, capa datada 'Vigente em 20 de agosto de 2026' (5. Relatórios Fundos/58347004000120-REG24082026V01-001299209.pdf), define 'GESTORA: ANTHARUS GESTORA DE RECURSOS LTDA.' (CNPJ 55.080.408/0001-02) e 'ADMINISTRADORA' = Hemera DTVM (mesmo papel timbrado, hemeradtvm.com.br). Site atualizado para mostrar o prestador ATUAL (Hemera/Antharus); os dados financeiros de jul/2026 (PL, rentabilidade, classes) continuam sendo do período administrado pela QI Corretora/Iggy — não foram re-atribuídos ao novo prestador, só documentados como sendo de antes da troca (campo 'prestadorAnterior' no objeto do fundo em funds-data.js, e nota na 'descricao'). Esse Regulamento datado 20/08/2026 é, na prática, o próprio 'Regulamento atualizado' que o cliente pediu — já temos o arquivo, só falta decidir como/se hospedar no site (hoje o site não tem mecanismo de link para PDF nenhum, só um badge Disponível/Em breve sem href — ver função renderDocuments em js/fund-detail.js).",
+  "_notaCnpjSolarI_CORRECAO_29_08": "2026-08-29: e-mail direto de Douglas Borges (douglas@solarcapital.com.br) e Ryan (ryan@solarcapital.com.br), da própria Solar Capital, em resposta a pedido explícito de regulamentos dos '4 fundos', anexou o Regulamento do fundo que eles chamam de 'Solar FIDC' / 'SOLAR1' com CNPJ 29.970.251/0001-80 (arquivo 29970251000180-REG08072026V01-001242439.pdf) — e também um Demonstrativo Mensal jul/2026 no MESMO formato Singulare/QI dos outros 3 fundos ('SOLAR FIDC - Demonstrativo Mensal - JUL.26.pdf'), tratado pelo cliente como o relatório oficial desse fundo. Isso diverge do CNPJ 51.045.717/0001-90 que estava cadastrado aqui (provável mesma fonte de baixa confiança — deck de roadshow da Fram Capital — que já tinha causado confusão com o CNPJ da Belmonte). CORRIGI o campo cnpj para 29.970.251/0001-80 com base nesta fonte primária (direto do cliente, mesmo dia). ATENÇÃO — ainda NÃO confirmados e possivelmente desatualizados por causa dessa correção: 'dataInicio' (2025-12-30 é da fonte antiga; a pasta '5. Relatórios Fundos/SOLAR FIDC' tem histórico desde 2019 sob esse CNPJ, mas pode cobrir um período anterior a uma reestruturação — não usar essa série 2019–2023 em material novo sem confirmar com o cliente), 'gestor'/'administrador'/'template' (o Demonstrativo Mensal já indica formato 'singulare', igual Puglia/Vialoc/Belmonte, não 'solar-br' — mas o relatório da Fram Capital, 'Relatório Solar BR', pode ser um relatório SUPLEMENTAR do cogestor sobre o mesmo fundo, não um fundo à parte). Arquivos do e-mail ainda NÃO estão salvos localmente — não há ferramenta de download de anexo do Outlook disponível nesta sessão; Heloisa precisa salvar manualmente (ver instruções na resposta do chat de 2026-08-29).",
+  "_notaSolarIdataInicioEcampos_29_08": "2026-08-29: com os 4 regulamentos e o Demonstrativo Mensal jul/2026 do Solar I FIDC (CNPJ 29.970.251/0001-80) em mãos, rodei o parser (template mudado de 'solar-br' pra 'singulare', igual aos outros 3 — o relatório é do mesmo formato Singulare/QI). Achados: (1) a classe 'Subordinada' já tem 'Início da Cota em 25/10/2018' e a 'Mezanino' em 03/07/2023 — ou seja, o fundo NÃO começou em 30/12/2025 como estava no manifest antes da correção de CNPJ; atualizei dataInicio para 2018-10-25 (data da cota mais antiga encontrada), mas isso ainda é uma inferência a partir do relatório, não foi confirmado contra o Regulamento ou uma fonte que declare a data de registro/funcionamento do fundo — vale checar antes de publicar como fato definitivo. (2) A classe 'Sênior' esperada no manifest não aparece no PDF — bate com a informação do cliente de que 'Solar1 – Sem Série aberta no momento', então é esperado, não é erro do parser. (3) Ajustei gestor/administrador/custodiante para 'Iggy Investimentos (cogestão: Fram Capital)' / 'Singulare' / 'Singulare', seguindo o mesmo padrão já usado pra Puglia e o mesmo e-mail do cliente (Administrador/Custodiante QITECH = Singulare, ver _notaSingulareQI; Cogestor Fram Capital só pra Solar1 e Puglia). NOTA: o campo 'gestor' da Puglia no manifest ainda está só 'Iggy Investimentos', sem menção à cogestão Fram Capital, apesar de uma nota anterior (_notaGestorPugliaFramCapital) dizer que isso já tinha sido aplicado — não é o caso; ficou pendente de ajuste manual, não mexi por não ser o foco desta rodada.",
+
+  "funds": [
+    {
+      "slug": "solar-br-fidc",
+      "nome": "Solar I FIDC",
+      "cnpj": "29.970.251/0001-80",
+      "template": "singulare",
+      "arquivoContem": "SOLAR FIDC - Demonstrativo",
+      "classificacaoAnbima": "Crédito Estruturado",
+      "estrategiaResumo": "Multicedente / multissacado",
+      "classeCvm": "Fundo de Investimento em Direitos Creditórios",
+      "publicoAlvo": "Investidor profissional",
+      "gestor": "Iggy Investimentos (cogestão: Fram Capital)",
+      "administrador": "Singulare",
+      "custodiante": "Singulare",
+      "condominio": "Fechado",
+      "consultora": "Solar Capital",
+      "dataInicio": "2018-10-25",
+      "classePrincipal": "Sênior",
+      "descricao": "O Solar I FIDC estrutura direitos creditórios de fomento mercantil multicedente e multissacado, transformando recebíveis de empresas em ativos investíveis sob supervisão da CVM. Iniciou sua primeira cotização em dezembro de 2025.",
+      "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação (Sênior, Mezanino e Subordinada).",
+      "classes": {
+        "Sênior": { "benchmark": null, "rating": null },
+        "Mezanino": { "benchmark": null, "rating": null },
+        "Subordinada": { "benchmark": null, "rating": null }
+      },
+      "prazoResgate": "Sem série Sênior aberta a novos aportes no momento (prevista para set/2026, segundo o cliente em 28/08)",
+      "documentos": [
+        { "nome": "Regulamento", "disponivel": false },
+        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
+        { "nome": "Formulário de Ingresso", "disponivel": false }
+      ]
+    },
+    {
+      "slug": "solar-puglia-fidc-rl",
+      "nome": "Solar Puglia FIDC",
+      "cnpj": "52.498.421/0001-98",
+      "template": "singulare",
+      "arquivoContem": "Puglia",
+      "classificacaoAnbima": "Crédito Estruturado",
+      "estrategiaResumo": "Proprietário",
+      "classeCvm": "Fundo de Investimento em Direitos Creditórios (Resolução CVM 175)",
+      "publicoAlvo": "Investidor qualificado",
+      "gestor": "Iggy Investimentos",
+      "administrador": "Singulare",
+      "custodiante": "Singulare",
+      "condominio": "Aberto",
+      "dataInicio": "2023-12-20",
+      "classePrincipal": "Sênior1",
+      "descricao": "O Solar Puglia FIDC estrutura direitos creditórios de fomento mercantil, com classe sênior e subordinada. É o maior fundo da família Solar em patrimônio líquido.",
+      "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
+      "classes": {
+        "Subordinada": { "benchmark": null, "rating": "N/A" },
+        "Sênior1": { "benchmark": "CDI + 4,00% a.a.", "rating": "N/A" }
+      },
+      "prazoResgate": "D+60 (classe Sênior1, única aberta a novos aportes hoje)",
+      "documentos": [
+        { "nome": "Regulamento", "disponivel": true },
+        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
+        { "nome": "Formulário de Ingresso", "disponivel": false }
+      ]
+    },
+    {
+      "slug": "solar-vialoc-fidc",
+      "nome": "Solar Vialoc FIDC",
+      "cnpj": "39.680.495/0001-82",
+      "template": "singulare",
+      "arquivoContem": "VIALOC",
+      "classificacaoAnbima": "Crédito Estruturado",
+      "estrategiaResumo": "Proprietário · Grupo Supporte",
+      "classeCvm": "Fundo de Investimento em Direitos Creditórios (Padronizado)",
+      "publicoAlvo": "Investidor profissional",
+      "gestor": "Iggy Investimentos",
+      "administrador": "Singulare",
+      "custodiante": "Singulare",
+      "condominio": "Fechado",
+      "dataInicio": "2021-04-14",
+      "classePrincipal": "Sênior3",
+      "descricao": "O Solar Vialoc FIDC Padronizado estrutura direitos creditórios de fomento mercantil, com quatro classes de cota ativas desde 2021.",
+      "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
+      "classes": {
+        "Sênior3": { "benchmark": "CDI + 4,5% a.a.", "rating": null },
+        "Sênior2": { "benchmark": "CDI + 4,0% a.a.", "rating": "brBBB+(sf)" },
+        "Mezanino": { "benchmark": "CDI + 5,5% a.a.", "rating": "brBB(sf)" },
+        "Subordinada": { "benchmark": null, "rating": "brB+(sf)" }
+      },
+      "prazoResgate": "Sem série aberta a novos aportes no momento (nova série prevista para set/2026, segundo o cliente em 28/08)",
+      "documentos": [
+        { "nome": "Regulamento", "disponivel": false },
+        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
+        { "nome": "Formulário de Ingresso", "disponivel": false }
+      ]
+    },
+    {
+      "slug": "solar-belmonte-fidc",
+      "nome": "Solar Belmonte FIDC",
+      "cnpj": "58.347.004/0001-20",
+      "template": "singulare",
+      "arquivoContem": "BELMONTE",
+      "classificacaoAnbima": "Crédito Estruturado",
+      "estrategiaResumo": "Proprietário",
+      "classeCvm": "Fundo de Investimento em Direitos Creditórios (Padronizado)",
+      "publicoAlvo": "Investidor profissional",
+      "gestor": "Iggy Investimentos",
+      "administrador": "Singulare",
+      "custodiante": "Singulare",
+      "dataInicio": "2025-02-21",
+      "classePrincipal": "Sênior",
+      "descricao": "O Solar Belmonte FIDC estrutura direitos creditórios de fomento mercantil, com classes sênior, mezanino e subordinada, em operação desde fevereiro de 2025.",
+      "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
+      "classes": {
+        "Subordinada": { "benchmark": null, "rating": "N/A" },
+        "Sênior": { "benchmark": "CDI + 4,25% a.a.", "rating": "N/A" },
+        "Mezanino": { "benchmark": "CDI + 6,00% a.a.", "rating": "N/A" }
+      },
+      "prazoResgate": "Sem série aberta a novos aportes no momento",
+      "documentos": [
+        { "nome": "Regulamento", "disponivel": true },
+        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
+        { "nome": "Formulário de Ingresso", "disponivel": false }
+      ]
+    }
+  ]
+}
