@@ -558,10 +558,13 @@
     var container = document.getElementById("documentos-list");
     if (!container) return;
     container.innerHTML = fund.documentos.map(function (doc) {
+      var badge = doc.disponivel && doc.url
+        ? '<a class="card-badge card-badge--link" href="' + doc.url + '" target="_blank" rel="noopener">Baixar PDF ↓</a>'
+        : '<span class="card-badge">' + (doc.disponivel ? "Disponível" : "Em breve") + "</span>";
       return (
         '<div class="document-row">' +
           "<span>" + doc.nome + "</span>" +
-          '<span class="card-badge">' + (doc.disponivel ? "Disponível" : "Em breve") + "</span>" +
+          badge +
         "</div>"
       );
     }).join("");

@@ -1278,6 +1278,12 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
   color: var(--color-navy-900);
 }
 .document-row:last-child { border-bottom: none; }
+.card-badge--link {
+  background: var(--color-navy-900);
+  color: var(--color-white);
+  transition: background 0.15s ease;
+}
+.card-badge--link:hover { background: var(--color-gold-600); }
 
 /* =========================================================
    Sistema visual novo — baseado no mockup "Todas as Telas do Site"

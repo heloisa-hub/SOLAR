@@ -80,9 +80,23 @@ var SOLAR_CAPITAL_FUNDS = [
     estrategiaResumo: "Proprietário",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Resolução CVM 175)",
     publicoAlvo: "A definir",
-    gestor: "Iggy Investimentos",
-    administrador: "Singulare",
-    custodiante: "Singulare",
+    // Administrador/custodiante corrigidos em 2026-08-28: o demonstrativo mensal
+    // jul/2026 (fonte de todo o resto deste objeto) rotula "Singulare", mas o
+    // Regulamento vigente (03/08/2026, arquivo 5. Relatórios
+    // Fundos/52498421000198-REG14082026V01-001293263.pdf) define a
+    // "Administradora" como QI Corretora de Títulos e Valores Mobiliários S.A.,
+    // CNPJ 62.285.390/0001-40 — o mesmo CNPJ que a API do Tomé associa ao nome
+    // "Singulare" (ver nota _notaSingulareQI em manifest.json). Não é conflito:
+    // é a mesma pessoa jurídica sob dois nomes, ou um rebranding no período
+    // entre jul/2026 (nome antigo no demonstrativo) e ago/2026 (nome atual no
+    // regulamento). Gestora confirmada como Iguana/Iggy Investimentos no mesmo
+    // regulamento, que também define Cogestora = Fram Capital – Gestão de
+    // Ativos Ltda. (CNPJ 08.157.028/0001-49) — papel que o demonstrativo mensal
+    // (template de 1 página) simplesmente não tem campo para mostrar.
+    gestor: "Iggy Investimentos (cogestora: Fram Capital – Gestão de Ativos)",
+    administrador: "QI Corretora de Títulos e Valores Mobiliários S.A.",
+    custodiante: "QI Corretora de Títulos e Valores Mobiliários S.A.",
+    condominio: "Aberto",
     agenciaRating: "Austin Rating",
     dataInicio: "2023-12-20",
     status: "operacional",
@@ -112,8 +126,10 @@ var SOLAR_CAPITAL_FUNDS = [
     inadimplenciaCvmPercentPL: 1.88,
     fonteInadimplenciaCvm: "Tomé / informe CVM-FNET, competência jul/2026",
     composicaoPortfolio: [],
+    // Regulamento vigente em 03/08/2026, obtido diretamente da CVM — ver nota
+    // _notaSingulareQI em manifest.json. Arquivo hospedado em documentos/.
     documentos: [
-      { nome: "Regulamento", disponivel: false },
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-puglia-fidc.pdf" },
       { nome: "Lâmina de Informações Essenciais", disponivel: false },
       { nome: "Formulário de Ingresso", disponivel: false }
     ],
@@ -129,9 +145,18 @@ var SOLAR_CAPITAL_FUNDS = [
     estrategiaResumo: "Proprietário · Grupo Supporte",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Padronizado)",
     publicoAlvo: "A definir",
+    // Administrador/custodiante corrigidos em 2026-08-28: confirmado via fonte
+    // primária própria do Vialoc — "Instrumento Particular de Emissão de
+    // Cotas" (5. Relatórios Fundos/39680495000182-ADA17062026V01-001223406.pdf)
+    // qualifica expressamente "A QI CORRETORA DE TÍTULOS E VALORES MOBILIÁRIOS
+    // S.A. ... inscrita no CNPJ sob o nº 62.285.390/0001-40" como
+    // "Administradora" do fundo. Mesmo CNPJ que a Puglia (ver nota lá) e que a
+    // API do Tomé associa ao nome "Singulare" — mesma pessoa jurídica ou
+    // rebranding, não um erro. Sem evidência de cogestora para este fundo
+    // especificamente (diferente de Puglia/Solar1).
     gestor: "Iggy Investimentos",
-    administrador: "Singulare",
-    custodiante: "Singulare",
+    administrador: "QI Corretora de Títulos e Valores Mobiliários S.A.",
+    custodiante: "QI Corretora de Títulos e Valores Mobiliários S.A.",
     agenciaRating: "Austin Rating",
     dataInicio: "2021-04-14",
     status: "operacional",
@@ -180,9 +205,30 @@ var SOLAR_CAPITAL_FUNDS = [
     estrategiaResumo: "Proprietário",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Padronizado)",
     publicoAlvo: "A definir",
-    gestor: "Iggy Investimentos",
-    administrador: "Singulare",
-    custodiante: "Singulare",
+    // TROCA DE PRESTADORES em 2026-08-28: confirmada pelo Regulamento do fundo
+    // "vigente em 20 de agosto de 2026" (fonte primária, 79 páginas, papel
+    // timbrado Hemera — 5. Relatórios Fundos/58347004000120-REG24082026V01-
+    // 001299209.pdf), que define GESTORA = ANTHARUS GESTORA DE RECURSOS LTDA.
+    // (CNPJ 55.080.408/0001-02) e ADMINISTRADORA = Hemera DTVM. Isso bate
+    // exatamente com o e-mail do cliente (28/08/2026): "Belmonte a partir de
+    // 20/08/26: Administrador/Custodiante = Hemera; Gestor = Antharus".
+    // ANTES de 20/08/2026 o fundo era administrado pela QI Corretora (rótulo
+    // "Singulare" no demonstrativo, mesma entidade — ver nota na Puglia) com
+    // gestão da Iggy/Iguana Investimentos — é sob ESSE regime anterior que
+    // todos os dados financeiros deste objeto (PL, rentabilidade, classes,
+    // etc., competência jul/2026) foram apurados. Não apagar/reatribuir esse
+    // histórico ao novo prestador. Condomínio confirmado no mesmo regulamento:
+    // "natureza especial fechado, com prazo de duração indeterminado".
+    gestor: "Antharus Gestora de Recursos Ltda.",
+    administrador: "Hemera Distribuidora de Títulos e Valores Mobiliários S.A.",
+    custodiante: "Hemera Distribuidora de Títulos e Valores Mobiliários S.A.",
+    prestadorAnterior: {
+      vigenciaAte: "2026-08-19",
+      gestor: "Iggy Investimentos",
+      administrador: "QI Corretora de Títulos e Valores Mobiliários S.A. (rótulo \"Singulare\" nos demonstrativos)",
+      nota: "Os dados financeiros abaixo (PL, rentabilidade, classes) são da competência Jul/2026, apurados sob este prestador anterior."
+    },
+    condominio: "Fechado",
     agenciaRating: "Austin Rating",
     dataInicio: "2025-02-21",
     status: "operacional",
@@ -200,7 +246,7 @@ var SOLAR_CAPITAL_FUNDS = [
       { nome: "Sênior", percentPL: 40.46, rating: "N/A", benchmark: "CDI + 4,25% a.a.", dataInicioCota: "2025-06-09", plReais: "R$ 10,08 milhões", mes: 1.6, ano: 10.77, tresMeses: 4.55, seisMeses: 9.1, dozeMeses: 19.6, desdeInicio: 22.7, cdiMes: 131.7, cdiAno: 132.2, cdi3m: 131.9, cdi6m: 132.1, cdi12m: 133.2, cdiInicio: 133.0, historicoMensal: [{ mes: "2025-06", rentabilidade: 1.0 }, { mes: "2025-07", rentabilidade: 1.66 }, { mes: "2025-08", rentabilidade: 1.52 }, { mes: "2025-09", rentabilidade: 1.59 }, { mes: "2025-10", rentabilidade: 1.66 }, { mes: "2025-11", rentabilidade: 1.37 }, { mes: "2025-12", rentabilidade: 1.59 }, { mes: "2026-03", rentabilidade: 1.58 }, { mes: "2026-04", rentabilidade: 1.43 }, { mes: "2026-05", rentabilidade: 1.41 }, { mes: "2026-06", rentabilidade: 1.47 }, { mes: "2026-07", rentabilidade: 1.6 }] },
       { nome: "Mezanino", percentPL: 0.0, rating: "N/A", benchmark: "CDI + 6,00% a.a.", dataInicioCota: "2025-06-09", plReais: "R$ 0", mes: 1.06, ano: 11.07, tresMeses: 4.28, seisMeses: 9.26, dozeMeses: 20.8, desdeInicio: 24.28, cdiMes: 87.6, cdiAno: 136.0, cdi3m: 124.1, cdi6m: 134.3, cdi12m: 141.2, cdiInicio: 142.2, historicoMensal: [{ mes: "2025-06", rentabilidade: 1.08 }, { mes: "2025-07", rentabilidade: 1.82 }, { mes: "2025-08", rentabilidade: 1.66 }, { mes: "2025-09", rentabilidade: 1.74 }, { mes: "2025-10", rentabilidade: 1.82 }, { mes: "2025-11", rentabilidade: 1.5 }, { mes: "2025-12", rentabilidade: 1.74 }, { mes: "2026-03", rentabilidade: 1.73 }, { mes: "2026-04", rentabilidade: 1.56 }, { mes: "2026-05", rentabilidade: 1.54 }, { mes: "2026-06", rentabilidade: 1.61 }, { mes: "2026-07", rentabilidade: 1.06 }] }
     ],
-    descricao: "O Solar Belmonte FIDC estrutura direitos creditórios de fomento mercantil, com classes sênior, mezanino e subordinada, em operação desde fevereiro de 2025.",
+    descricao: "O Solar Belmonte FIDC estrutura direitos creditórios de fomento mercantil, com classes sênior, mezanino e subordinada, em operação desde fevereiro de 2025. Desde 20/08/2026, o fundo é administrado pela Hemera DTVM e gerido pela Antharus Gestora de Recursos — os números de rentabilidade e patrimônio abaixo (competência Jul/2026) referem-se ao período anterior a essa transição.",
     estrategia: "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
     tese: {
       originacao: "Direitos creditórios de fomento mercantil — fundo proprietário (não-feeder) em operação desde fevereiro de 2025, o mais novo com FIDC próprio da família Solar.",
@@ -213,8 +259,11 @@ var SOLAR_CAPITAL_FUNDS = [
     inadimplenciaCvmPercentPL: 0.0,
     fonteInadimplenciaCvm: "Tomé / informe CVM-FNET, competência jul/2026",
     composicaoPortfolio: [],
+    // Regulamento vigente em 20/08/2026 (já sob a Hemera/Antharus), obtido
+    // diretamente da CVM — ver nota _notaBelmonteTransicaoPrestadores em
+    // manifest.json. Arquivo hospedado em documentos/.
     documentos: [
-      { nome: "Regulamento", disponivel: false },
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-belmonte-fidc.pdf" },
       { nome: "Lâmina de Informações Essenciais", disponivel: false },
       { nome: "Formulário de Ingresso", disponivel: false }
     ],
