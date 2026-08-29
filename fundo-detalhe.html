@@ -129,6 +129,7 @@
               <div><dt>Público-alvo</dt><dd data-field="publicoAlvo"></dd></div>
               <div><dt>Condomínio</dt><dd data-field="condominio"></dd></div>
               <div><dt>Data de início</dt><dd data-field-date="dataInicio"></dd></div>
+              <div><dt>Janela de resgate</dt><dd data-field="janelaResgate"></dd></div>
             </dl>
           </div>
         </div>
@@ -160,7 +161,13 @@
         <p id="rentabilidade-empty" style="display:none; margin-bottom: 24px;">Este fundo ainda não iniciou suas operações — o histórico de rentabilidade será publicado aqui assim que houver dados a divulgar.</p>
         <div class="rentab-grid">
           <div class="chart-box" id="rentabilidade-chart-box" style="display:none; max-width: none;">
-            <p style="font-size: 0.85rem; color: var(--color-muted); margin-bottom: 12px;">Rentabilidade acumulada — classe <span id="chart-class-name"></span></p>
+            <div class="chart-header-row">
+              <p style="font-size: 0.85rem; color: var(--color-muted); margin: 0;"><span id="chart-mode-label">Rentabilidade acumulada desde o início</span> — classe <span id="chart-class-name"></span></p>
+              <div class="chart-class-picker" id="rentabilidade-view-toggle" role="group" aria-label="Escolher tipo de gráfico">
+                <button type="button" class="chart-class-picker-btn is-active" data-modo="acumulado" aria-pressed="true">Desde o início</button>
+                <button type="button" class="chart-class-picker-btn" data-modo="mensal" aria-pressed="false">Mensal</button>
+              </div>
+            </div>
             <div class="chart-class-picker" id="rentabilidade-class-picker" role="group" aria-label="Escolher classe de cota do gráfico"></div>
             <svg id="rentabilidade-chart"></svg>
           </div>

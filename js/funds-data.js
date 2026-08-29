@@ -15,6 +15,7 @@ var SOLAR_CAPITAL_FUNDS = [
     estrategiaResumo: "Multicedente / multissacado",
     classeCvm: "Fundo de Investimento em Direitos Creditórios",
     publicoAlvo: "Investidor profissional",
+    janelaResgate: "Sem série aberta no momento",
     gestor: "Fram Capital",
     administrador: "Q.I. Tech",
     custodiante: "QI Corretora de Títulos e Valores Mobiliários S.A.",
@@ -79,7 +80,13 @@ var SOLAR_CAPITAL_FUNDS = [
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Proprietário",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Resolução CVM 175)",
-    publicoAlvo: "A definir",
+    // Público-alvo confirmado por e-mail direto de Douglas Borges (Solar
+    // Capital) em 28/08/2026: "Puglia: Investidores Qualificados, ABERTO" —
+    // bate com o que já tínhamos derivado do próprio Regulamento ("condomínio
+    // aberto"). Janela de resgate também informada diretamente: Sênior1 tem
+    // resgate D+60 (fundo aberto).
+    publicoAlvo: "Investidor qualificado",
+    janelaResgate: "Fundo aberto — resgate D+60 (classe Sênior1)",
     // Administrador/custodiante corrigidos em 2026-08-28: o demonstrativo mensal
     // jul/2026 (fonte de todo o resto deste objeto) rotula "Singulare", mas o
     // Regulamento vigente (03/08/2026, arquivo 5. Relatórios
@@ -144,7 +151,14 @@ var SOLAR_CAPITAL_FUNDS = [
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Proprietário · Grupo Supporte",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Padronizado)",
-    publicoAlvo: "A definir",
+    // Público-alvo e condomínio confirmados por e-mail direto de Douglas
+    // Borges (Solar Capital) em 28/08/2026: "Vialoc: Investidores
+    // Profissionais, FECHADO". Sem série aberta para captação no momento
+    // ("provavelmente lançada em setembro", segundo o cliente — não publicado
+    // como fato, só a situação atual).
+    publicoAlvo: "Investidor profissional",
+    condominio: "Fechado",
+    janelaResgate: "Sem série aberta no momento",
     // Administrador/custodiante corrigidos em 2026-08-28: confirmado via fonte
     // primária própria do Vialoc — "Instrumento Particular de Emissão de
     // Cotas" (5. Relatórios Fundos/39680495000182-ADA17062026V01-001223406.pdf)
@@ -204,7 +218,11 @@ var SOLAR_CAPITAL_FUNDS = [
     classificacaoAnbima: "Crédito Estruturado",
     estrategiaResumo: "Proprietário",
     classeCvm: "Fundo de Investimento em Direitos Creditórios (Padronizado)",
-    publicoAlvo: "A definir",
+    // Público-alvo confirmado por e-mail direto de Douglas Borges (Solar
+    // Capital) em 28/08/2026: "Belmonte: Investidores Profissionais,
+    // FECHADO" — bate com o condomínio já confirmado pelo próprio Regulamento.
+    publicoAlvo: "Investidor profissional",
+    janelaResgate: "Sem série aberta no momento",
     // TROCA DE PRESTADORES em 2026-08-28: confirmada pelo Regulamento do fundo
     // "vigente em 20 de agosto de 2026" (fonte primária, 79 páginas, papel
     // timbrado Hemera — 5. Relatórios Fundos/58347004000120-REG24082026V01-

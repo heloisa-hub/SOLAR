@@ -380,10 +380,24 @@
     overlay.addEventListener("touchend", hide);
   }
 
-  function drawChartInto(svgId, boxId, nameElId, cls, dark) {
+  // Composição geométrica dos retornos mensais num índice acumulado (base 0%
+  // no mês anterior ao início da série). Ex.: +1%, +1% seguidos viram
+  // +1,00%, +2,01% acumulados — não +1%, +2% (soma simples subestima o
+  // efeito de juros compostos, que é real mesmo em janelas curtas).
+  function computeCumulativeSeries(historicoMensal) {
+    var acc = 1;
+    return (historicoMensal || []).map(function (d) {
+      acc *= (1 + Number(d.rentabilidade) / 100);
+      return { mes: d.mes, rentabilidade: (acc - 1) * 100 };
+    });
+  }
+
+  function drawChartInto(svgId, boxId, nameElId, cls, dark, viewMode) {
     var box = document.getElementById(boxId);
     var svg = document.getElementById(svgId);
-    var data = cls ? cls.historicoMensal : null;
+    var data = cls
+      ? (viewMode === "mensal" ? cls.historicoMensal : computeCumulativeSeries(cls.historicoMensal))
+      : null;
     var gridColor = dark ? "rgba(255,255,255,0.14)" : "#E4DFD3";
     var axisTextColor = dark ? "rgba(255,255,255,0.5)" : "#7A7568";
     var dotStrokeColor = dark ? "#070222" : "#FFFDF6";
@@ -475,7 +489,8 @@
 
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
     svg.setAttribute("role", "img");
-    svg.setAttribute("aria-label", "Rentabilidade mensal da classe " + cls.nome + ": " + data.map(function (d) { return formatMonthShort(d.mes) + " " + formatLabelValue(Number(d.rentabilidade)); }).join(", "));
+    var ariaKind = viewMode === "mensal" ? "Rentabilidade mensal" : "Rentabilidade acumulada desde o início";
+    svg.setAttribute("aria-label", ariaKind + " da classe " + cls.nome + ": " + data.map(function (d) { return formatMonthShort(d.mes) + " " + formatLabelValue(Number(d.rentabilidade)); }).join(", "));
     svg.innerHTML =
       '<defs>' +
         '<linearGradient id="' + gradientId + '" x1="0" y1="0" x2="0" y2="1">' +
@@ -537,19 +552,48 @@
     var emptyState = document.getElementById("rentabilidade-empty");
     if (emptyState) emptyState.style.display = (!hasData && fund.classes && fund.classes.length) ? "block" : "none";
 
+    // "Desde o início" é a visão padrão (o que a maioria quer ver primeiro:
+    // quanto rendeu no total) — "Mensal" fica disponível para quem quer o
+    // detalhe mês a mês, que já existia antes deste toggle.
+    var viewMode = "acumulado";
+    var modeLabelEl = document.getElementById("chart-mode-label");
+
+    function updateModeLabel() {
+      if (modeLabelEl) modeLabelEl.textContent = viewMode === "mensal" ? "Rentabilidade mensal" : "Rentabilidade acumulada desde o início";
+    }
+
+    var currentClassNome = null;
+
     function selectClass(nome) {
       var cls = withHistory.filter(function (c) { return c.nome === nome; })[0] ||
         (principal && principal.historicoMensal && principal.historicoMensal.length ? principal : withHistory[0]);
-      drawChartInto("rentabilidade-chart", "rentabilidade-chart-box", "chart-class-name", cls, false);
-      renderChartClassPicker(fund, cls ? cls.nome : null, selectClass);
+      currentClassNome = cls ? cls.nome : null;
+      drawChartInto("rentabilidade-chart", "rentabilidade-chart-box", "chart-class-name", cls, false, viewMode);
+      renderChartClassPicker(fund, currentClassNome, selectClass);
+      updateModeLabel();
     }
 
     var initial = (principal && principal.historicoMensal && principal.historicoMensal.length) ? principal : withHistory[0];
     selectClass(initial ? initial.nome : null);
 
-    // A Visão Geral mostra só a classe principal (é um resumo rápido, não a
-    // análise completa) — o seletor fica só na aba Rentabilidade.
-    var overviewHasChart = drawChartInto("overview-chart", "overview-chart-box", "overview-chart-class-name", principal, true);
+    var toggle = document.getElementById("rentabilidade-view-toggle");
+    if (toggle) {
+      Array.prototype.forEach.call(toggle.querySelectorAll(".chart-class-picker-btn"), function (btn) {
+        btn.addEventListener("click", function () {
+          viewMode = btn.getAttribute("data-modo");
+          Array.prototype.forEach.call(toggle.querySelectorAll(".chart-class-picker-btn"), function (b) {
+            b.classList.toggle("is-active", b === btn);
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          selectClass(currentClassNome);
+        });
+      });
+    }
+
+    // A Visão Geral mostra só a classe principal, sempre acumulada desde o
+    // início (é um resumo rápido, não a análise completa) — o toggle e o
+    // seletor de classe ficam só na aba Rentabilidade.
+    var overviewHasChart = drawChartInto("overview-chart", "overview-chart-box", "overview-chart-class-name", principal, true, "acumulado");
     var overviewEmpty = document.getElementById("overview-chart-empty");
     if (overviewEmpty) overviewEmpty.style.display = overviewHasChart ? "none" : "block";
   }

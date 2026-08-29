@@ -939,6 +939,18 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
 }
 /* dentro do card escuro da Visão Geral não se aplica — o picker só existe na aba Rentabilidade */
 
+.chart-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-bottom: 14px;
+}
+/* O toggle Desde o início/Mensal reaproveita o visual do seletor de classe,
+   mas ao contrário dele fica sempre visível (não depende de haver 2+ classes). */
+#rentabilidade-view-toggle { display: flex; margin-bottom: 0; }
+
 /* ===== Tooltip do gráfico (hover) ===== */
 .chart-tooltip {
   position: absolute;
