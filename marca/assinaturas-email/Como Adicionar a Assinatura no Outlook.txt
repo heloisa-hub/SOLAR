@@ -1,0 +1,13 @@
+COMO ADICIONAR A ASSINATURA NO OUTLOOK
+
+1. Abra o arquivo "Assinatura de E-mail - [Seu Nome].html" (nesta mesma pasta) no navegador (Chrome, Edge etc).
+2. Selecione todo o conteúdo da assinatura com Ctrl+A e copie com Ctrl+C.
+3. Abra o Outlook.
+4. Vá em Arquivo > Opções > E-mail > Assinaturas.
+   (No Outlook novo/web: Configurações > E-mail > Redigir e responder > Assinaturas)
+5. Clique em "Nova", dê um nome (ex: "Padrão") e clique OK.
+6. Cole (Ctrl+V) a assinatura copiada na caixa de edição.
+7. Em "Escolher assinatura padrão", selecione essa assinatura para Novas mensagens e para Respostas/encaminhamentos.
+8. Clique em OK para salvar.
+
+Pronto — a assinatura vai aparecer automaticamente nos próximos e-mails.
