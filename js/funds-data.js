@@ -46,8 +46,7 @@ var SOLAR_CAPITAL_FUNDS = [
       { categoria: "Disponibilidades", percent: 0.0 }
     ],
     documentos: [
-      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-fidc-multissetorial.pdf" },
-      { nome: "Formulário de Ingresso", disponivel: false }
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-fidc-multissetorial.pdf" }
     ],
     fonteDados: "Relatório mensal oficial — Jul/2026",
     illustrative: false
@@ -89,8 +88,7 @@ var SOLAR_CAPITAL_FUNDS = [
       { categoria: "Disponibilidades", percent: 0.0 }
     ],
     documentos: [
-      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-puglia-fidc.pdf" },
-      { nome: "Formulário de Ingresso", disponivel: false }
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-puglia-fidc.pdf" }
     ],
     fonteDados: "Relatório mensal oficial — Jul/2026",
     illustrative: false
@@ -134,8 +132,7 @@ var SOLAR_CAPITAL_FUNDS = [
       { categoria: "Disponibilidades", percent: 0.0 }
     ],
     documentos: [
-      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-vialoc-fidc.pdf" },
-      { nome: "Formulário de Ingresso", disponivel: false }
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-vialoc-fidc.pdf" }
     ],
     fonteDados: "Relatório mensal oficial — Jul/2026",
     illustrative: false
@@ -177,8 +174,7 @@ var SOLAR_CAPITAL_FUNDS = [
       { categoria: "Disponibilidades", percent: 0.0 }
     ],
     documentos: [
-      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-belmonte-fidc.pdf" },
-      { nome: "Formulário de Ingresso", disponivel: false }
+      { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-belmonte-fidc.pdf" }
     ],
     fonteDados: "Relatório mensal oficial — Jul/2026",
     illustrative: false

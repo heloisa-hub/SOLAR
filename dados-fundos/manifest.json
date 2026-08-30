@@ -8,7 +8,6 @@
   "_notaCnpjSolarI_CORRECAO_29_08": "2026-08-29: e-mail direto de Douglas Borges (douglas@solarcapital.com.br) e Ryan (ryan@solarcapital.com.br), da própria Solar Capital, em resposta a pedido explícito de regulamentos dos '4 fundos', anexou o Regulamento do fundo que eles chamam de 'Solar FIDC' / 'SOLAR1' com CNPJ 29.970.251/0001-80 (arquivo 29970251000180-REG08072026V01-001242439.pdf) — e também um Demonstrativo Mensal jul/2026 no MESMO formato Singulare/QI dos outros 3 fundos ('SOLAR FIDC - Demonstrativo Mensal - JUL.26.pdf'), tratado pelo cliente como o relatório oficial desse fundo. Isso diverge do CNPJ 51.045.717/0001-90 que estava cadastrado aqui (provável mesma fonte de baixa confiança — deck de roadshow da Fram Capital — que já tinha causado confusão com o CNPJ da Belmonte). CORRIGI o campo cnpj para 29.970.251/0001-80 com base nesta fonte primária (direto do cliente, mesmo dia). ATENÇÃO — ainda NÃO confirmados e possivelmente desatualizados por causa dessa correção: 'dataInicio' (2025-12-30 é da fonte antiga; a pasta '5. Relatórios Fundos/SOLAR FIDC' tem histórico desde 2019 sob esse CNPJ, mas pode cobrir um período anterior a uma reestruturação — não usar essa série 2019–2023 em material novo sem confirmar com o cliente), 'gestor'/'administrador'/'template' (o Demonstrativo Mensal já indica formato 'singulare', igual Puglia/Vialoc/Belmonte, não 'solar-br' — mas o relatório da Fram Capital, 'Relatório Solar BR', pode ser um relatório SUPLEMENTAR do cogestor sobre o mesmo fundo, não um fundo à parte). Arquivos do e-mail ainda NÃO estão salvos localmente — não há ferramenta de download de anexo do Outlook disponível nesta sessão; Heloisa precisa salvar manualmente (ver instruções na resposta do chat de 2026-08-29).",
   "_notaNomeSolarFidcMultissetorial_29_08": "2026-08-29: o arquivo de briefing dentro do próprio Figma (página '00 · Briefing & Roadmap', frame 'Fase 6 — Camada de dados e correções') lista como bug conhecido: 'A página pública de Fundos ainda lista Solar I FIDC. O veículo correto é Solar FIDC Multissetorial' — e no checklist de QA da Fase 7: 'Solar I não aparece em lugar nenhum'. Isso é uma fonte primária independente (parece escrita pela própria Heloísa ou em colaboração direta com ela) que CONFIRMA o CNPJ 29.970.251/0001-80 corrigido mais cedo nesta sessão, mas corrige o NOME que eu tinha aplicado: não é 'Solar I FIDC' (nome que eu peguei do e-mail do Douglas/Ryan, que usa 'Solar1'/'SOLAR FIDC' como apelido informal), é 'Solar FIDC Multissetorial' — slug/nome corrigidos aqui (slug: solar-br-fidc → solar-fidc-multissetorial). Também corrigi 'estrategiaResumo' e 'descricao'/'estrategia': o briefing descreve esse fundo como efetivamente multissetorial (direitos creditórios diversos + cotas de FIDC + renda fixa), não 'multicedente/multissacado' — essa segunda descrição parece ter vindo de uma narrativa de marketing aspiracional (o caso do 'empresário de autopeças' que a Heloísa contou), que serve melhor como conteúdo educativo genérico sobre FIDCs (em servicos.html) do que como descrição literal deste fundo específico. NÃO apliquei essa mudança de estratégia sem grau de confiança alto — as duas fontes (e-mail do cliente sobre classes Sênior2/3/4/5/6 histórico longo, e o próprio briefing) convergem pra a mesma leitura.",
   "_notaSolarIdataInicioEcampos_29_08": "2026-08-29: com os 4 regulamentos e o Demonstrativo Mensal jul/2026 do Solar I FIDC (CNPJ 29.970.251/0001-80) em mãos, rodei o parser (template mudado de 'solar-br' pra 'singulare', igual aos outros 3 — o relatório é do mesmo formato Singulare/QI). Achados: (1) a classe 'Subordinada' já tem 'Início da Cota em 25/10/2018' e a 'Mezanino' em 03/07/2023 — ou seja, o fundo NÃO começou em 30/12/2025 como estava no manifest antes da correção de CNPJ; atualizei dataInicio para 2018-10-25 (data da cota mais antiga encontrada), mas isso ainda é uma inferência a partir do relatório, não foi confirmado contra o Regulamento ou uma fonte que declare a data de registro/funcionamento do fundo — vale checar antes de publicar como fato definitivo. (2) A classe 'Sênior' esperada no manifest não aparece no PDF — bate com a informação do cliente de que 'Solar1 – Sem Série aberta no momento', então é esperado, não é erro do parser. (3) Ajustei gestor/administrador/custodiante para 'Iggy Investimentos (cogestão: Fram Capital)' / 'Singulare' / 'Singulare', seguindo o mesmo padrão já usado pra Puglia e o mesmo e-mail do cliente (Administrador/Custodiante QITECH = Singulare, ver _notaSingulareQI; Cogestor Fram Capital só pra Solar1 e Puglia). NOTA: o campo 'gestor' da Puglia no manifest ainda está só 'Iggy Investimentos', sem menção à cogestão Fram Capital, apesar de uma nota anterior (_notaGestorPugliaFramCapital) dizer que isso já tinha sido aplicado — não é o caso; ficou pendente de ajuste manual, não mexi por não ser o foco desta rodada.",
-
   "funds": [
     {
       "slug": "solar-fidc-multissetorial",
@@ -30,13 +29,26 @@
       "descricao": "O Solar FIDC Multissetorial estrutura direitos creditórios diversificados — incluindo cotas de outros FIDCs, créditos vencidos e renda fixa — sob supervisão da CVM, com histórico de operação desde 2018.",
       "estrategia": "Aquisição e gestão de uma carteira multissetorial de direitos creditórios, cotas de FIDC e renda fixa, com estrutura de cotas segmentada por nível de subordinação.",
       "classes": {
-        "Sênior": { "benchmark": null, "rating": null },
-        "Mezanino": { "benchmark": null, "rating": null },
-        "Subordinada": { "benchmark": null, "rating": null }
+        "Sênior": {
+          "benchmark": null,
+          "rating": null
+        },
+        "Mezanino": {
+          "benchmark": null,
+          "rating": null
+        },
+        "Subordinada": {
+          "benchmark": null,
+          "rating": null
+        }
       },
       "janelaResgate": "Sem série Sênior aberta a novos aportes no momento (prevista para set/2026, segundo o cliente em 28/08)",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-fidc-multissetorial.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
+        {
+          "nome": "Regulamento",
+          "disponivel": true,
+          "url": "documentos/regulamento-solar-fidc-multissetorial.pdf"
+        }
       ]
     },
     {
@@ -58,12 +70,22 @@
       "descricao": "O Solar Puglia FIDC estrutura direitos creditórios de fomento mercantil, com classe sênior e subordinada. É o maior fundo da família Solar em patrimônio líquido.",
       "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
       "classes": {
-        "Subordinada": { "benchmark": null, "rating": "N/A" },
-        "Sênior1": { "benchmark": "CDI + 4,00% a.a.", "rating": "N/A" }
+        "Subordinada": {
+          "benchmark": null,
+          "rating": "N/A"
+        },
+        "Sênior1": {
+          "benchmark": "CDI + 4,00% a.a.",
+          "rating": "N/A"
+        }
       },
       "janelaResgate": "D+60 (classe Sênior1, única aberta a novos aportes hoje)",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-puglia-fidc.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
+        {
+          "nome": "Regulamento",
+          "disponivel": true,
+          "url": "documentos/regulamento-solar-puglia-fidc.pdf"
+        }
       ]
     },
     {
@@ -85,14 +107,30 @@
       "descricao": "O Solar Vialoc FIDC Padronizado estrutura direitos creditórios de fomento mercantil, com quatro classes de cota ativas desde 2021.",
       "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
       "classes": {
-        "Sênior3": { "benchmark": "CDI + 4,5% a.a.", "rating": null },
-        "Sênior2": { "benchmark": "CDI + 4,0% a.a.", "rating": "brBBB+(sf)" },
-        "Mezanino": { "benchmark": "CDI + 5,5% a.a.", "rating": "brBB(sf)" },
-        "Subordinada": { "benchmark": null, "rating": "brB+(sf)" }
+        "Sênior3": {
+          "benchmark": "CDI + 4,5% a.a.",
+          "rating": null
+        },
+        "Sênior2": {
+          "benchmark": "CDI + 4,0% a.a.",
+          "rating": "brBBB+(sf)"
+        },
+        "Mezanino": {
+          "benchmark": "CDI + 5,5% a.a.",
+          "rating": "brBB(sf)"
+        },
+        "Subordinada": {
+          "benchmark": null,
+          "rating": "brB+(sf)"
+        }
       },
       "janelaResgate": "Sem série aberta a novos aportes no momento (nova série prevista para set/2026, segundo o cliente em 28/08)",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-vialoc-fidc.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
+        {
+          "nome": "Regulamento",
+          "disponivel": true,
+          "url": "documentos/regulamento-solar-vialoc-fidc.pdf"
+        }
       ]
     },
     {
@@ -113,13 +151,26 @@
       "descricao": "O Solar Belmonte FIDC estrutura direitos creditórios de fomento mercantil, com classes sênior, mezanino e subordinada, em operação desde fevereiro de 2025.",
       "estrategia": "Aquisição de direitos creditórios com critérios de elegibilidade e diversificação de cedentes, com estrutura de cotas segmentada por nível de subordinação.",
       "classes": {
-        "Subordinada": { "benchmark": null, "rating": "N/A" },
-        "Sênior": { "benchmark": "CDI + 4,25% a.a.", "rating": "N/A" },
-        "Mezanino": { "benchmark": "CDI + 6,00% a.a.", "rating": "N/A" }
+        "Subordinada": {
+          "benchmark": null,
+          "rating": "N/A"
+        },
+        "Sênior": {
+          "benchmark": "CDI + 4,25% a.a.",
+          "rating": "N/A"
+        },
+        "Mezanino": {
+          "benchmark": "CDI + 6,00% a.a.",
+          "rating": "N/A"
+        }
       },
       "janelaResgate": "Sem série aberta a novos aportes no momento",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-belmonte-fidc.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
+        {
+          "nome": "Regulamento",
+          "disponivel": true,
+          "url": "documentos/regulamento-solar-belmonte-fidc.pdf"
+        }
       ]
     }
   ]
