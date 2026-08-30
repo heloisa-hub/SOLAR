@@ -42,6 +42,32 @@ scripts/
 2. Rode `node scripts/convert-funds.cjs` aqui dentro.
 3. Confira o resultado (`npx tsc --noEmit` e `npm run build`) e suba.
 
+## Publicando no GitHub Pages
+
+Já existe um workflow (`.github/workflows/deploy.yml`) que builda e publica
+automaticamente a cada push na branch `react-app`. Falta só um passo manual,
+que só dá pra fazer pela interface do GitHub (sem `gh` CLI instalado aqui
+pra fazer por mim):
+
+1. No repositório, **Settings → Pages → Source**, escolher **"GitHub Actions"**.
+2. Depois do primeiro deploy rodar, o site fica em
+   `https://heloisa-hub.github.io/SOLAR/` (a menos que um domínio próprio
+   seja configurado — nesse caso, ver "Domínio próprio" abaixo).
+
+**Sobre `main` vs `react-app`**: a branch `main` ainda tem o site HTML antigo;
+o app React está isolado na branch `react-app` pra não mexer em nada existente.
+Quando o site em React estiver aprovado pra ser o site oficial, dá pra trocar
+a branch padrão do repositório pra `react-app` em **Settings → Branches**
+(também não dá pra fazer isso automaticamente sem `gh` CLI ou acesso à API).
+
+**Domínio próprio**: o texto do site já assume `solarcapital.com.br`. Se for
+usar um domínio próprio (em vez do subcaminho `github.io/SOLAR/`), configurar
+em **Settings → Pages → Custom domain** e apontar o DNS do domínio pra
+GitHub Pages — nesse caso não precisa mexer em `vite.config.ts`. Se for usar
+o subcaminho `github.io/SOLAR/` mesmo, aí sim precisa adicionar
+`base: '/SOLAR/'` em `vite.config.ts` antes de publicar, senão os assets
+não carregam.
+
 ## Pendências conhecidas
 
 - ~~Redes sociais placeholder~~ — resolvido: LinkedIn real
