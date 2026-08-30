@@ -159,5 +159,68 @@
     "inadimplenciaPercentCarteira": 0.0,
     "concentracaoTop3Cedentes": null,
     "concentracaoTop5Cedentes": null
+  },
+  "solar-fidc-multissetorial": {
+    "cnpj": "29970251000180",
+    "dataBase": "07/2026",
+    "composicaoAtivos": [
+      {
+        "categoria": "Carteira de direitos creditórios",
+        "percent": 97.0
+      },
+      {
+        "categoria": "Cotas de outros FIDCs",
+        "percent": 7.1
+      },
+      {
+        "categoria": "Títulos públicos federais",
+        "percent": 0.3
+      },
+      {
+        "categoria": "Disponibilidades",
+        "percent": 0.0
+      }
+    ],
+    "agingCarteira": [
+      {
+        "faixa": "até 30 dias",
+        "percent": 43.0
+      },
+      {
+        "faixa": "31 a 60 dias",
+        "percent": 19.3
+      },
+      {
+        "faixa": "61 a 90 dias",
+        "percent": 8.2
+      },
+      {
+        "faixa": "91 a 120 dias",
+        "percent": 2.8
+      },
+      {
+        "faixa": "121 a 150 dias",
+        "percent": 1.9
+      },
+      {
+        "faixa": "151 a 180 dias",
+        "percent": 1.7
+      },
+      {
+        "faixa": "181 a 360 dias",
+        "percent": 9.1
+      },
+      {
+        "faixa": "361 a 720 dias",
+        "percent": 13.0
+      },
+      {
+        "faixa": "721 a 1080 dias",
+        "percent": 1.1
+      }
+    ],
+    "inadimplenciaPercentCarteira": 3.55,
+    "concentracaoTop3Cedentes": 10.8,
+    "concentracaoTop5Cedentes": 10.8
   }
 }

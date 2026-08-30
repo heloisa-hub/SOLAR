@@ -24,6 +24,7 @@ RAW_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", "..", "5. Relatórios Fu
 OUT_JSON = os.path.join(BASE_DIR, "composicao.json")
 
 FUNDS = {
+    "29970251000180": "solar-fidc-multissetorial",
     "39680495000182": "solar-vialoc-fidc",
     "52498421000198": "solar-puglia-fidc-rl",
     "58347004000120": "solar-belmonte-fidc",
@@ -105,7 +106,7 @@ def parse_ifp(path):
 
 def main():
     result = {}
-    for xml_path in glob.glob(os.path.join(RAW_ROOT, "*IFP*.xml")):
+    for xml_path in glob.glob(os.path.join(RAW_ROOT, "**", "*IFP*.xml"), recursive=True):
         base = os.path.basename(xml_path)
         m = re.match(r"(\d{14})-IFP", base)
         if not m:

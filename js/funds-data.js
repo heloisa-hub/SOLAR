@@ -39,7 +39,12 @@ var SOLAR_CAPITAL_FUNDS = [
     ],
     descricao: "O Solar FIDC Multissetorial estrutura direitos creditórios diversificados — incluindo cotas de outros FIDCs, créditos vencidos e renda fixa — sob supervisão da CVM, com histórico de operação desde 2018.",
     estrategia: "Aquisição e gestão de uma carteira multissetorial de direitos creditórios, cotas de FIDC e renda fixa, com estrutura de cotas segmentada por nível de subordinação.",
-    composicaoPortfolio: [],
+    composicaoPortfolio: [
+      { categoria: "Carteira de direitos creditórios", percent: 97.0 },
+      { categoria: "Cotas de outros FIDCs", percent: 7.1 },
+      { categoria: "Títulos públicos federais", percent: 0.3 },
+      { categoria: "Disponibilidades", percent: 0.0 }
+    ],
     documentos: [
       { nome: "Regulamento", disponivel: true, url: "documentos/regulamento-solar-fidc-multissetorial.pdf" },
       { nome: "Lâmina de Informações Essenciais", disponivel: false },
