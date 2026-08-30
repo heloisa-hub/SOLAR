@@ -351,7 +351,7 @@ def build_funds_js(funds):
             "plAtual", "carteiraCredito", "creditosAtraso", "pdd", "disponibilidade",
             "percentDcSobrePl", "aplicacaoCotizacao", "aplicacaoLiquidacao",
             "resgateCotizacao", "resgateLiquidacao", "classePrincipal", "janelaResgate",
-            "inadimplenciaCvmPercentPL",
+            "inadimplenciaCvmPercentPL", "prestadorAnterior",
         ]
         for key in field_order:
             if key in f:
@@ -497,6 +497,8 @@ def main():
             fund_out["consultora"] = fund_manifest["consultora"]
         if "condominio" in fund_manifest:
             fund_out["condominio"] = fund_manifest["condominio"]
+        if "prestadorAnterior" in fund_manifest:
+            fund_out["prestadorAnterior"] = fund_manifest["prestadorAnterior"]
         if fund_manifest["template"] == "singulare":
             fund_out["agenciaRating"] = "Austin Rating"
             fund_out["statusLabel"] = "Em funcionamento normal"
