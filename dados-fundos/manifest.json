@@ -36,9 +36,7 @@
       },
       "janelaResgate": "Sem série Sênior aberta a novos aportes no momento (prevista para set/2026, segundo o cliente em 28/08)",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-fidc-multissetorial.pdf" },
-        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
-        { "nome": "Formulário de Ingresso", "disponivel": false }
+        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-fidc-multissetorial.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
       ]
     },
     {
@@ -65,9 +63,7 @@
       },
       "janelaResgate": "D+60 (classe Sênior1, única aberta a novos aportes hoje)",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-puglia-fidc.pdf" },
-        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
-        { "nome": "Formulário de Ingresso", "disponivel": false }
+        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-puglia-fidc.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
       ]
     },
     {
@@ -96,9 +92,7 @@
       },
       "janelaResgate": "Sem série aberta a novos aportes no momento (nova série prevista para set/2026, segundo o cliente em 28/08)",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-vialoc-fidc.pdf" },
-        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
-        { "nome": "Formulário de Ingresso", "disponivel": false }
+        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-vialoc-fidc.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
       ]
     },
     {
@@ -125,9 +119,7 @@
       },
       "janelaResgate": "Sem série aberta a novos aportes no momento",
       "documentos": [
-        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-belmonte-fidc.pdf" },
-        { "nome": "Lâmina de Informações Essenciais", "disponivel": false },
-        { "nome": "Formulário de Ingresso", "disponivel": false }
+        { "nome": "Regulamento", "disponivel": true, "url": "documentos/regulamento-solar-belmonte-fidc.pdf" },        { "nome": "Formulário de Ingresso", "disponivel": false }
       ]
     }
   ]
