@@ -23,6 +23,17 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MANIFEST_PATH = os.path.join(BASE_DIR, "manifest.json")
 REPORTS_ROOT = os.path.join(BASE_DIR, "relatorios")
 OUTPUT_JS = os.path.join(BASE_DIR, "..", "js", "funds-data.js")
+COMPOSICAO_PATH = os.path.join(BASE_DIR, "composicao.json")
+
+
+def load_composicao():
+    """Composicao de carteira vem do Informe Mensal (XML oficial da CVM),
+    nao do demonstrativo mensal -- ver dados-fundos/parse_composicao.py.
+    Retorna {} se o arquivo ainda nao foi gerado para nenhum fundo."""
+    if not os.path.exists(COMPOSICAO_PATH):
+        return {}
+    with open(COMPOSICAO_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def clean_currency(raw):
@@ -298,6 +309,7 @@ def build_funds_js(funds):
             "plAtual", "carteiraCredito", "creditosAtraso", "pdd", "disponibilidade",
             "percentDcSobrePl", "aplicacaoCotizacao", "aplicacaoLiquidacao",
             "resgateCotizacao", "resgateLiquidacao", "classePrincipal", "janelaResgate",
+            "inadimplenciaCvmPercentPL",
         ]
         for key in field_order:
             if key in f:
@@ -305,7 +317,8 @@ def build_funds_js(funds):
         block += f"    classes: {classes_js},\n"
         block += f"    descricao: {js_value(f['descricao'])},\n"
         block += f"    estrategia: {js_value(f['estrategia'])},\n"
-        block += "    composicaoPortfolio: [],\n"
+        composicao_js = "[\n" + ",\n".join("      " + js_value(c) for c in f.get("composicaoPortfolio", [])) + "\n    ]" if f.get("composicaoPortfolio") else "[]"
+        block += f"    composicaoPortfolio: {composicao_js},\n"
         docs_js = "[\n" + ",\n".join("      " + js_value(d) for d in f["documentos"]) + "\n    ]"
         block += f"    documentos: {docs_js},\n"
         block += f"    fonteDados: {js_value(f['fonteDados'])},\n"
@@ -329,6 +342,7 @@ def main():
 
     with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
         manifest = json.load(f)
+    composicao = load_composicao()
 
     try:
         import pdfplumber
@@ -391,6 +405,17 @@ def main():
                 entry["historicoMensal"] = parsed_c["historicoMensal"]
             classes_list.append(entry)
 
+        pl_raw = parsed.get("plAtual")
+        creditos_atraso_raw = parsed.get("creditosAtraso")
+        inadimplencia_pl = (
+            round(creditos_atraso_raw / pl_raw * 100, 2)
+            if pl_raw and creditos_atraso_raw is not None
+            else None
+        )
+
+        composicao_fundo = composicao.get(fund_manifest["slug"], {})
+        composicao_portfolio = composicao_fundo.get("composicaoAtivos", [])
+
         fund_out = {
             "slug": fund_manifest["slug"],
             "nome": fund_manifest["nome"],
@@ -413,6 +438,8 @@ def main():
             "percentDcSobrePl": parsed.get("percentDcSobrePl"),
             "classePrincipal": fund_manifest["classePrincipal"],
             "janelaResgate": fund_manifest.get("janelaResgate"),
+            "inadimplenciaCvmPercentPL": inadimplencia_pl,
+            "composicaoPortfolio": composicao_portfolio,
             "classesList": classes_list,
             "descricao": fund_manifest["descricao"],
             "estrategia": fund_manifest["estrategia"],
