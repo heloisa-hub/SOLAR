@@ -25,24 +25,28 @@
       "condominio": "Fechado",
       "consultora": "Solar Capital",
       "dataInicio": "2018-10-25",
-      "classePrincipal": "Sênior",
+      "classePrincipal": "Sênior6",
       "descricao": "O Solar FIDC Multissetorial estrutura direitos creditórios diversificados — incluindo cotas de outros FIDCs, créditos vencidos e renda fixa — sob supervisão da CVM, com histórico de operação desde 2018.",
       "estrategia": "Aquisição e gestão de uma carteira multissetorial de direitos creditórios, cotas de FIDC e renda fixa, com estrutura de cotas segmentada por nível de subordinação.",
       "classes": {
-        "Sênior": {
-          "benchmark": null,
-          "rating": null
+        "Sênior6": {
+          "benchmark": "CDI + 4,00% a.a.",
+          "rating": "brA(sf)"
+        },
+        "Sênior5": {
+          "benchmark": "CDI + 4,00% a.a.",
+          "rating": "brA(sf)"
         },
         "Mezanino": {
-          "benchmark": null,
-          "rating": null
+          "benchmark": "CDI + 5,50% a.a.",
+          "rating": "brBBB-(sf)"
         },
         "Subordinada": {
           "benchmark": null,
-          "rating": null
+          "rating": "brB+(sf)"
         }
       },
-      "janelaResgate": "Sem série Sênior aberta a novos aportes no momento (prevista para set/2026, segundo o cliente em 28/08)",
+      "janelaResgate": "Sênior5 e Sênior6 em operação; sem série nova aberta a aportes no momento (prevista para set/2026, segundo o cliente em 28/08)",
       "documentos": [
         {
           "nome": "Regulamento",

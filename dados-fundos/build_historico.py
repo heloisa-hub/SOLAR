@@ -26,6 +26,7 @@ from parse_relatorios import parse_singulare, clean_currency, to_float_pct  # no
 
 RAW_ROOT = os.path.abspath(os.path.join(BASE_DIR, "..", "..", "5. Relatórios Fundos"))
 OUT_XLSX = os.path.join(BASE_DIR, "Historico-Mensal-Fundos_2026-08-29.xlsx")
+OUT_JSON = os.path.join(BASE_DIR, "historico.json")
 
 # Candidatos amplos de nome de classe, cobrindo variantes historicas que
 # nao aparecem mais no manifest.json (que so guarda as classes ATIVAS).
@@ -212,6 +213,21 @@ def main():
     wb.save(OUT_XLSX)
     print(f"\n[OK] Planilha salva em: {OUT_XLSX}")
     print(f"{len(warnings_log)} avisos (aba 'Avisos') -- revisar antes de considerar definitivo.")
+
+    # Mesma serie, em JSON, no formato que js/funds-data.js espera por
+    # classe (historicoMensal) -- consumido por parse_relatorios.py pra
+    # alimentar o grafico de rentabilidade no site (antes so o template
+    # "solar-br" tinha essa serie; agora todo mundo tem, vindo daqui).
+    json_out = {}
+    for fund in FUNDS:
+        data = workbook_data[fund["slug"]]
+        json_out[fund["slug"]] = {
+            cname: [{"mes": p, "rentabilidade": round(periods[p][0], 2)} for p in sorted(periods.keys())]
+            for cname, periods in data["by_class"].items()
+        }
+    with open(OUT_JSON, "w", encoding="utf-8") as f:
+        json.dump(json_out, f, ensure_ascii=False, indent=2)
+    print(f"[OK] Serie mensal por classe salva em: {OUT_JSON}")
 
 
 if __name__ == "__main__":
