@@ -982,11 +982,17 @@ body[data-page="home"] .site-header.is-open .nav-links a.is-active { color: var(
   color: var(--color-gold-500);
   font-size: 0.92rem;
 }
+.chart-tooltip-value--secondary {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+}
 .chart-tooltip--dark {
   background: var(--color-white);
   box-shadow: 0 8px 20px rgba(7,2,34,0.18);
 }
 .chart-tooltip--dark .chart-tooltip-date { color: var(--color-muted); }
+.chart-tooltip--dark .chart-tooltip-value--secondary { color: var(--color-muted); }
 .chart-tooltip--dark .chart-tooltip-value { color: var(--color-gold-600); }
 
 /* ===== Dark section (estilo apresentação FIDC) ===== */

@@ -295,6 +295,8 @@
     var width = opts.width, height = opts.height, padding = opts.padding;
     var dark = opts.dark, formatLabelValue = opts.formatLabelValue, formatMonthLong = opts.formatMonthLong;
     var dotStrokeColor = opts.dotStrokeColor;
+    var monthlyValues = opts.monthlyValues, cumulativeValues = opts.cumulativeValues;
+    var monthlyIsPrimary = opts.viewMode === "mensal";
 
     var ns = "http://www.w3.org/2000/svg";
     var guide = document.createElementNS(ns, "line");
@@ -349,9 +351,23 @@
       var leftPx = (cx * scale) + (rect.left - boxRect.left);
       var topPx = (cy * scale) + (rect.top - boxRect.top);
 
+      // O hover sempre mostra os dois números juntos — mês e acumulado
+      // desde o início — não só o que está sendo desenhado no momento.
+      // Quem passa o mouse quer comparar "quanto rendeu esse mês" com
+      // "quanto rendeu no total" sem precisar trocar o toggle.
+      var mesVal = monthlyValues ? monthlyValues[idx] : null;
+      var acumVal = cumulativeValues ? cumulativeValues[idx] : null;
+      var rows = [];
+      if (monthlyIsPrimary) {
+        if (mesVal != null) rows.push('<span class="chart-tooltip-value">Mês: ' + formatLabelValue(mesVal) + '</span>');
+        if (acumVal != null) rows.push('<span class="chart-tooltip-value chart-tooltip-value--secondary">Desde o início: ' + formatLabelValue(acumVal) + '</span>');
+      } else {
+        if (acumVal != null) rows.push('<span class="chart-tooltip-value">Desde o início: ' + formatLabelValue(acumVal) + '</span>');
+        if (mesVal != null) rows.push('<span class="chart-tooltip-value chart-tooltip-value--secondary">Mês: ' + formatLabelValue(mesVal) + '</span>');
+      }
       tooltip.innerHTML =
         '<span class="chart-tooltip-date">' + formatMonthLong(data[idx].mes) + '</span>' +
-        '<span class="chart-tooltip-value">' + formatLabelValue(values[idx]) + '</span>';
+        rows.join("");
       tooltip.style.opacity = "1";
       var tw = tooltip.offsetWidth || 120;
       var clampedLeft = Math.min(Math.max(leftPx, tw / 2 + 4), boxRect.width - tw / 2 - 4);
@@ -395,8 +411,9 @@
   function drawChartInto(svgId, boxId, nameElId, cls, dark, viewMode) {
     var box = document.getElementById(boxId);
     var svg = document.getElementById(svgId);
+    var cumulativeSeries = cls ? computeCumulativeSeries(cls.historicoMensal) : null;
     var data = cls
-      ? (viewMode === "mensal" ? cls.historicoMensal : computeCumulativeSeries(cls.historicoMensal))
+      ? (viewMode === "mensal" ? cls.historicoMensal : cumulativeSeries)
       : null;
     var gridColor = dark ? "rgba(255,255,255,0.14)" : "#E4DFD3";
     var axisTextColor = dark ? "rgba(255,255,255,0.5)" : "#7A7568";
@@ -533,7 +550,9 @@
         data: data, values: values, xFor: xFor, yFor: yFor,
         width: width, height: height, padding: padding, plotH: plotH,
         dark: dark, formatLabelValue: formatLabelValue, formatMonthLong: formatMonthLong,
-        dotStrokeColor: dotStrokeColor
+        dotStrokeColor: dotStrokeColor, viewMode: viewMode,
+        monthlyValues: cls && cls.historicoMensal ? cls.historicoMensal.map(function (d) { return Number(d.rentabilidade); }) : null,
+        cumulativeValues: cumulativeSeries ? cumulativeSeries.map(function (d) { return Number(d.rentabilidade); }) : null
       });
     }
     return true;

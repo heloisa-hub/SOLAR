@@ -26,6 +26,20 @@ OUTPUT_JS = os.path.join(BASE_DIR, "..", "js", "funds-data.js")
 COMPOSICAO_PATH = os.path.join(BASE_DIR, "composicao.json")
 
 
+HISTORICO_PATH = os.path.join(BASE_DIR, "historico.json")
+
+
+def load_historico():
+    """Serie mensal por classe, gerada por build_historico.py a partir de
+    TODOS os Demonstrativos Mensais da pasta bruta (nao so o mes atual).
+    So usada pra classes que o template do mes nao ja trouxe com
+    historicoMensal proprio (hoje: templates 'singulare')."""
+    if not os.path.exists(HISTORICO_PATH):
+        return {}
+    with open(HISTORICO_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def load_composicao():
     """Composicao de carteira vem do Informe Mensal (XML oficial da CVM),
     nao do demonstrativo mensal -- ver dados-fundos/parse_composicao.py.
@@ -126,26 +140,54 @@ def parse_singulare(text, class_names):
                     continue  # não é a linha oficial — ignora e segue procurando
 
                 rest = line[len(cname):].strip()
-                # PL da classe = primeiro numero grande da linha
-                m_pl = re.match(r"([\d.,\s]+?)\s+(\d+,\d+%)", rest)
-                class_pl = clean_currency(m_pl.group(1)) if m_pl else None
-                percent_pl = to_float_pct(m_pl.group(2)) if m_pl else None
+                # Remove o texto do benchmark ("CDI + 4,5% a.a.") antes de
+                # tudo -- ele tem um "%" no meio e bagunça a contagem.
+                rest_clean = re.sub(r"CDI\s*\+\s*[\d,]+%\s*a\.a\.?", " ", rest)
+                all_pcts = find_all_percents(rest_clean)
+                if not all_pcts:
+                    continue  # linha sem nenhum percentual -- não é a linha certa
 
-                # busca os percentuais de período SÓ depois do %PL, senão o
-                # próprio %PL entra na contagem das 6 colunas (Mês..Início).
-                # Também remove o texto do benchmark ("CDI + 4,5% a.a."),
-                # que tem um "%" no meio e bagunça a contagem.
-                search_from = m_pl.end() if m_pl else 0
-                search_text = rest[search_from:]
-                search_text = re.sub(r"CDI\s*\+\s*[\d,]+%\s*a\.a\.?", " ", search_text)
-                pcts = find_all_percents(search_text)
-                # colunas ausentes (fundo muito novo) sempre faltam da direita
-                # pra esquerda (ex: "Início" ainda não existe) — por isso os
-                # valores presentes são sempre os N primeiros, não os últimos
-                periodo = pcts[:6]
+                # O %PL é SEMPRE o primeiro percentual da linha, independente
+                # de vir ou não precedido do valor em reais da classe -- o
+                # formato do relatório mudou ao longo dos anos (relatórios
+                # mais antigos do Multissetorial não trazem o valor em reais
+                # nessa linha, só o %PL direto). Ancorar no primeiro % em vez
+                # de exigir "reais + %PL" evita que o %PL escorregue pra
+                # dentro das 6 colunas de período (bug real encontrado nos
+                # relatórios de 2025 do Multissetorial: "Sênior6 36,17%
+                # 1,26% 3,97%..." sem reais, o %PL 36,17% estava sendo lido
+                # como se fosse o retorno do mês).
+                percent_pl = to_float_pct(all_pcts[0])
+                m_val = re.match(r"([\d.,\s]+?)\s*" + re.escape(all_pcts[0]), rest_clean)
+                class_pl = clean_currency(m_val.group(1)) if m_val and m_val.group(1).strip() else None
 
-                cdi_pcts = find_all_percents(cdi_line)
-                cdi_periodo = cdi_pcts[:6]
+                # As 6 colunas (Mês/Ano/3M/6M/12M/Início) às vezes trazem um
+                # "-" avulso pra um período SEM dado -- e não só nas últimas
+                # colunas (classe nova), pode aparecer no MEIO da sequência
+                # também (ex.: "Mezanino ... brBBB-(sf) - 9,89% 3,33% 8,15%
+                # 19,25% 68,90%", onde só o Mês ficou sem valor naquele mês).
+                # find_all_percents() ignora o "-" e faz tudo deslizar uma
+                # casa pra esquerda -- por isso aqui percorremos token a
+                # token (separados por espaço) depois do %PL, aceitando "-"
+                # como um período vazio na posição certa, não descartando.
+                after_pl = rest_clean[rest_clean.find(all_pcts[0]) + len(all_pcts[0]):]
+                periodo = []
+                for tok in after_pl.split():
+                    if tok == "-" or re.fullmatch(r"-?\d+,\d+%", tok):
+                        periodo.append(tok)
+                        if len(periodo) == 6:
+                            break
+                    elif periodo:
+                        break  # sequência de período já tinha começado e acabou
+
+                cdi_periodo = []
+                for tok in cdi_line.split():
+                    if tok == "-" or re.fullmatch(r"-?\d+,\d+%", tok):
+                        cdi_periodo.append(tok)
+                        if len(cdi_periodo) == 6:
+                            break
+                    elif cdi_periodo:
+                        break
 
                 if len(periodo) < 6 or len(cdi_periodo) < 6:
                     result["warnings"].append(
@@ -343,6 +385,7 @@ def main():
     with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
         manifest = json.load(f)
     composicao = load_composicao()
+    historico = load_historico()
 
     try:
         import pdfplumber
@@ -403,6 +446,10 @@ def main():
             }
             if "historicoMensal" in parsed_c:
                 entry["historicoMensal"] = parsed_c["historicoMensal"]
+            else:
+                hist = historico.get(fund_manifest["slug"], {}).get(cname)
+                if hist:
+                    entry["historicoMensal"] = hist
             classes_list.append(entry)
 
         pl_raw = parsed.get("plAtual")
