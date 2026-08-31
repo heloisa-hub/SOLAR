@@ -60,13 +60,23 @@ Quando o site em React estiver aprovado pra ser o site oficial, dá pra trocar
 a branch padrão do repositório pra `react-app` em **Settings → Branches**
 (também não dá pra fazer isso automaticamente sem `gh` CLI ou acesso à API).
 
-**Domínio próprio**: o texto do site já assume `solarcapital.com.br`. Se for
-usar um domínio próprio (em vez do subcaminho `github.io/SOLAR/`), configurar
-em **Settings → Pages → Custom domain** e apontar o DNS do domínio pra
-GitHub Pages — nesse caso não precisa mexer em `vite.config.ts`. Se for usar
-o subcaminho `github.io/SOLAR/` mesmo, aí sim precisa adicionar
-`base: '/SOLAR/'` em `vite.config.ts` antes de publicar, senão os assets
-não carregam.
+**Domínio próprio (`solarcapital.com.br`)**: já deixei o arquivo
+`public/CNAME` com o domínio, então todo build já sai pronto pra isso — não
+precisa mexer em `vite.config.ts`. Falta só a parte que é fora do repositório:
+
+1. No provedor onde o domínio foi registrado, criar um registro **CNAME**
+   apontando `solarcapital.com.br` (ou o subdomínio escolhido, tipo `www`)
+   pra `heloisa-hub.github.io`. Se for o domínio raiz (sem `www`), o GitHub
+   pede registros **A** apontando pros IPs deles em vez de CNAME — a
+   [documentação oficial](https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site)
+   tem os IPs atualizados.
+2. Depois do DNS propagar, em **Settings → Pages → Custom domain**, digitar
+   `solarcapital.com.br` e salvar — o GitHub confirma automaticamente que o
+   DNS está correto e emite o certificado HTTPS.
+
+(Se um dia precisar publicar sem domínio próprio, no subcaminho padrão
+`github.io/SOLAR/`, aí sim precisaria remover o `CNAME` e adicionar
+`base: '/SOLAR/'` em `vite.config.ts` — mas não é o caso agora.)
 
 ## Pendências conhecidas
 

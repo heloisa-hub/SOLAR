@@ -89,7 +89,7 @@ export default function Home() {
         </video>
         <div
           className="absolute inset-0"
-          style={{ background: 'linear-gradient(to right, rgba(12,15,46,0.92) 0%, rgba(12,15,46,0.55) 60%, rgba(12,15,46,0.15) 100%)' }}
+          style={{ background: 'linear-gradient(to right, rgba(12,15,46,0.92) 0%, rgba(12,15,46,0.65) 30%, rgba(12,15,46,0.35) 46%, rgba(12,15,46,0.08) 62%, rgba(12,15,46,0.05) 100%)' }}
         />
         <div
           className="absolute pointer-events-none"
@@ -102,13 +102,13 @@ export default function Home() {
           className="relative z-10 site-container flex flex-col justify-center"
           style={{ minHeight: '100svh', paddingTop: '124px', paddingBottom: '15.5rem' }}
         >
-          <div style={{ maxWidth: 'clamp(500px, 66vw, 720px)' }}>
+          <div style={{ maxWidth: 'clamp(500px, 46vw, 820px)' }}>
             <p className="font-semibold uppercase tracking-[0.3em] mb-5" style={{ color: '#F5A623', fontSize: '11px' }}>
               Solar Capital
             </p>
             <h1
               className="font-bold leading-[1.1] mb-6 text-white"
-              style={{ fontSize: 'clamp(1.9rem, 3.6vw, 3.4rem)', letterSpacing: '-0.02em' }}
+              style={{ fontSize: 'clamp(1.9rem, 3.4vw, 3.9rem)', letterSpacing: '-0.02em' }}
             >
               Crédito estruturado
               <br />
