@@ -457,7 +457,7 @@ export default function Home() {
                     <h3 className="font-semibold text-sm leading-snug" style={{ color: 'var(--color-text-on-light)' }}>{f.name}</h3>
                   </div>
                   <div
-                    className="grid grid-cols-2 lg:grid-cols-4 gap-2 pt-5 mt-5 border-t"
+                    className="grid grid-cols-2 gap-x-2 gap-y-4 pt-5 mt-5 border-t"
                     style={{ borderColor: 'rgb(var(--ink-rgb) / 0.08)' }}
                   >
                     {[
