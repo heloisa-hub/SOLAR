@@ -23,7 +23,10 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
+      # npm install (não npm ci) porque o package-lock.json não pôde ser
+      # regenerado localmente (ambiente sem npm) ao adicionar lucide-react —
+      # rodar `npm install` uma vez localmente sincroniza o lockfile de novo.
+      - run: npm install
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

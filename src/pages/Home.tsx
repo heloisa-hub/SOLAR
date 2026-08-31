@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { funds } from '../data/funds'
 import usePageTitle from '../hooks/usePageTitle'
 import { withBase } from '../lib/assetUrl'
+import { ShieldCheck, Handshake, Eye, Layers } from 'lucide-react'
 
 function useInView(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null)
@@ -60,10 +61,10 @@ const fidcBenefits = [
 ]
 
 const nossaAtuacao = [
-  { title: 'Disciplina de crédito', body: 'Análise individual de recebíveis, garantias e capacidade de pagamento em cada operação.' },
-  { title: 'Alinhamento de interesses', body: 'A Solar estrutura e acompanha o mesmo veículo em que o investidor está exposto.' },
-  { title: 'Transparência radical', body: 'Custódia independente, rating de agência e data-base publicados em cada fundo.' },
-  { title: 'Estruturação proprietária', body: 'Veículos desenhados a partir do negócio real, não de um modelo de prateleira.' },
+  { icon: ShieldCheck, title: 'Disciplina de crédito', body: 'Análise individual de recebíveis, garantias e capacidade de pagamento em cada operação.' },
+  { icon: Handshake, title: 'Alinhamento de interesses', body: 'A Solar estrutura e acompanha o mesmo veículo em que o investidor está exposto.' },
+  { icon: Eye, title: 'Transparência radical', body: 'Custódia independente, rating de agência e data-base publicados em cada fundo.' },
+  { icon: Layers, title: 'Estruturação proprietária', body: 'Veículos desenhados a partir do negócio real, não de um modelo de prateleira.' },
 ]
 
 const teseOperacao = [
@@ -193,7 +194,7 @@ export default function Home() {
       </section>
 
       {/* ── Manifesto: O que nos move + O que a estrutura entrega ── */}
-      <section style={{ background: 'var(--color-brand)' }} className="py-20 lg:py-24">
+      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-20 lg:py-24">
         <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
             <div className="flex flex-col h-full">
@@ -227,13 +228,13 @@ export default function Home() {
               </Link>
             </div>
 
-            <div>
+            <div className="h-full flex flex-col">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-6" style={{ color: 'rgb(var(--ink-rgb) / 0.55)' }}>
                 O que a estrutura entrega
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px" style={{ background: 'rgb(var(--ink-rgb) / 0.12)' }}>
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 auto-rows-fr gap-px" style={{ background: 'rgb(var(--ink-rgb) / 0.12)' }}>
                 {fidcBenefits.map((b, i) => (
-                  <div key={i} className="p-5" style={{ background: 'var(--color-brand)' }}>
+                  <div key={i} className="p-5 flex flex-col justify-center" style={{ background: 'var(--color-brand)' }}>
                     <h3 className="font-semibold text-sm leading-snug mb-1.5" style={{ color: 'var(--color-text-on-light)' }}>
                       {b.title}
                     </h3>
@@ -269,15 +270,29 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {/* 4 cards escuros — mesma altura do Processo ao lado */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* 4 cards escuros — altura conforme o conteúdo */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {nossaAtuacao.map((v, i) => (
-                <div key={i} className="p-6 flex flex-col justify-center" style={{ background: 'var(--color-text-on-light)' }}>
-                  <h3 className="font-semibold text-sm leading-snug mb-2 text-white">{v.title}</h3>
-                  <p className="text-xs font-light leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
-                    {v.body}
-                  </p>
+                <div
+                  key={i}
+                  className="group p-6 flex flex-col gap-4 border transition-all duration-200 hover:-translate-y-0.5"
+                  style={{ background: 'var(--color-text-on-light)', borderColor: 'rgb(var(--paper-rgb) / 0.08)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-brand)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgb(var(--paper-rgb) / 0.08)')}
+                >
+                  <v.icon size={24} strokeWidth={1.5} style={{ color: 'var(--color-brand)' }} />
+                  <div>
+                    <h3
+                      className="font-semibold mb-2 text-white"
+                      style={{ fontSize: 'var(--text-h3-size)', lineHeight: 'var(--text-h3-leading)' }}
+                    >
+                      {v.title}
+                    </h3>
+                    <p className="text-sm font-light leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
+                      {v.body}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -441,7 +456,10 @@ export default function Home() {
                         >
                           {label}
                         </p>
-                        <p className="text-xs font-bold leading-snug" style={{ color: 'var(--color-text-on-light)' }}>
+                        <p
+                          className="font-bold leading-snug whitespace-nowrap"
+                          style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h3-size)' }}
+                        >
                           {value}
                         </p>
                       </div>

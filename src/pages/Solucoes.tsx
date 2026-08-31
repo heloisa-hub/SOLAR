@@ -163,19 +163,19 @@ export default function Solucoes() {
       </section>
 
       {/* Comparativo */}
-      <section style={{ background: 'var(--color-text-on-light)' }} className="py-24 lg:py-40">
+      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-24 lg:py-40">
         <div className="site-container">
           <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
             Comparativo
           </p>
           <div className="w-8 h-px mb-8" style={{ background: 'var(--color-brand)' }} />
           <h2
-            className="font-bold leading-[1.04] mb-4 text-white"
-            style={{ fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em' }}
+            className="font-bold leading-[1.04] mb-4"
+            style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em' }}
           >
             O mesmo problema, respostas distintas
           </h2>
-          <p className="text-base mb-14 max-w-3xl" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
+          <p className="text-base mb-14 max-w-3xl" style={{ color: 'rgb(var(--ink-rgb) / 0.7)' }}>
             Crédito para uma empresa que não cabe no produto de prateleira. A estrutura é o que muda.
           </p>
 
@@ -185,43 +185,42 @@ export default function Solucoes() {
                 <tr>
                   <th className="text-left py-3 pr-6 w-[22%]" />
                   <th className="text-left py-3 pr-6 w-[26%]">
-                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
+                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgb(var(--ink-rgb) / 0.5)' }}>
                       Banco Tradicional
                     </span>
                   </th>
                   <th className="text-left py-3 pr-6 w-[26%]">
-                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
+                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgb(var(--ink-rgb) / 0.5)' }}>
                       Fintech de Crédito
                     </span>
                   </th>
-                  <th className="text-left py-3 w-[26%]">
+                  <th className="text-left py-3 pr-6 w-[26%]" style={{ borderTop: '2px solid var(--color-brand)' }}>
                     <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--color-brand)' }}>
                       Solar Capital
                     </span>
-                    <div className="h-px mt-2" style={{ background: 'var(--color-brand)' }} />
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {comparison.map((row, i) => (
-                  <tr key={i} className="border-t" style={{ borderColor: 'rgb(var(--paper-rgb) / 0.08)' }}>
+                  <tr key={i} className="border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.1)' }}>
                     <td className="py-6 pr-6 align-top">
-                      <span className="text-sm font-semibold" style={{ color: 'rgb(var(--paper-rgb) / 0.7)' }}>
+                      <span className="text-sm font-semibold" style={{ color: 'rgb(var(--ink-rgb) / 0.7)' }}>
                         {row.attribute}
                       </span>
                     </td>
                     <td className="py-6 pr-6 align-top">
-                      <span className="text-sm leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
+                      <span className="text-sm leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>
                         {row.banco}
                       </span>
                     </td>
                     <td className="py-6 pr-6 align-top">
-                      <span className="text-sm leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
+                      <span className="text-sm leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>
                         {row.fintech}
                       </span>
                     </td>
-                    <td className="py-6 align-top">
-                      <span className="text-sm font-semibold leading-relaxed text-white">
+                    <td className="py-6 pr-6 align-top" style={{ background: 'rgb(var(--brand-rgb) / 0.08)' }}>
+                      <span className="text-sm font-semibold leading-relaxed" style={{ color: 'var(--color-text-on-light)' }}>
                         {row.solar}
                       </span>
                     </td>
