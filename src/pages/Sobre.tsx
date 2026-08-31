@@ -156,31 +156,31 @@ export default function Sobre() {
       </section>
 
       {/* Nossos marcos — trajetória em números */}
-      <section style={{ background: 'var(--color-text-on-light)' }} className="py-24 lg:py-40">
+      <section style={{ background: 'var(--color-brand)' }} className="py-24 lg:py-40">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'rgb(var(--ink-rgb) / 0.55)' }}>
             Nossos marcos
           </p>
-          <div className="w-8 h-px mb-10" style={{ background: 'var(--color-brand)' }} />
+          <div className="w-8 h-px mb-10" style={{ background: 'var(--color-text-on-light)' }} />
           <h2
-            className="font-bold leading-[1.06] mb-16 text-white"
-            style={{ fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em' }}
+            className="font-bold leading-[1.06] mb-16"
+            style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em' }}
           >
             Nossa trajetória em números
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: 'rgb(var(--paper-rgb) / 0.08)' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px" style={{ background: 'rgb(var(--ink-rgb) / 0.15)' }}>
             {[
               { value: '2018', label: 'Fundação', body: 'Início das operações focadas em originação estratégica de recebíveis.' },
               { value: '8+', label: 'FIDCs Ativos', body: 'Veículos estruturados sob gestão direta e rigoroso acompanhamento.' },
               { value: 'R$ 850M+', label: 'Sob Custódia', body: 'Volume total originado e gerido nos diversos setores econômicos atendidos.' },
               { value: '4.500+', label: 'Sacados Homologados', body: 'Capilaridade de risco descentralizado na cadeia de fornecedores.' },
             ].map((m, i) => (
-              <div key={i} className="p-8" style={{ background: 'var(--color-text-on-light)' }}>
-                <span className="block font-bold leading-none mb-3" style={{ color: 'var(--color-brand)', fontSize: 'clamp(1.8rem, 2.6vw, 2.2rem)' }}>
+              <div key={i} className="p-8" style={{ background: 'var(--color-brand)' }}>
+                <span className="block font-bold leading-none mb-3" style={{ color: 'var(--color-text-on-light)', fontSize: 'clamp(1.8rem, 2.6vw, 2.2rem)' }}>
                   {m.value}
                 </span>
-                <span className="block text-sm font-semibold text-white mb-3">{m.label}</span>
-                <p className="text-xs leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.4)' }}>{m.body}</p>
+                <span className="block text-sm font-semibold mb-3" style={{ color: 'var(--color-text-on-light)' }}>{m.label}</span>
+                <p className="text-xs leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>{m.body}</p>
               </div>
             ))}
           </div>
