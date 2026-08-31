@@ -34,7 +34,7 @@
 
   /* ---- Tipografia · no máximo 6 níveis ---- */
   /* display — título de hero (Home) */
-  --text-display-size: clamp(1.9rem, 3.4vw, 3.9rem);
+  --text-display-size: clamp(1.5rem, 3.4vw, 3.9rem);
   --text-display-leading: 1.1;
   /* h1 — título de cabeçalho de página interna */
   --text-h1-size: clamp(1.8rem, 3vw, 2.6rem);
@@ -90,7 +90,7 @@
   /* Altura fixa e padrão dos componentes de cabeçalho de página e faixa de
      CTA (Tarefas 2.1 e 2.2) — mesma altura nas três/cinco páginas. */
   --page-hero-height: 26rem; /* 416px — menor que o hero de vídeo da Home, sem usar 100vh */
-  --cta-band-py: var(--space-8); /* 64px, igual em toda página */
+  --cta-band-py: clamp(3rem, 8vw, 4rem); /* 48–64px — mesmo valor em toda página em cada largura, mas reduz proporcionalmente no mobile */
 
   /* ---- Raio, borda, container ---- */
   --radius-sm: 0.25rem; /* botões */

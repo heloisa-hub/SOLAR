@@ -46,7 +46,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden xl:flex items-center gap-10 mx-auto">
+          <nav className="hidden lg:flex items-center gap-10 mx-auto">
             {navLinks.map(({ to, label }) => (
               <Link
                 key={to}
@@ -71,7 +71,7 @@ export default function Header() {
           <div className="flex items-center gap-4">
             <Link
               to="/contato"
-              className="hidden xl:inline-flex items-center px-6 py-2.5 text-sm font-semibold uppercase tracking-wider rounded transition-all duration-200"
+              className="hidden lg:inline-flex items-center px-6 py-2.5 text-sm font-semibold uppercase tracking-wider rounded transition-all duration-200"
               style={{
                 background: 'var(--color-brand)',
                 color: 'var(--color-text-on-light)',
@@ -82,9 +82,10 @@ export default function Header() {
               Fale com a Solar
             </Link>
 
-            {/* Mobile menu button */}
+            {/* Mobile menu button — min-w/h-11 garante alvo de toque de
+                44px mesmo com o ícone pequeno lá dentro. */}
             <button
-              className="xl:hidden p-2 text-white"
+              className="lg:hidden min-w-11 min-h-11 flex items-center justify-center text-white"
               onClick={() => setMobileOpen(o => !o)}
               aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={mobileOpen}
@@ -110,9 +111,9 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className="xl:hidden overflow-hidden transition-all duration-300"
+        className="lg:hidden overflow-hidden transition-all duration-300"
         style={{
-          maxHeight: mobileOpen ? '400px' : '0',
+          maxHeight: mobileOpen ? '440px' : '0',
           background: 'rgb(var(--ink-rgb) / 0.98)',
           borderTop: mobileOpen ? '1px solid rgb(var(--paper-rgb) / 0.08)' : 'none',
         }}
@@ -122,7 +123,7 @@ export default function Header() {
             <Link
               key={to}
               to={to}
-              className="text-base font-medium py-1"
+              className="text-base font-medium py-2.5"
               style={{ color: isActive(to) ? 'var(--color-brand)' : 'rgb(var(--paper-rgb) / 0.8)' }}
             >
               {label}

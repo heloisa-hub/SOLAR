@@ -155,12 +155,18 @@ export default function Home() {
           className="relative z-10"
           style={{ background: 'linear-gradient(to bottom, rgb(var(--ink-rgb) / 0) 0%, rgb(var(--ink-rgb) / 0.55) 60%, var(--color-surface-dark) 82%)' }}
         >
-          <div className="overflow-x-auto">
-            <div className="flex min-w-max site-container" style={{ paddingTop: '3rem', paddingBottom: '2.25rem' }}>
+          <div
+            className="overflow-x-auto"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent)',
+              maskImage: 'linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent)',
+            }}
+          >
+            <div className="flex justify-center min-w-max site-container" style={{ paddingTop: '3rem', paddingBottom: '2.25rem' }}>
               {kpis.map((k, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center flex-1 min-w-[128px]"
+                  className="flex flex-col items-center min-w-[128px]"
                   style={{
                     padding: '0 1.25rem',
                     opacity: kpiInView ? 1 : 0,
@@ -338,7 +344,7 @@ export default function Home() {
       {/* ── Track record (painel de texto + foto sangrada) ── */}
       <section style={{ background: 'var(--color-surface-offwhite)' }} className="grid grid-cols-1 lg:grid-cols-2">
         <div
-          className="flex flex-col justify-center py-24"
+          className="flex flex-col justify-center py-16 lg:py-24"
           style={{ paddingLeft: 'clamp(1.5rem, 5vw, 8rem)', paddingRight: 'clamp(1.5rem, 5vw, 4rem)' }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: 'var(--color-brand)' }}>
@@ -356,7 +362,7 @@ export default function Home() {
           <p className="text-base leading-loose mb-8 font-light" style={{ color: 'rgb(var(--ink-rgb) / 0.65)', maxWidth: '560px' }}>
             Desde 2018, desenvolvemos soluções de crédito para empresas e gerimos veículos de investimento ligados à economia real.
           </p>
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 mb-10 pt-8 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.1)', maxWidth: '560px' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-10 pt-8 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.1)', maxWidth: '560px' }}>
             {[
               { value: 'R$ 7,4bi', label: 'Operado desde 2018' },
               { value: 'R$ 6,2bi', label: 'Liquidados' },
@@ -377,13 +383,13 @@ export default function Home() {
           </div>
           <Link
             to="/sobre"
-            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest self-start transition-opacity hover:opacity-60"
+            className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest self-start transition-opacity hover:opacity-60 py-3 -my-3"
             style={{ color: 'var(--color-text-on-light)' }}
           >
             Conheça a Solar <span style={{ color: 'var(--color-brand)' }}>→</span>
           </Link>
         </div>
-        <div style={{ minHeight: '340px' }}>
+        <div style={{ minHeight: 'clamp(220px, 40vw, 340px)' }}>
           <img
             src={withBase('/img/sobre-solar-ceu.jpg')}
             alt=""
@@ -414,14 +420,14 @@ export default function Home() {
             </div>
             <Link
               to="/fundos"
-              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest flex-shrink-0 transition-opacity hover:opacity-60"
+              className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest flex-shrink-0 transition-opacity hover:opacity-60 py-3 -my-3"
               style={{ color: 'var(--color-text-on-light)' }}
             >
               Ver todos os fundos <span style={{ color: 'var(--color-brand)' }}>→</span>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-5xl">
             {funds.map((f, i) => (
               <Link
                 key={i}
