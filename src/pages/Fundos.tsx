@@ -16,18 +16,12 @@ export default function Fundos() {
         titleLine2="disciplina de crédito."
       />
 
-      {/* Intro */}
-      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-16 lg:py-20">
-        <div className="site-container max-w-3xl">
-          <p className="text-base leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
-            Cada veículo Solar possui política de investimento própria, prestadores independentes e relatórios periódicos. As estratégias são construídas a partir de originação próxima e análise individual de crédito — não de modelos de prateleira.
-          </p>
-        </div>
-      </section>
-
       {/* Fund cards */}
       <section style={{ background: 'var(--color-surface-cream)' }} className="py-12 lg:py-16 pb-24 lg:pb-32">
         <div className="site-container">
+          <p className="text-base leading-relaxed mb-10 max-w-3xl" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
+            Cada veículo Solar possui política de investimento própria, prestadores independentes e relatórios periódicos. As estratégias são construídas a partir de originação próxima e análise individual de crédito — não de modelos de prateleira.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {funds.map((fund) => (
               <Link
