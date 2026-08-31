@@ -10,7 +10,7 @@ export default function Fundos() {
   return (
     <>
       <PageHero
-        image={withBase('/img/page-hero-sol.jpg')}
+        image={withBase('/img/page-hero-fundos.jpg')}
         eyebrow="Estratégias"
         titleLine1="Fundos construídos com"
         titleLine2="disciplina de crédito."

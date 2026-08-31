@@ -48,7 +48,7 @@ export default function Sobre() {
   return (
     <>
       <PageHero
-        image={withBase('/img/page-hero-sol.jpg')}
+        image={withBase('/img/page-hero-sobre.jpg')}
         eyebrow="Sobre a Solar Capital"
         titleLine1="Entender o negócio antes"
         titleLine2="de estruturar o capital."

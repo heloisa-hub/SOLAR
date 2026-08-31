@@ -45,7 +45,7 @@ export default function Contato() {
         style={{ minHeight: '44vh', paddingTop: '118px' }}
       >
         <img
-          src={withBase('/img/page-hero-sol.jpg')}
+          src={withBase('/img/page-hero-contato.jpg')}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover"

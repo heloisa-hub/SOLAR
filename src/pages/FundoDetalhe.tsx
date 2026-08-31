@@ -55,7 +55,7 @@ export default function FundoDetalhe() {
         style={{ minHeight: '52vh', paddingTop: '118px' }}
       >
         <img
-          src={withBase('/img/page-hero-sol.jpg')}
+          src={withBase('/img/page-hero-fundo-detalhe.jpg')}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-cover"

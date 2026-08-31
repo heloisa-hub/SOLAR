@@ -90,7 +90,7 @@ export default function Solucoes() {
   return (
     <>
       <PageHero
-        image={withBase('/img/page-hero-sol.jpg')}
+        image={withBase('/img/page-hero-solucoes.jpg')}
         eyebrow="Soluções para empresas"
         titleLine1="Cada operação começa pelo"
         titleLine2="entendimento do negócio."
