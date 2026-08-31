@@ -289,9 +289,13 @@ export default function Solucoes() {
           </div>
 
           <div className="relative">
+            {/* A linha passa exatamente pelo centro dos 5 pontinhos, que
+                ficam alinhados à esquerda de cada coluna de 20% (0/20/40/
+                60/80%) — não centralizados, então a linha vai de 0% a 80%,
+                não de 10% a 90%. */}
             <div
               className="hidden sm:block absolute h-px"
-              style={{ top: '5px', left: '10%', right: '10%', background: 'rgb(var(--brand-rgb) / 0.3)' }}
+              style={{ top: '5.5px', left: '5.5px', right: 'calc(20% - 5.5px)', background: 'rgb(var(--brand-rgb) / 0.3)' }}
             />
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-y-10 gap-x-4">
               {process.map((p, i) => (

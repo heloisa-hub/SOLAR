@@ -47,12 +47,27 @@ export default function FundoDetalhe() {
     // ficavam "grudados" na navegação entre fundos, já que o React Router
     // reaproveita a mesma instância quando só o parâmetro da rota muda.
     <Fragment key={fund.slug}>
-      {/* Fund hero */}
+      {/* Fund hero — mesmo tratamento de foto do PageHero (Tarefa 2.1),
+          mas com conteúdo próprio (link de volta + linha de metadados) que
+          o componente compartilhado não tem espaço pra acomodar. */}
       <section
         className="relative overflow-hidden flex flex-col justify-end"
-        style={{ background: 'linear-gradient(135deg, var(--color-surface-dark-deep) 0%, var(--color-surface-dark) 100%)', minHeight: '52vh', paddingTop: '118px' }}
+        style={{ minHeight: '52vh', paddingTop: '118px' }}
       >
-        <div className="absolute pointer-events-none" style={{ right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '50vw', opacity: 0.06 }}>
+        <img
+          src={withBase('/img/page-hero-sol.jpg')}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to right, rgb(var(--ink-rgb) / 0.88) 0%, rgb(var(--ink-rgb) / 0.88) 42%, rgb(var(--ink-rgb) / 0.6) 72%, rgb(var(--ink-rgb) / 0.38) 100%)',
+          }}
+        />
+        <div className="absolute pointer-events-none" style={{ right: '-4%', top: '50%', transform: 'translateY(-50%)', width: '32vw', opacity: 0.2 }}>
           <SolarMark className="w-full h-full" />
         </div>
         <div className="site-container pb-0 relative z-10">
@@ -64,7 +79,9 @@ export default function FundoDetalhe() {
           </p>
           <div className="w-8 h-px mb-6" style={{ background: 'var(--color-brand)' }} />
           <h1 className="font-bold text-white mb-6" style={{ fontSize: 'var(--text-h1-size)', lineHeight: 'var(--text-h1-leading)' }}>
-            {fund.name}
+            {fund.name.split(' ')[0]}
+            <br />
+            {fund.name.split(' ').slice(1).join(' ')}
           </h1>
           <div className="flex flex-wrap gap-6 pb-10 text-xs" style={{ color: 'rgb(var(--paper-rgb) / 0.45)' }}>
             <span>CNPJ {fund.cnpj}</span>

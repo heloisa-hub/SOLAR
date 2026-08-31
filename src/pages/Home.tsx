@@ -162,11 +162,11 @@ export default function Home() {
               maskImage: 'linear-gradient(to right, transparent, black 24px, black calc(100% - 24px), transparent)',
             }}
           >
-            <div className="flex justify-center min-w-max site-container" style={{ paddingTop: '3rem', paddingBottom: '2.25rem' }}>
+            <div className="flex min-w-max site-container" style={{ paddingTop: '3rem', paddingBottom: '2.25rem' }}>
               {kpis.map((k, i) => (
                 <div
                   key={i}
-                  className="flex flex-col items-center min-w-[128px]"
+                  className="flex flex-col items-center flex-1 min-w-[128px]"
                   style={{
                     padding: '0 1.25rem',
                     opacity: kpiInView ? 1 : 0,
@@ -238,9 +238,13 @@ export default function Home() {
               <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-6" style={{ color: 'rgb(var(--ink-rgb) / 0.55)' }}>
                 O que a estrutura entrega
               </p>
-              <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 auto-rows-fr gap-px" style={{ background: 'rgb(var(--ink-rgb) / 0.12)' }}>
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 auto-rows-fr gap-px" style={{ background: 'rgb(var(--ink-rgb) / 0.10)' }}>
                 {fidcBenefits.map((b, i) => (
-                  <div key={i} className="p-5 flex flex-col justify-center" style={{ background: 'var(--color-brand)' }}>
+                  <div
+                    key={i}
+                    className="p-5 flex flex-col justify-center border-t-2"
+                    style={{ background: 'var(--color-surface-cream)', borderColor: 'var(--color-brand)' }}
+                  >
                     <h3 className="font-semibold text-sm leading-snug mb-1.5" style={{ color: 'var(--color-text-on-light)' }}>
                       {b.title}
                     </h3>
@@ -258,7 +262,7 @@ export default function Home() {
       {/* ── Nossa Atuação (diferenciais + timeline vertical) ── */}
       <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-24 lg:py-28">
         <div className="site-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-10 lg:mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-6 lg:mb-8">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: 'var(--color-brand)' }}>
                 Nossa Atuação
@@ -315,7 +319,7 @@ export default function Home() {
                     <div key={i} className="relative">
                       <span
                         className="absolute rounded-full"
-                        style={{ left: '-27px', top: '5px', width: 9, height: 9, background: 'var(--color-brand)' }}
+                        style={{ left: '-24px', top: '5px', width: 9, height: 9, background: 'var(--color-brand)' }}
                       />
                       <span className="text-xs font-bold mr-2" style={{ color: 'var(--color-brand)' }}>
                         {p.n}
@@ -427,7 +431,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-5xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             {funds.map((f, i) => (
               <Link
                 key={i}

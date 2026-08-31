@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { SolarMark } from '../components/SolarLogo'
 import usePageTitle from '../hooks/usePageTitle'
+import { withBase } from '../lib/assetUrl'
 
 const subjects = [
   'Operações de crédito / FIDC',
@@ -41,11 +42,24 @@ export default function Contato() {
       {/* Hero */}
       <section
         className="relative overflow-hidden flex flex-col justify-end"
-        style={{ background: 'linear-gradient(135deg, var(--color-surface-dark-deep) 0%, var(--color-surface-dark) 100%)', minHeight: '44vh', paddingTop: '118px' }}
+        style={{ minHeight: '44vh', paddingTop: '118px' }}
       >
+        <img
+          src={withBase('/img/page-hero-sol.jpg')}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to right, rgb(var(--ink-rgb) / 0.88) 0%, rgb(var(--ink-rgb) / 0.88) 42%, rgb(var(--ink-rgb) / 0.6) 72%, rgb(var(--ink-rgb) / 0.38) 100%)',
+          }}
+        />
         <div
           className="absolute pointer-events-none"
-          style={{ right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '50vw', opacity: 0.06 }}
+          style={{ right: '-4%', top: '50%', transform: 'translateY(-50%)', width: '32vw', opacity: 0.2 }}
         >
           <SolarMark className="w-full h-full" />
         </div>
