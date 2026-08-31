@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Solar Capital</title>
+    <!--
+      GitHub Pages é hospedagem estática — não tem como reescrever rota
+      no servidor. Esse redirect (técnica padrão spa-github-pages) manda
+      qualquer URL não encontrada (ex: acesso direto ou refresh em
+      /SOLAR/fundos) de volta pro index.html, preservando o caminho pra
+      o React Router assumir a partir daí. Ver o script correspondente
+      em index.html.
+    -->
+    <script type="text/javascript">
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

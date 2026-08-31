@@ -7,11 +7,13 @@
  * (fundo escuro).
  */
 
-const SIMBOLO_GOLD = '/logo/simbolo-gold.png'
-const SIMBOLO_WHITE = '/logo/simbolo-white.png'
-const SIMBOLO_NAVY = '/logo/simbolo-navy.png'
-const EMPILHADO_NAVY = '/logo/empilhado-navy.png'
-const EMPILHADO_BRANCO = '/logo/empilhado-branco.png'
+import { withBase } from '../lib/assetUrl'
+
+const SIMBOLO_GOLD = withBase('/logo/simbolo-gold.png')
+const SIMBOLO_WHITE = withBase('/logo/simbolo-white.png')
+const SIMBOLO_NAVY = withBase('/logo/simbolo-navy.png')
+const EMPILHADO_NAVY = withBase('/logo/empilhado-navy.png')
+const EMPILHADO_BRANCO = withBase('/logo/empilhado-branco.png')
 
 /** Logo completo empilhado (símbolo dourado + SOLAR / CAPITAL) — usado no header e no footer. */
 export function SolarLogoFull({

@@ -7,17 +7,20 @@ import Fundos from './pages/Fundos'
 import FundoDetalhe from './pages/FundoDetalhe'
 import Contato from './pages/Contato'
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    Component: Layout,
-    children: [
-      { index: true, Component: Home },
-      { path: 'sobre', Component: Sobre },
-      { path: 'solucoes', Component: Solucoes },
-      { path: 'fundos', Component: Fundos },
-      { path: 'fundos/:slug', Component: FundoDetalhe },
-      { path: 'contato', Component: Contato },
-    ],
-  },
-])
+export const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      Component: Layout,
+      children: [
+        { index: true, Component: Home },
+        { path: 'sobre', Component: Sobre },
+        { path: 'solucoes', Component: Solucoes },
+        { path: 'fundos', Component: Fundos },
+        { path: 'fundos/:slug', Component: FundoDetalhe },
+        { path: 'contato', Component: Contato },
+      ],
+    },
+  ],
+  { basename: import.meta.env.BASE_URL },
+)

@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crédito Estruturado para a Economia Real | Solar Capital</title>
     <meta name="description" content="A Solar Capital origina, estrutura e gerencia operações de crédito e FIDCs, conectando empresas a investidores com disciplina em crédito real." />
-    <link rel="icon" href="/logo/favicon-32.png" type="image/png" />
+    <link rel="icon" href="%BASE_URL%logo/favicon-32.png" type="image/png" />
+    <!-- Contraparte do redirect em public/404.html — restaura o caminho real antes do React Router montar. -->
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&')
+            })
+            .join('?')
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash)
+        }
+      })(window.location)
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -5,6 +5,7 @@ import { SolarMark } from '../components/SolarLogo'
 import ReturnChart from '../components/ReturnChart'
 import { PortfolioDonut, AgingBars } from '../components/PortfolioChart'
 import usePageTitle from '../hooks/usePageTitle'
+import { withBase } from '../lib/assetUrl'
 
 const TABS = ['Visão Geral', 'Estratégia', 'Estrutura', 'Carteira & Crédito', 'Rentabilidade', 'Documentos']
 
@@ -364,7 +365,7 @@ export default function FundoDetalhe() {
                     </div>
                     {doc.url ? (
                       <a
-                        href={doc.url}
+                        href={withBase(doc.url)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-xs font-semibold uppercase tracking-wider px-4 py-2 border transition-all duration-200 hover:bg-solar-navy hover:border-solar-navy hover:text-white"

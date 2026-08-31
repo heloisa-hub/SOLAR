@@ -3,6 +3,7 @@ import { SolarMark } from '../components/SolarLogo'
 import { useEffect, useRef, useState } from 'react'
 import { funds } from '../data/funds'
 import usePageTitle from '../hooks/usePageTitle'
+import { withBase } from '../lib/assetUrl'
 
 function useInView(threshold = 0.2) {
   const ref = useRef<HTMLDivElement>(null)
@@ -85,7 +86,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ filter: 'brightness(0.48)' }}
         >
-          <source src="/video/hero-solar-web.mp4" type="video/mp4" />
+          <source src={withBase('/video/hero-solar-web.mp4')} type="video/mp4" />
         </video>
         <div
           className="absolute inset-0"
@@ -357,7 +358,7 @@ export default function Home() {
         </div>
         <div style={{ minHeight: '340px' }}>
           <img
-            src="/img/sobre-solar-ceu.jpg"
+            src={withBase('/img/sobre-solar-ceu.jpg')}
             alt=""
             aria-hidden
             className="w-full h-full object-cover"
