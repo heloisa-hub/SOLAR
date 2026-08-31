@@ -436,8 +436,12 @@ export default function Home() {
               <Link
                 key={i}
                 to={`/fundos/${f.slug}`}
-                className="group flex flex-col border transition-all duration-200 hover:border-solar-amber"
-                style={{ background: 'var(--color-surface-offwhite)', borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}
+                className="group flex flex-col border transition-all duration-200 hover:border-solar-amber hover:-translate-y-0.5"
+                style={{
+                  background: 'var(--color-surface-offwhite)',
+                  borderColor: 'rgb(var(--ink-rgb) / 0.25)',
+                  boxShadow: '0 1px 3px rgb(var(--ink-rgb) / 0.08), 0 8px 20px rgb(var(--ink-rgb) / 0.06)',
+                }}
               >
                 <div className="p-6 flex flex-col justify-between" style={{ minHeight: '190px' }}>
                   <div>
