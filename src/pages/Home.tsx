@@ -262,57 +262,58 @@ export default function Home() {
       {/* ── Nossa Atuação (diferenciais + timeline vertical) ── */}
       <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-24 lg:py-28">
         <div className="site-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-6 lg:mb-8">
-            <div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+            {/* Coluna esquerda — eyebrow + título + cards */}
+            <div className="flex flex-col h-full">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: 'var(--color-brand)' }}>
                 Nossa Atuação
               </p>
               <div className="w-8 h-px mb-8" style={{ background: 'var(--color-brand)' }} />
               <h2
-                className="font-bold leading-[1.1]"
+                className="font-bold leading-[1.1] mb-10"
                 style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em', maxWidth: '600px' }}
               >
                 Cada operação começa pelo entendimento do negócio.
               </h2>
-            </div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: 'var(--color-brand)' }}>
-              Processo
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
-            {/* 4 cards escuros — mesma altura total do Processo ao lado;
-                o ícone fica ancorado no topo e o título+corpo centralizam
-                no espaço que sobra, então a altura extra não vira só um
-                vão morto embaixo. */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
-              {nossaAtuacao.map((v, i) => (
-                <div
-                  key={i}
-                  className="group p-6 flex flex-col gap-4 border transition-all duration-200 hover:-translate-y-0.5"
-                  style={{ background: 'var(--color-text-on-light)', borderColor: 'rgb(var(--paper-rgb) / 0.08)' }}
-                  onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-brand)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgb(var(--paper-rgb) / 0.08)')}
-                >
-                  <v.icon size={24} strokeWidth={1.5} style={{ color: 'var(--color-brand)' }} />
-                  <div className="flex-1 flex flex-col justify-center">
-                    <h3
-                      className="font-semibold mb-2 text-white"
-                      style={{ fontSize: 'var(--text-h3-size)', lineHeight: 'var(--text-h3-leading)' }}
-                    >
-                      {v.title}
-                    </h3>
-                    <p className="text-sm font-light leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
-                      {v.body}
-                    </p>
+              {/* 4 cards escuros — preenchem o espaço restante da coluna;
+                  o ícone fica ancorado no topo e o título+corpo centralizam
+                  no espaço que sobra, então a altura extra não vira só um
+                  vão morto embaixo. */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr flex-1">
+                {nossaAtuacao.map((v, i) => (
+                  <div
+                    key={i}
+                    className="group p-6 flex flex-col gap-4 border transition-all duration-200 hover:-translate-y-0.5"
+                    style={{ background: 'var(--color-text-on-light)', borderColor: 'rgb(var(--paper-rgb) / 0.08)' }}
+                    onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-brand)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgb(var(--paper-rgb) / 0.08)')}
+                  >
+                    <v.icon size={24} strokeWidth={1.5} style={{ color: 'var(--color-brand)' }} />
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h3
+                        className="font-semibold mb-2 text-white"
+                        style={{ fontSize: 'var(--text-h3-size)', lineHeight: 'var(--text-h3-leading)' }}
+                      >
+                        {v.title}
+                      </h3>
+                      <p className="text-sm font-light leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
+                        {v.body}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
-            {/* Timeline vertical */}
-            <div>
-              <div className="relative pl-6">
+            {/* Coluna direita — eyebrow + timeline vertical, começando na
+                mesma altura do título ao lado (não espera a coluna dos
+                cards terminar). */}
+            <div className="flex flex-col h-full">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-8" style={{ color: 'var(--color-brand)' }}>
+                Processo
+              </p>
+              <div className="relative pl-6 flex-1">
                 <div
                   className="absolute top-1 bottom-1 w-px"
                   style={{ left: '4px', background: 'rgb(var(--brand-rgb) / 0.3)' }}
