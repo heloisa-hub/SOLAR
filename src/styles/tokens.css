@@ -1,0 +1,101 @@
+/**
+ * Solar Capital — Design Tokens
+ * Fonte única de verdade para cor, tipografia, espaçamento, raio, borda e
+ * largura de container. Nenhum hex, tamanho de fonte ou espaçamento de seção
+ * deve aparecer hardcoded fora deste arquivo — todo o site referencia estas
+ * variáveis (ver index.css, componentes e páginas).
+ *
+ * Migração, não redesign: os valores abaixo foram extraídos do que já
+ * existia no site (auditoria em 2026-08-31), não inventados. Onde havia
+ * inconsistência real, o valor mais frequente virou o token — ver relatório
+ * de migração para os pontos exatos onde isso muda algo visualmente.
+ */
+
+:root {
+  /* ---- Cor · superfícies (nomeadas por função, não por aparência) ---- */
+  --color-surface-dark: #0C0F2E; /* navy — heros e seções escuras */
+  --color-surface-dark-deep: #080A20; /* stop mais escuro do gradiente diagonal do hero; usado sempre junto com --color-surface-dark, nunca sozinho */
+  --color-surface-dark-elevated: #131737; /* navy "elevado" — separa duas seções escuras vizinhas sem borda dura (KPI strip do fundo, seção "Casos de uso") */
+  --color-surface-offwhite: #F7F2E6; /* superfície mais clara do site */
+  --color-surface-cream: #EDE6D3; /* superfície creme das seções intermediárias */
+
+  /* ---- Cor · marca ---- */
+  --color-brand: #F5A623; /* amarelo Solar — destaque */
+  --color-brand-strong: #CF8A1A; /* estado hover/pressed do amarelo */
+
+  /* ---- Cor · texto ---- */
+  --color-text-on-light: #0C0F2E; /* texto sobre superfície clara */
+  --color-text-on-dark: #ffffff; /* texto sobre superfície escura */
+  /* Canais RGB dos tons acima, pra texto secundário/bordas com opacidade
+     variável sem precisar de um token por opacidade: rgb(var(--ink-rgb) / 0.NN) */
+  --ink-rgb: 12 15 46; /* = #0C0F2E */
+  --paper-rgb: 255 255 255; /* = #ffffff */
+  --brand-rgb: 245 166 35; /* = #F5A623 */
+
+  /* ---- Tipografia · no máximo 6 níveis ---- */
+  /* display — título de hero (Home) */
+  --text-display-size: clamp(1.9rem, 3.4vw, 3.9rem);
+  --text-display-leading: 1.1;
+  /* h1 — título de cabeçalho de página interna */
+  --text-h1-size: clamp(1.8rem, 3vw, 2.6rem);
+  --text-h1-leading: 1.06;
+  /* h2 — título de seção */
+  --text-h2-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  --text-h2-leading: 1.1;
+  /* h3 — título de card/subsecão */
+  --text-h3-size: 0.875rem; /* 14px */
+  --text-h3-leading: 1.3;
+  /* corpo — parágrafo */
+  --text-body-size: 1rem; /* 16px */
+  --text-body-leading: 1.7;
+  /* label — eyebrow em caixa alta acima de títulos */
+  --text-label-size: 0.75rem; /* 12px */
+  --text-label-leading: 1.2;
+  --text-label-tracking: 0.25em;
+
+  /* ---- Espaçamento · escala de 8px ---- */
+  --space-1: 0.5rem; /* 8px */
+  --space-2: 1rem; /* 16px */
+  --space-3: 1.5rem; /* 24px */
+  --space-4: 2rem; /* 32px */
+  --space-5: 2.5rem; /* 40px */
+  --space-6: 3rem; /* 48px */
+  --space-7: 3.5rem; /* 56px */
+  --space-8: 4rem; /* 64px */
+  --space-10: 5rem; /* 80px */
+  --space-12: 6rem; /* 96px */
+  --space-14: 7rem; /* 112px */
+  --space-16: 8rem; /* 128px */
+  --space-20: 10rem; /* 160px */
+
+  /* Padding vertical padrão de seção (mobile / desktop). O site hoje usa 7
+     pares diferentes sem critério — capturados aqui como tokens nomeados,
+     cada seção continua com o par que já usava (zero mudança visual nesta
+     etapa; unificar de fato é tarefa futura, separada). */
+  --section-py-1: var(--space-7); /* 56px */
+  --section-py-1-lg: var(--space-8); /* 64px */
+  --section-py-2: var(--space-6); /* 48px */
+  --section-py-2-lg: var(--space-8); /* 64px */
+  --section-py-3: var(--space-8); /* 64px */
+  --section-py-3-lg: var(--space-10); /* 80px */
+  --section-py-4: var(--space-10); /* 80px */
+  --section-py-4-lg: var(--space-12); /* 96px */
+  --section-py-5: var(--space-12); /* 96px */
+  --section-py-5-lg: var(--space-14); /* 112px */
+  --section-py-6: var(--space-12); /* 96px */
+  --section-py-6-lg: var(--space-16); /* 128px */
+  --section-py-7: var(--space-12); /* 96px */
+  --section-py-7-lg: var(--space-20); /* 160px */
+
+  /* Altura fixa e padrão dos componentes de cabeçalho de página e faixa de
+     CTA (Tarefas 2.1 e 2.2) — mesma altura nas três/cinco páginas. */
+  --page-hero-height: 26rem; /* 416px — menor que o hero de vídeo da Home, sem usar 100vh */
+  --cta-band-py: var(--space-8); /* 64px, igual em toda página */
+
+  /* ---- Raio, borda, container ---- */
+  --radius-sm: 0.25rem; /* botões */
+  --radius-full: 9999px; /* pills */
+  --border-width: 1px;
+  --border-width-emphasis: 2px; /* botões outline, aba ativa */
+  --container-max: none; /* sem teto — removido a pedido explícito numa sessão anterior; ver nota na migração */
+}

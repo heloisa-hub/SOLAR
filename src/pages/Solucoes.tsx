@@ -1,6 +1,7 @@
-import { Link } from 'react-router'
-import { SolarMark } from '../components/SolarLogo'
+import PageHero from '../components/PageHero'
+import CTABand from '../components/CTABand'
 import usePageTitle from '../hooks/usePageTitle'
+import { withBase } from '../lib/assetUrl'
 
 const services = [
   {
@@ -88,60 +89,42 @@ export default function Solucoes() {
   usePageTitle('Soluções para Empresas')
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden flex flex-col justify-end"
-        style={{ background: 'linear-gradient(135deg, #080A20 0%, #0C0F2E 100%)', minHeight: '52vh', paddingTop: '118px' }}
-      >
-        <div
-          className="absolute pointer-events-none"
-          style={{ right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '50vw', opacity: 0.06 }}
-        >
-          <SolarMark color="#F5A623" className="w-full h-full" />
-        </div>
-        <div className="site-container pb-16 relative z-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
-            Soluções para empresas
-          </p>
-          <div className="w-8 h-px mb-6" style={{ background: '#F5A623' }} />
-          <h1
-            className="font-bold leading-[1.06] text-white max-w-3xl"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 2.6rem)' }}
-          >
-            Cada operação começa pelo entendimento do negócio.
-          </h1>
-        </div>
-      </section>
+      <PageHero
+        image={withBase('/img/page-hero-sol.jpg')}
+        eyebrow="Soluções para empresas"
+        titleLine1="Cada operação começa pelo"
+        titleLine2="entendimento do negócio."
+      />
 
       {/* Intro */}
-      <section style={{ background: '#F7F2E6' }} className="py-20 lg:py-28">
+      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-20 lg:py-28">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
             Como pensamos
           </p>
-          <div className="w-8 h-px mb-10" style={{ background: '#F5A623' }} />
+          <div className="w-8 h-px mb-10" style={{ background: 'var(--color-brand)' }} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
             <h2
               className="font-bold leading-[1.1]"
-              style={{ color: '#0C0F2E', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', letterSpacing: '-0.02em' }}
+              style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em' }}
             >
               Não partimos de uma estrutura pronta.
             </h2>
-            <p className="text-base leading-loose" style={{ color: 'rgba(12,15,46,0.7)' }}>
+            <p className="text-base leading-loose" style={{ color: 'rgb(var(--ink-rgb) / 0.7)' }}>
               Analisamos a empresa, seus recebíveis, garantias e necessidade de capital antes de propor uma solução. O instrumento certo nasce do diagnóstico — não o contrário. Por isso as estruturas que construímos são mais robustas, mais eficientes e mais adequadas à realidade de quem as contrata.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px" style={{ background: 'rgba(12,15,46,0.10)' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px" style={{ background: 'rgb(var(--ink-rgb) / 0.10)' }}>
             {[
               { title: 'Diagnóstico primeiro', body: 'Entendemos o negócio antes de propor qualquer instrumento.' },
               { title: 'Estrutura sob medida', body: 'Nada de produto de prateleira — cada operação nasce do que a empresa já possui.' },
               { title: 'Disciplina de crédito', body: 'Garantias, covenants e capacidade de pagamento analisados caso a caso.' },
             ].map((c, i) => (
-              <div key={i} className="p-6" style={{ background: '#EDE6D3' }}>
-                <h3 className="font-semibold text-sm leading-snug mb-1.5" style={{ color: '#0C0F2E' }}>
+              <div key={i} className="p-6" style={{ background: 'var(--color-surface-cream)' }}>
+                <h3 className="font-semibold text-sm leading-snug mb-1.5" style={{ color: 'var(--color-text-on-light)' }}>
                   {c.title}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: 'rgba(12,15,46,0.6)' }}>
+                <p className="text-xs leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>
                   {c.body}
                 </p>
               </div>
@@ -151,26 +134,26 @@ export default function Solucoes() {
       </section>
 
       {/* Services */}
-      <section style={{ background: '#EDE6D3' }} className="py-24 lg:py-32">
+      <section style={{ background: 'var(--color-surface-cream)' }} className="py-24 lg:py-32">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
             O que fazemos
           </p>
-          <div className="w-8 h-px mb-12" style={{ background: '#F5A623' }} />
+          <div className="w-8 h-px mb-12" style={{ background: 'var(--color-brand)' }} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {services.map((s, i) => (
               <div
                 key={i}
                 className="p-8 border"
-                style={{ background: '#F7F2E6', borderColor: 'rgba(12,15,46,0.10)' }}
+                style={{ background: 'var(--color-surface-offwhite)', borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}
               >
-                <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: '#F5A623' }}>
+                <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: 'var(--color-brand)' }}>
                   {s.label}
                 </p>
-                <h3 className="font-bold text-base mb-4 leading-snug" style={{ color: '#0C0F2E' }}>
+                <h3 className="font-bold text-base mb-4 leading-snug" style={{ color: 'var(--color-text-on-light)' }}>
                   {s.title}
                 </h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(12,15,46,0.6)' }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>
                   {s.body}
                 </p>
               </div>
@@ -180,19 +163,19 @@ export default function Solucoes() {
       </section>
 
       {/* Comparativo */}
-      <section style={{ background: '#0C0F2E' }} className="py-24 lg:py-40">
+      <section style={{ background: 'var(--color-text-on-light)' }} className="py-24 lg:py-40">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
             Comparativo
           </p>
-          <div className="w-8 h-px mb-8" style={{ background: '#F5A623' }} />
+          <div className="w-8 h-px mb-8" style={{ background: 'var(--color-brand)' }} />
           <h2
             className="font-bold leading-[1.04] mb-4 text-white"
-            style={{ fontSize: 'clamp(1.5rem, 2.4vw, 2.2rem)', letterSpacing: '-0.02em' }}
+            style={{ fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)', letterSpacing: '-0.02em' }}
           >
             O mesmo problema, respostas distintas
           </h2>
-          <p className="text-base mb-14 max-w-3xl" style={{ color: 'rgba(255,255,255,0.55)' }}>
+          <p className="text-base mb-14 max-w-3xl" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
             Crédito para uma empresa que não cabe no produto de prateleira. A estrutura é o que muda.
           </p>
 
@@ -202,38 +185,38 @@ export default function Solucoes() {
                 <tr>
                   <th className="text-left py-3 pr-6 w-[22%]" />
                   <th className="text-left py-3 pr-6 w-[26%]">
-                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
                       Banco Tradicional
                     </span>
                   </th>
                   <th className="text-left py-3 pr-6 w-[26%]">
-                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
                       Fintech de Crédito
                     </span>
                   </th>
                   <th className="text-left py-3 w-[26%]">
-                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: '#F5A623' }}>
+                    <span className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--color-brand)' }}>
                       Solar Capital
                     </span>
-                    <div className="h-px mt-2" style={{ background: '#F5A623' }} />
+                    <div className="h-px mt-2" style={{ background: 'var(--color-brand)' }} />
                   </th>
                 </tr>
               </thead>
               <tbody>
                 {comparison.map((row, i) => (
-                  <tr key={i} className="border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                  <tr key={i} className="border-t" style={{ borderColor: 'rgb(var(--paper-rgb) / 0.08)' }}>
                     <td className="py-6 pr-6 align-top">
-                      <span className="text-sm font-semibold" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                      <span className="text-sm font-semibold" style={{ color: 'rgb(var(--paper-rgb) / 0.7)' }}>
                         {row.attribute}
                       </span>
                     </td>
                     <td className="py-6 pr-6 align-top">
-                      <span className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      <span className="text-sm leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
                         {row.banco}
                       </span>
                     </td>
                     <td className="py-6 pr-6 align-top">
-                      <span className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                      <span className="text-sm leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.35)' }}>
                         {row.fintech}
                       </span>
                     </td>
@@ -251,15 +234,15 @@ export default function Solucoes() {
       </section>
 
       {/* Use cases */}
-      <section style={{ background: '#131737' }} className="py-24 lg:py-32">
+      <section style={{ background: 'var(--color-surface-dark-elevated)' }} className="py-24 lg:py-32">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
             Casos de uso
           </p>
-          <div className="w-8 h-px mb-8" style={{ background: '#F5A623' }} />
+          <div className="w-8 h-px mb-8" style={{ background: 'var(--color-brand)' }} />
           <h2
             className="font-bold leading-[1.1] mb-12 text-white"
-            style={{ fontSize: 'clamp(1.4rem, 2.2vw, 2rem)' }}
+            style={{ fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)' }}
           >
             A sua situação se encaixa aqui?
           </h2>
@@ -268,12 +251,12 @@ export default function Solucoes() {
               <div
                 key={i}
                 className="flex gap-4 p-5 border border-white/10"
-                style={{ background: '#131737' }}
+                style={{ background: 'var(--color-surface-dark-elevated)' }}
               >
-                <span className="text-xs font-bold flex-shrink-0 mt-0.5" style={{ color: '#F5A623' }}>
+                <span className="text-xs font-bold flex-shrink-0 mt-0.5" style={{ color: 'var(--color-brand)' }}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.7)' }}>
                   {uc}
                 </p>
               </div>
@@ -283,24 +266,24 @@ export default function Solucoes() {
       </section>
 
       {/* Process — timeline horizontal */}
-      <section style={{ background: '#F7F2E6' }} className="py-24 lg:py-28">
+      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-24 lg:py-28">
         <div className="site-container">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 mb-20">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+              <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
                 Como atuamos
               </p>
-              <div className="w-8 h-px mb-6" style={{ background: '#F5A623' }} />
+              <div className="w-8 h-px mb-6" style={{ background: 'var(--color-brand)' }} />
               <h2
                 className="font-bold leading-[1.1]"
-                style={{ color: '#0C0F2E', fontSize: 'clamp(1.4rem, 2.2vw, 2rem)' }}
+                style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h2-size)', lineHeight: 'var(--text-h2-leading)' }}
               >
                 Do diagnóstico à gestão contínua.
               </h2>
             </div>
             <p
               className="text-sm leading-relaxed lg:text-right lg:pt-1"
-              style={{ color: 'rgba(12,15,46,0.5)', maxWidth: '320px' }}
+              style={{ color: 'rgb(var(--ink-rgb) / 0.5)', maxWidth: '320px' }}
             >
               A mesma disciplina se aplica a uma operação isolada e à gestão contínua de um fundo.
             </p>
@@ -309,22 +292,22 @@ export default function Solucoes() {
           <div className="relative">
             <div
               className="hidden sm:block absolute h-px"
-              style={{ top: '5px', left: '10%', right: '10%', background: 'rgba(245,166,35,0.3)' }}
+              style={{ top: '5px', left: '10%', right: '10%', background: 'rgb(var(--brand-rgb) / 0.3)' }}
             />
             <div className="grid grid-cols-1 sm:grid-cols-5 gap-y-10 gap-x-4">
               {process.map((p, i) => (
                 <div key={i}>
                   <span
                     className="block mb-5"
-                    style={{ width: 11, height: 11, borderRadius: '50%', background: '#F5A623' }}
+                    style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--color-brand)' }}
                   />
-                  <span className="block text-xs font-bold mb-2" style={{ color: '#F5A623' }}>
+                  <span className="block text-xs font-bold mb-2" style={{ color: 'var(--color-brand)' }}>
                     {p.n}
                   </span>
-                  <h3 className="font-bold text-sm mb-1.5" style={{ color: '#0C0F2E' }}>
+                  <h3 className="font-bold text-sm mb-1.5" style={{ color: 'var(--color-text-on-light)' }}>
                     {p.title}
                   </h3>
-                  <p className="text-xs leading-relaxed" style={{ color: 'rgba(12,15,46,0.55)' }}>
+                  <p className="text-xs leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.55)' }}>
                     {p.body}
                   </p>
                 </div>
@@ -334,32 +317,11 @@ export default function Solucoes() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden py-16" style={{ background: '#F5A623' }}>
-        <div
-          className="absolute pointer-events-none"
-          style={{ right: '-4%', top: '50%', transform: 'translateY(-50%)', width: 'clamp(180px, 24vw, 360px)', opacity: 0.12 }}
-        >
-          <SolarMark color="#0C0F2E" className="w-full h-auto" />
-        </div>
-        <div className="site-container relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <h2 className="font-bold text-xl mb-1" style={{ color: '#0C0F2E' }}>
-              Vamos falar sobre a sua operação?
-            </h2>
-            <p className="text-sm" style={{ color: 'rgba(12,15,46,0.6)' }}>
-              Empresas, investidores e parceiros — encontramos a estrutura certa para cada necessidade.
-            </p>
-          </div>
-          <Link
-            to="/contato"
-            className="inline-flex items-center px-8 py-4 text-sm font-semibold uppercase tracking-wider border-2 rounded flex-shrink-0 transition-all duration-200 hover:bg-solar-navy hover:border-solar-navy hover:text-white"
-            style={{ borderColor: '#0C0F2E', color: '#0C0F2E' }}
-          >
-            Fale com a Solar
-          </Link>
-        </div>
-      </section>
+      <CTABand
+        title="Vamos falar sobre a sua operação?"
+        body="Empresas, investidores e parceiros — encontramos a estrutura certa para cada necessidade."
+        primaryButton={{ label: 'Fale com a Solar', to: '/contato' }}
+      />
     </>
   )
 }

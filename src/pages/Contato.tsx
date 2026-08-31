@@ -33,60 +33,60 @@ export default function Contato() {
   }
 
   const inputClass = "w-full bg-transparent border-b py-3 text-sm outline-none transition-colors duration-200 placeholder-transparent focus:border-solar-amber"
-  const inputStyle = { borderColor: 'rgba(12,15,46,0.2)', color: '#0C0F2E' }
-  const labelStyle = { color: 'rgba(12,15,46,0.5)', fontSize: '11px', textTransform: 'uppercase' as const, letterSpacing: '0.1em', fontWeight: 600 }
+  const inputStyle = { borderColor: 'rgb(var(--ink-rgb) / 0.2)', color: 'var(--color-text-on-light)' }
+  const labelStyle = { color: 'rgb(var(--ink-rgb) / 0.5)', fontSize: 'var(--text-label-size)', textTransform: 'uppercase' as const, letterSpacing: '0.1em', fontWeight: 600 }
 
   return (
     <>
       {/* Hero */}
       <section
         className="relative overflow-hidden flex flex-col justify-end"
-        style={{ background: 'linear-gradient(135deg, #080A20 0%, #0C0F2E 100%)', minHeight: '44vh', paddingTop: '118px' }}
+        style={{ background: 'linear-gradient(135deg, var(--color-surface-dark-deep) 0%, var(--color-surface-dark) 100%)', minHeight: '44vh', paddingTop: '118px' }}
       >
         <div
           className="absolute pointer-events-none"
           style={{ right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '50vw', opacity: 0.06 }}
         >
-          <SolarMark color="#F5A623" className="w-full h-full" />
+          <SolarMark className="w-full h-full" />
         </div>
         <div className="site-container pb-16 relative z-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: 'var(--color-brand)' }}>
             Contato
           </p>
-          <div className="w-8 h-px mb-6" style={{ background: '#F5A623' }} />
+          <div className="w-8 h-px mb-6" style={{ background: 'var(--color-brand)' }} />
           <h1
             className="font-bold leading-[1.06] text-white max-w-xl"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 2.6rem)' }}
+            style={{ fontSize: 'var(--text-h1-size)', lineHeight: 'var(--text-h1-leading)' }}
           >
             Fale com a Solar.
           </h1>
-          <p className="mt-4 text-base max-w-lg" style={{ color: 'rgba(255,255,255,0.55)' }}>
+          <p className="mt-4 text-base max-w-lg" style={{ color: 'rgb(var(--paper-rgb) / 0.55)' }}>
             Empresas, investidores e parceiros — estamos disponíveis para falar sobre estruturas, fundos e oportunidades.
           </p>
         </div>
       </section>
 
       {/* Main content */}
-      <section style={{ background: '#F7F2E6' }} className="py-24 lg:py-32">
+      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-24 lg:py-32">
         <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-28 items-start">
 
             {/* Left — Form */}
             <div>
-              <h2 className="font-bold text-xl mb-8" style={{ color: '#0C0F2E' }}>Envie uma mensagem</h2>
+              <h2 className="font-bold text-xl mb-8" style={{ color: 'var(--color-text-on-light)' }}>Envie uma mensagem</h2>
 
               {sent ? (
                 <div
                   className="p-8 border text-center"
-                  style={{ background: '#EDE6D3', borderColor: 'rgba(12,15,46,0.10)' }}
+                  style={{ background: 'var(--color-surface-cream)', borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}
                 >
-                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center" style={{ background: '#F5A623' }}>
+                  <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center" style={{ background: 'var(--color-brand)' }}>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M4 10l4.5 4.5L16 6" stroke="#0C0F2E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M4 10l4.5 4.5L16 6" stroke="var(--color-text-on-light)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <h3 className="font-bold text-lg mb-2" style={{ color: '#0C0F2E' }}>Mensagem enviada.</h3>
-                  <p className="text-sm" style={{ color: 'rgba(12,15,46,0.6)' }}>
+                  <h3 className="font-bold text-lg mb-2" style={{ color: 'var(--color-text-on-light)' }}>Mensagem enviada.</h3>
+                  <p className="text-sm" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>
                     Entraremos em contato em breve.
                   </p>
                 </div>
@@ -145,7 +145,7 @@ export default function Contato() {
                         value={form.assunto}
                         onChange={handleChange}
                         className="w-full bg-transparent border-b py-3 text-sm outline-none appearance-none"
-                        style={{ ...inputStyle, borderColor: 'rgba(12,15,46,0.2)' }}
+                        style={{ ...inputStyle, borderColor: 'rgb(var(--ink-rgb) / 0.2)' }}
                       >
                         {subjects.map(s => (
                           <option key={s} value={s}>{s}</option>
@@ -172,7 +172,7 @@ export default function Contato() {
                   <button
                     type="submit"
                     className="inline-flex items-center px-8 py-4 text-sm font-semibold uppercase tracking-wider rounded transition-all duration-200 hover:opacity-90"
-                    style={{ background: '#0C0F2E', color: '#F5A623' }}
+                    style={{ background: 'var(--color-text-on-light)', color: 'var(--color-brand)' }}
                   >
                     Enviar mensagem
                   </button>
@@ -182,47 +182,47 @@ export default function Contato() {
 
             {/* Right — contact info */}
             <div>
-              <h2 className="font-bold text-xl mb-8" style={{ color: '#0C0F2E' }}>Canais diretos</h2>
+              <h2 className="font-bold text-xl mb-8" style={{ color: 'var(--color-text-on-light)' }}>Canais diretos</h2>
 
               <div className="space-y-8">
-                <div className="pt-6 border-t" style={{ borderColor: 'rgba(12,15,46,0.12)' }}>
+                <div className="pt-6 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.12)' }}>
                   <p style={labelStyle} className="mb-3">E-mail</p>
                   <a
                     href="mailto:contato@solarcapital.com.br"
                     className="text-base font-medium hover:opacity-70 transition-opacity"
-                    style={{ color: '#0C0F2E' }}
+                    style={{ color: 'var(--color-text-on-light)' }}
                   >
                     contato@solarcapital.com.br
                   </a>
                 </div>
 
-                <div className="pt-6 border-t" style={{ borderColor: 'rgba(12,15,46,0.12)' }}>
+                <div className="pt-6 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.12)' }}>
                   <p style={labelStyle} className="mb-3">Telefone</p>
                   <a
                     href="tel:+551138561545"
                     className="text-base font-medium hover:opacity-70 transition-opacity"
-                    style={{ color: '#0C0F2E' }}
+                    style={{ color: 'var(--color-text-on-light)' }}
                   >
                     +55 11 3856-1545
                   </a>
                 </div>
 
-                <div className="pt-6 border-t" style={{ borderColor: 'rgba(12,15,46,0.12)' }}>
+                <div className="pt-6 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.12)' }}>
                   <p style={labelStyle} className="mb-3">Endereço</p>
-                  <p className="text-base leading-relaxed" style={{ color: '#0C0F2E' }}>
+                  <p className="text-base leading-relaxed" style={{ color: 'var(--color-text-on-light)' }}>
                     Rua Dr. Eduardo de Souza Aranha, 153<br />
                     6º andar · São Paulo/SP
                   </p>
                 </div>
 
-                <div className="pt-6 border-t" style={{ borderColor: 'rgba(12,15,46,0.12)' }}>
+                <div className="pt-6 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.12)' }}>
                   <p style={labelStyle} className="mb-3">Horário de atendimento</p>
-                  <p className="text-base" style={{ color: '#0C0F2E' }}>
+                  <p className="text-base" style={{ color: 'var(--color-text-on-light)' }}>
                     Segunda a sexta, 9h–18h
                   </p>
                 </div>
 
-                <div className="pt-6 border-t" style={{ borderColor: 'rgba(12,15,46,0.12)' }}>
+                <div className="pt-6 border-t" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.12)' }}>
                   <p style={labelStyle} className="mb-4">Redes sociais</p>
                   <div className="flex gap-4">
                     <a
@@ -230,7 +230,7 @@ export default function Contato() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity"
-                      style={{ color: '#0C0F2E' }}
+                      style={{ color: 'var(--color-text-on-light)' }}
                     >
                       LinkedIn →
                     </a>

@@ -26,12 +26,12 @@ function LinkedInIcon() {
 
 export default function Footer() {
   return (
-    <footer style={{ background: '#0C0F2E' }}>
+    <footer style={{ background: 'var(--color-surface-dark)' }}>
       <div className="site-container py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Col 1 — Logo + tagline + redes + copyright */}
           <div className="lg:col-span-1">
-            <SolarWordmark symbolColor="#F5A623" textColor="#ffffff" size="md" align="start" className="mb-5" />
+            <SolarWordmark size="md" align="start" className="mb-5" />
             <p className="text-white/50 text-sm leading-relaxed max-w-xs">
               Crédito estruturado para a economia real. Originação, estruturação e gestão de operações de crédito.
             </p>
@@ -100,7 +100,7 @@ export default function Footer() {
 
         {/* Disclaimer — nota de rodapé, discreta, ao longo de toda a largura */}
         <div className="mt-10 pt-5 border-t border-white/10">
-          <p className="text-white/25 text-[11px] leading-relaxed">
+          <p className="text-white/25 leading-relaxed" style={{ fontSize: 'var(--text-label-size)' }}>
             Fundos de investimento não contam com garantia do administrador do fundo, do gestor da carteira, de qualquer mecanismo de seguro ou do Fundo Garantidor de Créditos — FGC. A rentabilidade obtida no passado não representa garantia de rentabilidade futura. Ao investidor é recomendada a leitura cuidadosa do regulamento e da lâmina de informações essenciais antes de aplicar seus recursos. Investimentos em fundos de investimento em direitos creditórios são destinados a investidores qualificados ou profissionais, conforme o regulamento de cada fundo.
           </p>
         </div>

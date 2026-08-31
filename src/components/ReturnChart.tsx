@@ -46,7 +46,7 @@ export default function ReturnChart({
   const cls = withHistory.find((c) => c.name === selectedClass) ?? withHistory[0]
 
   if (!cls) {
-    return <p className="text-sm" style={{ color: dark ? 'rgba(255,255,255,0.5)' : 'rgba(12,15,46,0.45)' }}>Histórico de rentabilidade ainda insuficiente para exibir gráfico.</p>
+    return <p className="text-sm" style={{ color: dark ? 'rgb(var(--paper-rgb) / 0.5)' : 'rgb(var(--ink-rgb) / 0.45)' }}>Histórico de rentabilidade ainda insuficiente para exibir gráfico.</p>
   }
 
   const cumulative = computeCumulative(cls.history)
@@ -106,15 +106,15 @@ export default function ReturnChart({
     setHoverIdx(best)
   }
 
-  const gridColor = dark ? 'rgba(255,255,255,0.14)' : 'rgba(12,15,46,0.1)'
-  const axisColor = dark ? 'rgba(255,255,255,0.45)' : 'rgba(12,15,46,0.35)'
-  const labelColor = dark ? '#ffffff' : '#0C0F2E'
+  const gridColor = dark ? 'rgb(var(--paper-rgb) / 0.14)' : 'rgb(var(--ink-rgb) / 0.1)'
+  const axisColor = dark ? 'rgb(var(--paper-rgb) / 0.45)' : 'rgb(var(--ink-rgb) / 0.35)'
+  const labelColor = dark ? 'var(--color-text-on-dark)' : 'var(--color-text-on-light)'
 
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-4 h-0.5" style={{ background: '#F5A623' }} />
+          <div className="w-4 h-0.5" style={{ background: 'var(--color-brand)' }} />
           <span className="text-xs" style={{ color: axisColor }}>
             {mode === 'mensal' ? 'Rentabilidade mensal' : 'Rentabilidade acumulada'} — {cls.name}
           </span>
@@ -128,9 +128,9 @@ export default function ReturnChart({
               aria-pressed={mode === m}
               className="px-3 py-1 text-xs font-semibold uppercase tracking-wider border rounded-full transition-colors duration-150"
               style={{
-                borderColor: mode === m ? '#F5A623' : (dark ? 'rgba(255,255,255,0.2)' : 'rgba(12,15,46,0.15)'),
-                background: mode === m ? 'rgba(245,166,35,0.12)' : 'transparent',
-                color: mode === m ? '#F5A623' : axisColor,
+                borderColor: mode === m ? 'var(--color-brand)' : (dark ? 'rgb(var(--paper-rgb) / 0.2)' : 'rgb(var(--ink-rgb) / 0.15)'),
+                background: mode === m ? 'rgb(var(--brand-rgb) / 0.12)' : 'transparent',
+                color: mode === m ? 'var(--color-brand)' : axisColor,
               }}
             >
               {m === 'acumulado' ? 'Desde o início' : 'Mensal'}
@@ -149,8 +149,8 @@ export default function ReturnChart({
               aria-pressed={c.name === cls.name}
               className="px-3 py-1 text-xs font-semibold border rounded-full transition-colors duration-150"
               style={{
-                borderColor: c.name === cls.name ? '#F5A623' : (dark ? 'rgba(255,255,255,0.2)' : 'rgba(12,15,46,0.15)'),
-                background: c.name === cls.name ? 'rgba(245,166,35,0.12)' : 'transparent',
+                borderColor: c.name === cls.name ? 'var(--color-brand)' : (dark ? 'rgb(var(--paper-rgb) / 0.2)' : 'rgb(var(--ink-rgb) / 0.15)'),
+                background: c.name === cls.name ? 'rgb(var(--brand-rgb) / 0.12)' : 'transparent',
                 color: c.name === cls.name ? labelColor : axisColor,
               }}
             >
@@ -171,8 +171,8 @@ export default function ReturnChart({
         >
           <defs>
             <linearGradient id="returnChartGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#F5A623" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#F5A623" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--color-brand)" stopOpacity="0.15" />
+              <stop offset="100%" stopColor="var(--color-brand)" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -192,10 +192,10 @@ export default function ReturnChart({
           ))}
 
           {!singlePoint && <path d={areaPath} fill="url(#returnChartGradient)" />}
-          {!singlePoint && <path d={linePath} fill="none" stroke="#F5A623" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />}
+          {!singlePoint && <path d={linePath} fill="none" stroke="var(--color-brand)" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />}
 
           {data.map((d, i) => (
-            <circle key={i} cx={toX(i)} cy={toY(d.value ?? 0)} r={2} fill="#F5A623" stroke={dark ? '#0C0F2E' : '#F7F2E6'} strokeWidth={1} />
+            <circle key={i} cx={toX(i)} cy={toY(d.value ?? 0)} r={2} fill="var(--color-brand)" stroke={dark ? 'var(--color-text-on-light)' : 'var(--color-surface-offwhite)'} strokeWidth={1} />
           ))}
 
           {/* Rótulos fixos no primeiro e último ponto */}
@@ -233,10 +233,10 @@ export default function ReturnChart({
               <line
                 x1={toX(hoverIdx)} x2={toX(hoverIdx)}
                 y1={pad.t} y2={pad.t + plotH}
-                stroke={dark ? 'rgba(255,255,255,0.35)' : 'rgba(12,15,46,0.25)'}
+                stroke={dark ? 'rgb(var(--paper-rgb) / 0.35)' : 'rgb(var(--ink-rgb) / 0.25)'}
                 strokeWidth={1} strokeDasharray="3,3"
               />
-              <circle cx={toX(hoverIdx)} cy={toY(data[hoverIdx].value ?? 0)} r={5} fill="#F5A623" stroke={dark ? '#0C0F2E' : '#F7F2E6'} strokeWidth={2} />
+              <circle cx={toX(hoverIdx)} cy={toY(data[hoverIdx].value ?? 0)} r={5} fill="var(--color-brand)" stroke={dark ? 'var(--color-text-on-light)' : 'var(--color-surface-offwhite)'} strokeWidth={2} />
             </>
           )}
 
@@ -265,18 +265,18 @@ export default function ReturnChart({
                 left: `${Math.min(Math.max(leftPct, 12), 88)}%`,
                 top: 0,
                 transform: 'translate(-50%, -100%)',
-                background: dark ? '#ffffff' : '#0C0F2E',
-                color: dark ? '#0C0F2E' : '#ffffff',
+                background: dark ? 'var(--color-text-on-dark)' : 'var(--color-text-on-light)',
+                color: dark ? 'var(--color-text-on-light)' : 'var(--color-text-on-dark)',
                 borderRadius: 6,
                 padding: '8px 12px',
                 fontSize: 11,
                 lineHeight: 1.4,
                 whiteSpace: 'nowrap',
-                boxShadow: '0 8px 20px rgba(7,2,34,0.25)',
+                boxShadow: '0 8px 20px rgb(var(--ink-rgb) / 0.25)',
               }}
             >
               <div style={{ opacity: 0.6, textTransform: 'capitalize', fontSize: 10 }}>{longMonth(data[idx].month)}</div>
-              <div style={{ fontWeight: 700, color: '#F5A623', fontSize: 13 }}>{primaryLabel}: {fmtPct(primary)}</div>
+              <div style={{ fontWeight: 700, color: 'var(--color-brand)', fontSize: 13 }}>{primaryLabel}: {fmtPct(primary)}</div>
               <div style={{ opacity: 0.6, fontSize: 10 }}>{secondaryLabel}: {fmtPct(secondary)}</div>
             </div>
           )

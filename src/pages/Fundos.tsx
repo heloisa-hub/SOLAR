@@ -1,48 +1,32 @@
 import { Link } from 'react-router'
-import { SolarMark } from '../components/SolarLogo'
+import PageHero from '../components/PageHero'
+import CTABand from '../components/CTABand'
 import { funds } from '../data/funds'
 import usePageTitle from '../hooks/usePageTitle'
+import { withBase } from '../lib/assetUrl'
 
 export default function Fundos() {
   usePageTitle('Fundos')
   return (
     <>
-      {/* Hero */}
-      <section
-        className="relative overflow-hidden flex flex-col justify-end"
-        style={{ background: 'linear-gradient(135deg, #080A20 0%, #0C0F2E 100%)', minHeight: '52vh', paddingTop: '118px' }}
-      >
-        <div
-          className="absolute pointer-events-none"
-          style={{ right: '-8%', top: '50%', transform: 'translateY(-50%)', width: '50vw', opacity: 0.06 }}
-        >
-          <SolarMark color="#F5A623" className="w-full h-full" />
-        </div>
-        <div className="site-container pb-16 relative z-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
-            Estratégias
-          </p>
-          <div className="w-8 h-px mb-6" style={{ background: '#F5A623' }} />
-          <h1
-            className="font-bold leading-[1.06] text-white max-w-3xl"
-            style={{ fontSize: 'clamp(1.8rem, 3vw, 2.6rem)' }}
-          >
-            Fundos construídos com disciplina de crédito.
-          </h1>
-        </div>
-      </section>
+      <PageHero
+        image={withBase('/img/page-hero-sol.jpg')}
+        eyebrow="Estratégias"
+        titleLine1="Fundos construídos com"
+        titleLine2="disciplina de crédito."
+      />
 
       {/* Intro */}
-      <section style={{ background: '#F7F2E6' }} className="py-16 lg:py-20">
+      <section style={{ background: 'var(--color-surface-offwhite)' }} className="py-16 lg:py-20">
         <div className="site-container max-w-3xl">
-          <p className="text-base leading-relaxed" style={{ color: 'rgba(12,15,46,0.65)' }}>
+          <p className="text-base leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
             Cada veículo Solar possui política de investimento própria, prestadores independentes e relatórios periódicos. As estratégias são construídas a partir de originação próxima e análise individual de crédito — não de modelos de prateleira.
           </p>
         </div>
       </section>
 
       {/* Fund cards */}
-      <section style={{ background: '#EDE6D3' }} className="py-12 lg:py-16 pb-24 lg:pb-32">
+      <section style={{ background: 'var(--color-surface-cream)' }} className="py-12 lg:py-16 pb-24 lg:pb-32">
         <div className="site-container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {funds.map((fund) => (
@@ -50,34 +34,34 @@ export default function Fundos() {
                 key={fund.slug}
                 to={`/fundos/${fund.slug}`}
                 className="group block border transition-all duration-200"
-                style={{ background: '#F7F2E6', borderColor: 'rgba(12,15,46,0.10)' }}
+                style={{ background: 'var(--color-surface-offwhite)', borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}
               >
                 <div className="p-8 flex flex-col h-full">
                   {/* Strategy label */}
-                  <p className="text-xs font-semibold uppercase tracking-wider mb-6" style={{ color: '#F5A623' }}>
+                  <p className="font-semibold uppercase tracking-wider mb-6" style={{ color: 'var(--color-brand)', fontSize: 'var(--text-label-size)' }}>
                     {fund.strategyLabel}
                   </p>
 
                   {/* Name */}
                   <h2
                     className="font-bold mb-3 leading-snug transition-colors duration-200 group-hover:text-solar-amber"
-                    style={{ color: '#0C0F2E', fontSize: 'clamp(1.1rem, 1.8vw, 1.4rem)' }}
+                    style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-h3-size)' }}
                   >
                     {fund.name}
                   </h2>
 
                   {/* Tagline */}
-                  <p className="text-base font-medium leading-relaxed mb-3 flex-1" style={{ color: 'rgba(12,15,46,0.75)' }}>
+                  <p className="text-base font-medium leading-relaxed mb-3 flex-1" style={{ color: 'rgb(var(--ink-rgb) / 0.75)' }}>
                     {fund.tagline}
                   </p>
-                  <p className="text-xs mb-6" style={{ color: 'rgba(12,15,46,0.4)' }}>
+                  <p className="text-xs mb-6" style={{ color: 'rgb(var(--ink-rgb) / 0.4)' }}>
                     PL {fund.aumShort} · {fund.publicTarget} · Condomínio {fund.condominium}
                   </p>
 
                   {/* Key metrics row */}
                   <div
                     className="grid grid-cols-2 lg:grid-cols-4 gap-3 pt-6 mt-auto border-t mb-8"
-                    style={{ borderColor: 'rgba(12,15,46,0.10)' }}
+                    style={{ borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}
                   >
                     {[
                       ['Mês', fund.returns.month],
@@ -86,10 +70,10 @@ export default function Fundos() {
                       ['Desde o início', fund.returns.sinceInception],
                     ].map(([label, value]) => (
                       <div key={label as string}>
-                        <p className="text-xs uppercase tracking-wider mb-1" style={{ color: 'rgba(12,15,46,0.4)' }}>
+                        <p className="text-xs uppercase tracking-wider mb-1" style={{ color: 'rgb(var(--ink-rgb) / 0.4)' }}>
                           {label}
                         </p>
-                        <p className="text-sm font-semibold" style={{ color: '#0C0F2E' }}>
+                        <p className="text-sm font-semibold" style={{ color: 'var(--color-text-on-light)' }}>
                           {value == null ? '—' : `${(value as number).toFixed(2).replace('.', ',')}%`}
                         </p>
                       </div>
@@ -98,14 +82,14 @@ export default function Fundos() {
 
                   {/* CTA */}
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgba(12,15,46,0.35)' }}>
+                    <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: 'rgb(var(--ink-rgb) / 0.35)' }}>
                       CNPJ {fund.cnpj}
                     </p>
                     <span
                       className="text-sm font-semibold uppercase tracking-wider flex items-center gap-2 transition-all duration-200 group-hover:gap-3"
-                      style={{ color: '#0C0F2E' }}
+                      style={{ color: 'var(--color-text-on-light)' }}
                     >
-                      Conheça o fundo <span style={{ color: '#F5A623' }}>→</span>
+                      Conheça o fundo <span style={{ color: 'var(--color-brand)' }}>→</span>
                     </span>
                   </div>
                 </div>
@@ -115,32 +99,11 @@ export default function Fundos() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative overflow-hidden py-16" style={{ background: '#F5A623' }}>
-        <div
-          className="absolute pointer-events-none"
-          style={{ right: '-4%', top: '50%', transform: 'translateY(-50%)', width: 'clamp(180px, 24vw, 360px)', opacity: 0.12 }}
-        >
-          <SolarMark color="#0C0F2E" className="w-full h-auto" />
-        </div>
-        <div className="site-container relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <h2 className="font-bold text-xl mb-1" style={{ color: '#0C0F2E' }}>
-              Tem interesse em investir em algum fundo Solar?
-            </h2>
-            <p className="text-sm" style={{ color: 'rgba(12,15,46,0.6)' }}>
-              Entre em contato para falar com um especialista.
-            </p>
-          </div>
-          <Link
-            to="/contato"
-            className="inline-flex items-center px-8 py-4 text-sm font-semibold uppercase tracking-wider border-2 rounded flex-shrink-0 transition-all duration-200 hover:bg-solar-navy hover:border-solar-navy hover:text-white"
-            style={{ borderColor: '#0C0F2E', color: '#0C0F2E' }}
-          >
-            Fale com a Solar
-          </Link>
-        </div>
-      </section>
+      <CTABand
+        title="Tem interesse em investir em algum fundo Solar?"
+        body="Entre em contato para falar com um especialista."
+        primaryButton={{ label: 'Fale com a Solar', to: '/contato' }}
+      />
     </>
   )
 }

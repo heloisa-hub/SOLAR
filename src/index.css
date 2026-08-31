@@ -1,14 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
 @import 'tailwindcss';
+@import './styles/tokens.css';
 
 @theme {
-  --color-solar-navy: #0C0F2E;
-  --color-solar-navy-mid: #131737;
-  --color-solar-navy-card: #1A1E45;
-  --color-solar-amber: #F5A623;
-  --color-solar-amber-dark: #CF8A1A;
-  --color-solar-cream: #F7F2E6;
-  --color-solar-cream-mid: #EDE6D3;
+  /* Gera as classes utilitárias do Tailwind (bg-solar-navy, text-solar-amber
+     etc.) — os valores em si vêm de src/styles/tokens.css, única fonte de
+     hex do projeto. */
+  --color-solar-navy: var(--color-surface-dark);
+  --color-solar-navy-mid: var(--color-surface-dark-elevated);
+  --color-solar-amber: var(--color-brand);
+  --color-solar-amber-dark: var(--color-brand-strong);
+  --color-solar-cream: var(--color-surface-offwhite);
+  --color-solar-cream-mid: var(--color-surface-cream);
   --font-sans: 'Montserrat', system-ui, sans-serif;
 }
 
@@ -22,12 +25,13 @@ body {
   font-family: 'Montserrat', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F7F2E6;
-  color: #0C0F2E;
+  background-color: var(--color-surface-offwhite);
+  color: var(--color-text-on-light);
 }
 
 .site-container {
   width: 100%;
+  max-width: var(--container-max);
   margin-left: auto;
   margin-right: auto;
   padding-left: clamp(1.5rem, 4vw, 5rem);

@@ -47,13 +47,13 @@ export function PortfolioDonut({ categories }: { categories: PortfolioCategory[]
               onMouseLeave={() => setActive(null)}
             />
           ))}
-          <circle cx={cx} cy={cy} r={R * 0.55} fill="#F7F2E6" />
+          <circle cx={cx} cy={cy} r={R * 0.55} fill="var(--color-surface-offwhite)" />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-6">
-          <span className="font-bold leading-none" style={{ color: '#0C0F2E', fontSize: '1.1rem' }}>
+          <span className="font-bold leading-none" style={{ color: 'var(--color-text-on-light)', fontSize: '1.1rem' }}>
             {fmt1(shown.value)}
           </span>
-          <span className="text-[10px] leading-tight mt-1" style={{ color: 'rgba(12,15,46,0.5)' }}>
+          <span className="leading-tight mt-1" style={{ color: 'rgb(var(--ink-rgb) / 0.5)', fontSize: 'var(--text-label-size)' }}>
             {shown.name}
           </span>
         </div>
@@ -63,13 +63,13 @@ export function PortfolioDonut({ categories }: { categories: PortfolioCategory[]
           <div
             key={i}
             className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer transition-colors duration-150"
-            style={{ background: active === i ? 'rgba(12,15,46,0.04)' : 'transparent' }}
+            style={{ background: active === i ? 'rgb(var(--ink-rgb) / 0.04)' : 'transparent' }}
             onMouseEnter={() => setActive(i)}
             onMouseLeave={() => setActive(null)}
           >
             <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: c.color }} />
-            <span className="text-xs" style={{ color: 'rgba(12,15,46,0.65)' }}>
-              {c.name} <span className="font-semibold" style={{ color: '#0C0F2E' }}>{fmt1(c.value)}</span>
+            <span className="text-xs" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
+              {c.name} <span className="font-semibold" style={{ color: 'var(--color-text-on-light)' }}>{fmt1(c.value)}</span>
             </span>
           </div>
         ))}
@@ -88,16 +88,16 @@ export function AgingBars({ buckets, height = 260 }: { buckets: AgingBucket[]; h
     <div className="flex items-end gap-2" style={{ height }}>
       {buckets.map((b, i) => (
         <div key={i} className="flex-1 h-full flex flex-col items-center justify-end min-w-0">
-          <span className="text-[10px] font-semibold mb-1.5 whitespace-nowrap" style={{ color: '#0C0F2E' }}>
+          <span className="font-semibold mb-1.5 whitespace-nowrap" style={{ color: 'var(--color-text-on-light)', fontSize: 'var(--text-label-size)' }}>
             {fmt1(b.value)}
           </span>
           <div
             className="w-full rounded-t-sm transition-all duration-300"
-            style={{ height: Math.max((b.value / max) * barArea, 2), background: '#F5A623' }}
+            style={{ height: Math.max((b.value / max) * barArea, 2), background: 'var(--color-brand)' }}
           />
           <span
-            className="text-[9px] leading-tight text-center mt-2"
-            style={{ color: 'rgba(12,15,46,0.55)' }}
+            className="leading-tight text-center mt-2"
+            style={{ color: 'rgb(var(--ink-rgb) / 0.55)', fontSize: 'var(--text-label-size)' }}
           >
             {b.label}
           </span>

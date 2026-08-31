@@ -35,14 +35,14 @@ export default function Header() {
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: `rgba(12, 15, 46, ${bgOpacity})`,
+        background: `rgb(var(--ink-rgb) / ${bgOpacity})`,
         backdropFilter: 'blur(12px)',
       }}
     >
       <div className="site-container">
         <div className="flex items-center justify-between" style={{ height: '90px' }}>
           <Link to="/" aria-label="Solar Capital — Início" className="flex-shrink-0">
-            <SolarWordmark symbolColor="#F5A623" textColor="#ffffff" size="md" />
+            <SolarWordmark size="md" />
           </Link>
 
           {/* Desktop nav */}
@@ -54,14 +54,14 @@ export default function Header() {
                 aria-current={isActive(to) ? 'page' : undefined}
                 className="relative text-sm font-medium whitespace-nowrap transition-colors duration-200"
                 style={{
-                  color: isActive(to) ? '#F5A623' : 'rgba(255,255,255,0.75)',
+                  color: isActive(to) ? 'var(--color-brand)' : 'rgb(var(--paper-rgb) / 0.75)',
                 }}
               >
                 {label}
                 {isActive(to) && (
                   <span
                     className="absolute -bottom-1 left-0 right-0 h-px"
-                    style={{ background: '#F5A623' }}
+                    style={{ background: 'var(--color-brand)' }}
                   />
                 )}
               </Link>
@@ -73,11 +73,11 @@ export default function Header() {
               to="/contato"
               className="hidden xl:inline-flex items-center px-6 py-2.5 text-sm font-semibold uppercase tracking-wider rounded transition-all duration-200"
               style={{
-                background: '#F5A623',
-                color: '#0C0F2E',
+                background: 'var(--color-brand)',
+                color: 'var(--color-text-on-light)',
               }}
-              onMouseEnter={e => ((e.target as HTMLElement).style.background = '#CF8A1A')}
-              onMouseLeave={e => ((e.target as HTMLElement).style.background = '#F5A623')}
+              onMouseEnter={e => ((e.target as HTMLElement).style.background = 'var(--color-brand-strong)')}
+              onMouseLeave={e => ((e.target as HTMLElement).style.background = 'var(--color-brand)')}
             >
               Fale com a Solar
             </Link>
@@ -113,8 +113,8 @@ export default function Header() {
         className="xl:hidden overflow-hidden transition-all duration-300"
         style={{
           maxHeight: mobileOpen ? '400px' : '0',
-          background: 'rgba(12, 15, 46, 0.98)',
-          borderTop: mobileOpen ? '1px solid rgba(255,255,255,0.08)' : 'none',
+          background: 'rgb(var(--ink-rgb) / 0.98)',
+          borderTop: mobileOpen ? '1px solid rgb(var(--paper-rgb) / 0.08)' : 'none',
         }}
       >
         <div className="site-container py-6 flex flex-col gap-4">
@@ -123,7 +123,7 @@ export default function Header() {
               key={to}
               to={to}
               className="text-base font-medium py-1"
-              style={{ color: isActive(to) ? '#F5A623' : 'rgba(255,255,255,0.8)' }}
+              style={{ color: isActive(to) ? 'var(--color-brand)' : 'rgb(var(--paper-rgb) / 0.8)' }}
             >
               {label}
             </Link>
@@ -131,7 +131,7 @@ export default function Header() {
           <Link
             to="/contato"
             className="mt-2 inline-flex items-center justify-center px-6 py-3 text-sm font-semibold uppercase tracking-wider rounded"
-            style={{ background: '#F5A623', color: '#0C0F2E' }}
+            style={{ background: 'var(--color-brand)', color: 'var(--color-text-on-light)' }}
           >
             Fale com a Solar
           </Link>

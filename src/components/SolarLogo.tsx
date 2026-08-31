@@ -35,22 +35,29 @@ export function SolarLogoFull({
  * assim dá pra controlar cor/tamanho livremente e manter nítido em
  * qualquer tela. Sempre empilhado (símbolo em cima, texto embaixo).
  */
+type SolarColorVariant = 'brand' | 'white' | 'navy'
+
+const VARIANT_TEXT_COLOR: Record<SolarColorVariant, string> = {
+  brand: 'var(--color-brand)',
+  white: 'var(--color-text-on-dark)',
+  navy: 'var(--color-text-on-light)',
+}
+
 export function SolarWordmark({
-  symbolColor = '#F5A623',
-  textColor = '#ffffff',
+  symbolVariant = 'brand',
+  textVariant = 'white',
   size = 'md',
   align = 'center',
   className = '',
 }: {
-  symbolColor?: string
-  textColor?: string
+  symbolVariant?: SolarColorVariant
+  textVariant?: SolarColorVariant
   size?: 'sm' | 'md'
   align?: 'center' | 'start'
   className?: string
 }) {
-  const wantsWhite = symbolColor === '#ffffff' || symbolColor === 'white'
-  const wantsNavy = symbolColor === '#0C0F2E' || symbolColor === '#070222' || symbolColor === 'navy'
-  const symbolSrc = wantsWhite ? SIMBOLO_WHITE : wantsNavy ? SIMBOLO_NAVY : SIMBOLO_GOLD
+  const symbolSrc = symbolVariant === 'white' ? SIMBOLO_WHITE : symbolVariant === 'navy' ? SIMBOLO_NAVY : SIMBOLO_GOLD
+  const textColor = VARIANT_TEXT_COLOR[textVariant]
   const symbolHeight = size === 'sm' ? 26 : 32
   return (
     <div className={`flex flex-col ${align === 'center' ? 'items-center' : 'items-start'} ${className}`}>
@@ -77,16 +84,14 @@ export function SolarWordmark({
  * "Baixo contraste — evitar") — nesse caso usa branco.
  */
 export function SolarMark({
-  color = '#F5A623',
+  variant = 'brand',
   className = '',
 }: {
-  color?: string
+  variant?: SolarColorVariant
   className?: string
 }) {
-  const wantsWhite = color === '#ffffff' || color === 'white'
-  const wantsNavy = color === '#0C0F2E' || color === '#070222' || color === 'navy'
   // Navy pedido sobre fundo dourado vira branco — regra do Brand Book.
-  const src = wantsWhite || wantsNavy ? SIMBOLO_WHITE : SIMBOLO_GOLD
+  const src = variant === 'brand' ? SIMBOLO_GOLD : SIMBOLO_WHITE
   return (
     <img
       src={src}
