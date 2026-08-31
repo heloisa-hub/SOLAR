@@ -80,7 +80,7 @@ export default function Home() {
   return (
     <>
       {/* ── Hero (video + slogan + KPI strip, tudo na primeira tela) ── */}
-      <section className="relative overflow-hidden" style={{ minHeight: '100svh' }}>
+      <section className="relative overflow-hidden flex flex-col" style={{ minHeight: '100svh' }}>
         <video
           autoPlay muted loop playsInline
           className="absolute inset-0 w-full h-full object-cover object-center"
@@ -99,9 +99,14 @@ export default function Home() {
           <SolarMark color="#F5A623" className="w-full h-full" />
         </div>
 
+        {/* Bloco de texto ocupa o espaço flexível entre o header e a
+            faixa de KPIs, que fica sempre ancorada no fim do flex — assim
+            os indicadores nunca ficam "empurrados" pra fora da primeira
+            tela em telas mais baixas (o padding-bottom fixo antigo não
+            escalava com a altura real do viewport). */}
         <div
-          className="relative z-10 site-container flex flex-col justify-center"
-          style={{ minHeight: '100svh', paddingTop: '124px', paddingBottom: '15.5rem' }}
+          className="relative z-10 site-container flex flex-col justify-center flex-1"
+          style={{ paddingTop: '124px', paddingBottom: '2.5rem' }}
         >
           <div style={{ maxWidth: 'clamp(500px, 46vw, 820px)' }}>
             <p className="font-semibold uppercase tracking-[0.3em] mb-5" style={{ color: '#F5A623', fontSize: '11px' }}>
@@ -145,11 +150,11 @@ export default function Home() {
             cor sólida bem atrás dos números, pra garantir legibilidade. */}
         <div
           ref={kpiRef}
-          className="absolute left-0 right-0 bottom-0 z-10"
+          className="relative z-10"
           style={{ background: 'linear-gradient(to bottom, rgba(12,15,46,0) 0%, rgba(12,15,46,0.55) 60%, #0C0F2E 82%)' }}
         >
           <div className="overflow-x-auto">
-            <div className="flex min-w-max site-container" style={{ paddingTop: '7rem', paddingBottom: '2.25rem' }}>
+            <div className="flex min-w-max site-container" style={{ paddingTop: '3rem', paddingBottom: '2.25rem' }}>
               {kpis.map((k, i) => (
                 <div
                   key={i}
@@ -189,30 +194,32 @@ export default function Home() {
       {/* ── Manifesto: O que nos move + O que a estrutura entrega ── */}
       <section style={{ background: '#F5A623' }} className="py-20 lg:py-24">
         <div className="site-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: 'rgba(12,15,46,0.55)' }}>
-                O que nos move
-              </p>
-              <h2
-                className="font-bold leading-[1.1] mb-8"
-                style={{ color: '#0C0F2E', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', letterSpacing: '-0.02em' }}
-              >
-                Capital não resolve nada sozinho.
-                <br />
-                Estrutura resolve.
-              </h2>
-              <div className="space-y-5 mb-10">
-                <p className="text-base leading-loose" style={{ color: 'rgba(12,15,46,0.7)' }}>
-                  Toda empresa tem uma dinâmica própria de caixa, de ativos e de risco. Por isso não partimos de um produto de prateleira: partimos do negócio que existe por trás da operação.
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+            <div className="flex flex-col h-full">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: 'rgba(12,15,46,0.55)' }}>
+                  O que nos move
                 </p>
-                <p className="text-base leading-loose" style={{ color: 'rgba(12,15,46,0.7)' }}>
-                  Estruturamos crédito para que boas empresas continuem crescendo — e para que o investidor acesse a economia real com disciplina, garantia e governança.
-                </p>
+                <h2
+                  className="font-bold leading-[1.1] mb-8"
+                  style={{ color: '#0C0F2E', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', letterSpacing: '-0.02em' }}
+                >
+                  Capital não resolve nada sozinho.
+                  <br />
+                  Estrutura resolve.
+                </h2>
+                <div className="space-y-5 mb-10">
+                  <p className="text-base leading-loose" style={{ color: 'rgba(12,15,46,0.7)' }}>
+                    Toda empresa tem uma dinâmica própria de caixa, de ativos e de risco. Por isso não partimos de um produto de prateleira: partimos do negócio que existe por trás da operação.
+                  </p>
+                  <p className="text-base leading-loose" style={{ color: 'rgba(12,15,46,0.7)' }}>
+                    Estruturamos crédito para que boas empresas continuem crescendo — e para que o investidor acesse a economia real com disciplina, garantia e governança.
+                  </p>
+                </div>
               </div>
               <Link
                 to="/sobre"
-                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest rounded-full px-6 py-3 transition-all duration-200 hover:opacity-80"
+                className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest rounded-full px-6 py-3 transition-all duration-200 hover:opacity-80 self-start mt-auto"
                 style={{ background: '#0C0F2E', color: '#F5A623' }}
               >
                 Conheça a Solar <span>→</span>
@@ -243,22 +250,29 @@ export default function Home() {
       {/* ── Nossa Atuação (diferenciais + timeline vertical) ── */}
       <section style={{ background: '#F7F2E6' }} className="py-24 lg:py-28">
         <div className="site-container">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: '#F5A623' }}>
-            Nossa Atuação
-          </p>
-          <div className="w-8 h-px mb-8" style={{ background: '#F5A623' }} />
-          <h2
-            className="font-bold leading-[1.1] mb-16"
-            style={{ color: '#0C0F2E', fontSize: 'clamp(1.6rem, 2.6vw, 2.2rem)', letterSpacing: '-0.02em', maxWidth: '600px' }}
-          >
-            Cada operação começa pelo entendimento do negócio.
-          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-10 lg:mb-12">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: '#F5A623' }}>
+                Nossa Atuação
+              </p>
+              <div className="w-8 h-px mb-8" style={{ background: '#F5A623' }} />
+              <h2
+                className="font-bold leading-[1.1]"
+                style={{ color: '#0C0F2E', fontSize: 'clamp(1.6rem, 2.6vw, 2.2rem)', letterSpacing: '-0.02em', maxWidth: '600px' }}
+              >
+                Cada operação começa pelo entendimento do negócio.
+              </h2>
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-[0.3em]" style={{ color: '#F5A623' }}>
+              Processo
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* 4 cards escuros */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* 4 cards escuros — mesma altura do Processo ao lado */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
               {nossaAtuacao.map((v, i) => (
-                <div key={i} className="p-6" style={{ background: '#0C0F2E' }}>
+                <div key={i} className="p-6 flex flex-col justify-center" style={{ background: '#0C0F2E' }}>
                   <h3 className="font-semibold text-sm leading-snug mb-2 text-white">{v.title}</h3>
                   <p className="text-xs font-light leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
                     {v.body}
@@ -269,9 +283,6 @@ export default function Home() {
 
             {/* Timeline vertical */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-8" style={{ color: '#F5A623' }}>
-                Processo
-              </p>
               <div className="relative pl-6">
                 <div
                   className="absolute top-1 bottom-1 w-px"

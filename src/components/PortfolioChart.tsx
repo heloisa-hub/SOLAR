@@ -8,6 +8,9 @@ function fmt1(v: number) {
 /** Donut interativo — passar o mouse numa fatia ou na legenda destaca as duas juntas. */
 export function PortfolioDonut({ categories }: { categories: PortfolioCategory[] }) {
   const [active, setActive] = useState<number | null>(null)
+
+  if (categories.length === 0) return null
+
   const total = categories.reduce((s, c) => s + c.value, 0) || 1
   let cumulative = 0
   const R = 60, cx = 80, cy = 80
@@ -75,19 +78,29 @@ export function PortfolioDonut({ categories }: { categories: PortfolioCategory[]
   )
 }
 
-/** Barras de prazo de vencimento da carteira (aging). */
-export function AgingBars({ buckets }: { buckets: AgingBucket[] }) {
+/** Barras verticais de prazo de vencimento da carteira (aging). */
+export function AgingBars({ buckets, height = 260 }: { buckets: AgingBucket[]; height?: number }) {
+  if (buckets.length === 0) return null
+  const max = Math.max(...buckets.map((b) => b.value), 1)
+  const barArea = height - 60
+
   return (
-    <div className="space-y-3">
+    <div className="flex items-end gap-2" style={{ height }}>
       {buckets.map((b, i) => (
-        <div key={i}>
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-xs" style={{ color: 'rgba(12,15,46,0.6)' }}>{b.label}</span>
-            <span className="text-xs font-semibold" style={{ color: '#0C0F2E' }}>{fmt1(b.value)}</span>
-          </div>
-          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'rgba(12,15,46,0.08)' }}>
-            <div className="h-full rounded-full" style={{ width: `${Math.min(100, b.value)}%`, background: '#0C0F2E' }} />
-          </div>
+        <div key={i} className="flex-1 h-full flex flex-col items-center justify-end min-w-0">
+          <span className="text-[10px] font-semibold mb-1.5 whitespace-nowrap" style={{ color: '#0C0F2E' }}>
+            {fmt1(b.value)}
+          </span>
+          <div
+            className="w-full rounded-t-sm transition-all duration-300"
+            style={{ height: Math.max((b.value / max) * barArea, 2), background: '#F5A623' }}
+          />
+          <span
+            className="text-[9px] leading-tight text-center mt-2"
+            style={{ color: 'rgba(12,15,46,0.55)' }}
+          >
+            {b.label}
+          </span>
         </div>
       ))}
     </div>

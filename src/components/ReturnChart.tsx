@@ -211,8 +211,18 @@ export default function ReturnChart({
               {fmtPct(values[values.length - 1])}
             </text>
           )}
+          {/* Acima do ponto (nunca abaixo) — evita colidir com o rótulo do
+              eixo X, já que o primeiro ponto costuma ficar perto de 0,
+              bem próximo da base do gráfico. */}
           {values.length >= 2 && (
-            <text x={toX(0)} y={toY(values[0]) + 16} textAnchor="start" fontSize={10} fill={axisColor}>
+            <text
+              x={toX(0) + 4}
+              y={Math.max(toY(values[0]) - 9, pad.t + 9)}
+              textAnchor="start"
+              fontSize={10}
+              fontWeight={700}
+              fill={labelColor}
+            >
               {fmtPct(values[0])}
             </text>
           )}

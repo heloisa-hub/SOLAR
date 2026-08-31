@@ -67,7 +67,7 @@ export default function Fundos() {
                   </h2>
 
                   {/* Tagline */}
-                  <p className="text-sm leading-relaxed mb-2 flex-1" style={{ color: 'rgba(12,15,46,0.6)' }}>
+                  <p className="text-base font-medium leading-relaxed mb-3 flex-1" style={{ color: 'rgba(12,15,46,0.75)' }}>
                     {fund.tagline}
                   </p>
                   <p className="text-xs mb-6" style={{ color: 'rgba(12,15,46,0.4)' }}>

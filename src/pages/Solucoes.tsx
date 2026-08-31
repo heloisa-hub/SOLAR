@@ -116,13 +116,36 @@ export default function Solucoes() {
       {/* Intro */}
       <section style={{ background: '#F7F2E6' }} className="py-20 lg:py-28">
         <div className="site-container">
-          <div className="max-w-3xl">
-            <p className="text-xl font-semibold mb-6 leading-snug" style={{ color: '#0C0F2E' }}>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] mb-3" style={{ color: '#F5A623' }}>
+            Como pensamos
+          </p>
+          <div className="w-8 h-px mb-10" style={{ background: '#F5A623' }} />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+            <h2
+              className="font-bold leading-[1.1]"
+              style={{ color: '#0C0F2E', fontSize: 'clamp(1.8rem, 3vw, 2.6rem)', letterSpacing: '-0.02em' }}
+            >
               Não partimos de uma estrutura pronta.
-            </p>
-            <p className="text-base leading-relaxed" style={{ color: 'rgba(12,15,46,0.65)' }}>
+            </h2>
+            <p className="text-base leading-loose" style={{ color: 'rgba(12,15,46,0.7)' }}>
               Analisamos a empresa, seus recebíveis, garantias e necessidade de capital antes de propor uma solução. O instrumento certo nasce do diagnóstico — não o contrário. Por isso as estruturas que construímos são mais robustas, mais eficientes e mais adequadas à realidade de quem as contrata.
             </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px" style={{ background: 'rgba(12,15,46,0.10)' }}>
+            {[
+              { title: 'Diagnóstico primeiro', body: 'Entendemos o negócio antes de propor qualquer instrumento.' },
+              { title: 'Estrutura sob medida', body: 'Nada de produto de prateleira — cada operação nasce do que a empresa já possui.' },
+              { title: 'Disciplina de crédito', body: 'Garantias, covenants e capacidade de pagamento analisados caso a caso.' },
+            ].map((c, i) => (
+              <div key={i} className="p-6" style={{ background: '#EDE6D3' }}>
+                <h3 className="font-semibold text-sm leading-snug mb-1.5" style={{ color: '#0C0F2E' }}>
+                  {c.title}
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: 'rgba(12,15,46,0.6)' }}>
+                  {c.body}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -292,7 +315,7 @@ export default function Solucoes() {
               {process.map((p, i) => (
                 <div key={i}>
                   <span
-                    className="block mb-5 sm:mx-auto"
+                    className="block mb-5"
                     style={{ width: 11, height: 11, borderRadius: '50%', background: '#F5A623' }}
                   />
                   <span className="block text-xs font-bold mb-2" style={{ color: '#F5A623' }}>

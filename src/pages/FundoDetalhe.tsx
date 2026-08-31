@@ -250,19 +250,23 @@ export default function FundoDetalhe() {
               <h2 className="font-bold text-xl mb-10" style={{ color: '#0C0F2E' }}>Carteira & Crédito</h2>
               {fund.portfolio ? (
                 <>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-                    <div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 items-stretch">
+                    <div className="flex flex-col">
                       <h3 className="font-bold text-sm uppercase tracking-wider mb-6" style={{ color: 'rgba(12,15,46,0.45)' }}>
                         Composição da carteira
                       </h3>
-                      <PortfolioDonut categories={fund.portfolio.categories} />
+                      <div className="flex-1 flex items-center" style={{ minHeight: 260 }}>
+                        <PortfolioDonut categories={fund.portfolio.categories} />
+                      </div>
                     </div>
                     {fund.portfolio.aging.length > 0 && (
-                      <div>
+                      <div className="flex flex-col">
                         <h3 className="font-bold text-sm uppercase tracking-wider mb-6" style={{ color: 'rgba(12,15,46,0.45)' }}>
                           Prazo da carteira (aging)
                         </h3>
-                        <AgingBars buckets={fund.portfolio.aging} />
+                        <div className="flex-1 flex items-end">
+                          <AgingBars buckets={fund.portfolio.aging} height={260} />
+                        </div>
                       </div>
                     )}
                   </div>
@@ -302,7 +306,7 @@ export default function FundoDetalhe() {
                 Linhas em cinza mostram o percentual do CDI equivalente a cada período.
               </p>
               <div className="grid grid-cols-1 gap-12 items-start">
-                <div className="p-6 border" style={{ background: '#EDE6D3', borderColor: 'rgba(12,15,46,0.08)' }}>
+                <div>
                   <ReturnChart classes={fund.classes} />
                 </div>
 
@@ -354,11 +358,11 @@ export default function FundoDetalhe() {
 
           {/* TAB 5 — Documentos */}
           {activeTab === 5 && (
-            <div className="max-w-2xl">
+            <div style={{ maxWidth: 'clamp(320px, 50vw, 760px)' }}>
               <h2 className="font-bold text-xl mb-10" style={{ color: '#0C0F2E' }}>Documentos</h2>
-              <div className="space-y-3">
+              <div className="divide-y" style={{ borderColor: 'rgba(12,15,46,0.10)' }}>
                 {fund.documents.map((doc, i) => (
-                  <div key={i} className="flex items-center justify-between p-5 border" style={{ background: '#EDE6D3', borderColor: 'rgba(12,15,46,0.08)' }}>
+                  <div key={i} className="flex items-center justify-between py-5 border-t first:border-t-0" style={{ borderColor: 'rgba(12,15,46,0.10)' }}>
                     <div>
                       <p className="text-sm font-semibold" style={{ color: '#0C0F2E' }}>{doc.name}</p>
                       {doc.date && <p className="text-xs mt-0.5" style={{ color: 'rgba(12,15,46,0.4)' }}>{doc.date}</p>}
@@ -368,13 +372,13 @@ export default function FundoDetalhe() {
                         href={withBase(doc.url)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-xs font-semibold uppercase tracking-wider px-4 py-2 border transition-all duration-200 hover:bg-solar-navy hover:border-solar-navy hover:text-white"
+                        className="text-xs font-semibold uppercase tracking-wider px-4 py-2 border transition-all duration-200 hover:bg-solar-navy hover:border-solar-navy hover:text-white flex-shrink-0"
                         style={{ borderColor: '#0C0F2E', color: '#0C0F2E' }}
                       >
                         Download
                       </a>
                     ) : (
-                      <span className="text-xs" style={{ color: 'rgba(12,15,46,0.35)' }}>Sob solicitação</span>
+                      <span className="text-xs flex-shrink-0" style={{ color: 'rgba(12,15,46,0.35)' }}>Sob solicitação</span>
                     )}
                   </div>
                 ))}
