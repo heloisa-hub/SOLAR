@@ -280,9 +280,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* 4 cards escuros — altura conforme o conteúdo */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+            {/* 4 cards escuros — mesma altura total do Processo ao lado;
+                o ícone fica ancorado no topo e o título+corpo centralizam
+                no espaço que sobra, então a altura extra não vira só um
+                vão morto embaixo. */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 auto-rows-fr">
               {nossaAtuacao.map((v, i) => (
                 <div
                   key={i}
@@ -292,7 +295,7 @@ export default function Home() {
                   onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgb(var(--paper-rgb) / 0.08)')}
                 >
                   <v.icon size={24} strokeWidth={1.5} style={{ color: 'var(--color-brand)' }} />
-                  <div>
+                  <div className="flex-1 flex flex-col justify-center">
                     <h3
                       className="font-semibold mb-2 text-white"
                       style={{ fontSize: 'var(--text-h3-size)', lineHeight: 'var(--text-h3-leading)' }}
