@@ -311,7 +311,7 @@ export default function Home() {
       {/* ── Track record (painel de texto + foto sangrada) ── */}
       <section style={{ background: '#F7F2E6' }} className="grid grid-cols-1 lg:grid-cols-2">
         <div
-          className="flex flex-col justify-center py-24 lg:py-0"
+          className="flex flex-col justify-center py-24"
           style={{ paddingLeft: 'clamp(1.5rem, 5vw, 8rem)', paddingRight: 'clamp(1.5rem, 5vw, 4rem)' }}
         >
           <p className="text-xs font-semibold uppercase tracking-[0.3em] mb-3" style={{ color: '#F5A623' }}>
