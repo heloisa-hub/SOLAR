@@ -9,9 +9,17 @@ function fmt1(v: number) {
 export function PortfolioDonut({ categories }: { categories: PortfolioCategory[] }) {
   const [active, setActive] = useState<number | null>(null)
 
-  if (categories.length === 0) return null
+  const rawTotal = categories.reduce((s, c) => s + c.value, 0)
 
-  const total = categories.reduce((s, c) => s + c.value, 0) || 1
+  if (categories.length === 0 || rawTotal <= 0) {
+    return (
+      <p className="text-sm" style={{ color: 'rgb(var(--ink-rgb) / 0.45)' }}>
+        Composição da carteira não disponível para este fundo.
+      </p>
+    )
+  }
+
+  const total = rawTotal
   let cumulative = 0
   const R = 60, cx = 80, cy = 80
 
@@ -20,13 +28,21 @@ export function PortfolioDonut({ categories }: { categories: PortfolioCategory[]
     const startAngle = (cumulative / total) * 360 - 90
     cumulative += cat.value
     const endAngle = (cumulative / total) * 360 - 90
+    // Uma fatia que soma ~100% do total tem início e fim no mesmo ponto do
+    // círculo — o arco SVG (M→L→A→Z) degenera e não desenha nada nesse
+    // caso. Desenhamos um círculo cheio em vez do arco quando isso acontece.
+    const isFullCircle = pct >= 0.9999
     const largeArc = pct > 0.5 ? 1 : 0
     const toRad = (deg: number) => (deg * Math.PI) / 180
     const x1 = cx + R * Math.cos(toRad(startAngle))
     const y1 = cy + R * Math.sin(toRad(startAngle))
     const x2 = cx + R * Math.cos(toRad(endAngle))
     const y2 = cy + R * Math.sin(toRad(endAngle))
-    return { ...cat, d: `M${cx},${cy} L${x1},${y1} A${R},${R} 0 ${largeArc} 1 ${x2},${y2} Z` }
+    return {
+      ...cat,
+      isFullCircle,
+      d: isFullCircle ? '' : `M${cx},${cy} L${x1},${y1} A${R},${R} 0 ${largeArc} 1 ${x2},${y2} Z`,
+    }
   })
 
   const top = categories.reduce((a, b) => (b.value > a.value ? b : a), categories[0])
@@ -36,17 +52,31 @@ export function PortfolioDonut({ categories }: { categories: PortfolioCategory[]
     <div className="flex flex-wrap items-center gap-8">
       <div className="relative flex-shrink-0" style={{ width: 160, height: 160 }}>
         <svg viewBox="0 0 160 160" className="w-40 h-40">
-          {segments.map((s, i) => (
-            <path
-              key={i}
-              d={s.d}
-              fill={s.color}
-              opacity={active == null || active === i ? 1 : 0.35}
-              style={{ cursor: 'pointer', transition: 'opacity 0.12s ease' }}
-              onMouseEnter={() => setActive(i)}
-              onMouseLeave={() => setActive(null)}
-            />
-          ))}
+          {segments.map((s, i) =>
+            s.isFullCircle ? (
+              <circle
+                key={i}
+                cx={cx}
+                cy={cy}
+                r={R}
+                fill={s.color}
+                opacity={active == null || active === i ? 1 : 0.35}
+                style={{ cursor: 'pointer', transition: 'opacity 0.12s ease' }}
+                onMouseEnter={() => setActive(i)}
+                onMouseLeave={() => setActive(null)}
+              />
+            ) : (
+              <path
+                key={i}
+                d={s.d}
+                fill={s.color}
+                opacity={active == null || active === i ? 1 : 0.35}
+                style={{ cursor: 'pointer', transition: 'opacity 0.12s ease' }}
+                onMouseEnter={() => setActive(i)}
+                onMouseLeave={() => setActive(null)}
+              />
+            )
+          )}
           <circle cx={cx} cy={cy} r={R * 0.55} fill="var(--color-surface-offwhite)" />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none px-6">

@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FundClass } from '../data/funds'
 
 const MONTHS_SHORT = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
@@ -42,6 +42,24 @@ export default function ReturnChart({
   const [mode, setMode] = useState<'acumulado' | 'mensal'>('acumulado')
   const [hoverIdx, setHoverIdx] = useState<number | null>(null)
   const svgRef = useRef<SVGSVGElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  // Largura medida do container — o viewBox usa esse valor em vez de uma
+  // constante fixa, senão o SVG desenha no tamanho nativo do viewBox e fica
+  // centralizado com sobra nas bordas sempre que o container é mais largo
+  // (preserveAspectRatio "meet", o padrão). Medir de verdade também evita
+  // distorcer texto/pontos, que aconteceria com preserveAspectRatio="none".
+  const [measuredWidth, setMeasuredWidth] = useState(640)
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect.width
+      if (w) setMeasuredWidth(w)
+    })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
 
   const cls = withHistory.find((c) => c.name === selectedClass) ?? withHistory[0]
 
@@ -55,7 +73,7 @@ export default function ReturnChart({
   const data = mode === 'mensal' ? cls.history : cumulative
   const values = data.map((d) => d.value ?? 0)
 
-  const W = 640
+  const W = measuredWidth
   const H = 220
   const pad = { l: 44, r: 16, t: 20, b: 26 }
   const plotW = W - pad.l - pad.r
@@ -160,7 +178,7 @@ export default function ReturnChart({
         </div>
       )}
 
-      <div className="relative">
+      <div className="relative" ref={containerRef}>
         <svg
           ref={svgRef}
           viewBox={`0 0 ${W} ${H}`}

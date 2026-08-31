@@ -8,7 +8,7 @@ import { PortfolioDonut, AgingBars } from '../components/PortfolioChart'
 import usePageTitle from '../hooks/usePageTitle'
 import { withBase } from '../lib/assetUrl'
 
-const TABS = ['Visão Geral', 'Estratégia', 'Estrutura', 'Carteira & Crédito', 'Rentabilidade', 'Documentos']
+const TABS = ['Visão Geral', 'Estratégia e Estrutura', 'Carteira & Crédito', 'Rentabilidade', 'Documentos']
 
 function fmtPct(v: number | null | undefined) {
   if (v == null) return '—'
@@ -162,14 +162,14 @@ export default function FundoDetalhe() {
             </div>
           )}
 
-          {/* TAB 1 — Estratégia */}
+          {/* TAB 1 — Estratégia e Estrutura */}
           {activeTab === 1 && (
-            <div className="max-w-4xl">
+            <div>
               <h2 className="font-bold text-xl mb-4" style={{ color: 'var(--color-text-on-light)' }}>Estratégia</h2>
-              <p className="text-base leading-relaxed mb-4" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
+              <p className="text-base leading-relaxed mb-4 max-w-3xl" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
                 {fund.description}
               </p>
-              <p className="text-base leading-relaxed mb-12" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
+              <p className="text-base leading-relaxed mb-12 max-w-3xl" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
                 {fund.strategyDetail}
               </p>
 
@@ -190,29 +190,20 @@ export default function FundoDetalhe() {
               <h3 className="font-bold text-sm uppercase tracking-wider mb-8" style={{ color: 'rgb(var(--ink-rgb) / 0.45)' }}>
                 A tese em três pontos
               </h3>
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
                 {fund.tesis.map((t, i) => (
                   <div key={i} className="p-6 border" style={{ background: 'var(--color-surface-cream)', borderColor: 'rgb(var(--ink-rgb) / 0.08)' }}>
-                    <div className="flex items-start gap-4">
-                      <span className="text-xs font-bold flex-shrink-0 mt-0.5" style={{ color: 'var(--color-brand)' }}>
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <div>
-                        <h4 className="font-bold text-sm mb-2" style={{ color: 'var(--color-text-on-light)' }}>{t.title}</h4>
-                        <p className="text-sm leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>{t.body}</p>
-                      </div>
-                    </div>
+                    <span className="block text-xs font-bold mb-3" style={{ color: 'var(--color-brand)' }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h4 className="font-bold text-sm mb-2" style={{ color: 'var(--color-text-on-light)' }}>{t.title}</h4>
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.6)' }}>{t.body}</p>
                   </div>
                 ))}
               </div>
-            </div>
-          )}
 
-          {/* TAB 2 — Estrutura */}
-          {activeTab === 2 && (
-            <div>
               <h2 className="font-bold text-xl mb-4" style={{ color: 'var(--color-text-on-light)' }}>Estrutura de capital</h2>
-              <p className="text-base leading-relaxed mb-10 max-w-2xl" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
+              <p className="text-base leading-relaxed mb-10 max-w-3xl" style={{ color: 'rgb(var(--ink-rgb) / 0.65)' }}>
                 O fundo emite diferentes classes de cotas com hierarquia de pagamento definida. As cotas Sênior têm preferência no recebimento e retorno-alvo predefinido. As cotas Subordinadas absorvem as primeiras perdas e recebem o excedente.
               </p>
               <div className="overflow-x-auto">
@@ -245,8 +236,8 @@ export default function FundoDetalhe() {
             </div>
           )}
 
-          {/* TAB 3 — Carteira & Crédito */}
-          {activeTab === 3 && (
+          {/* TAB 2 — Carteira & Crédito */}
+          {activeTab === 2 && (
             <div>
               <h2 className="font-bold text-xl mb-10" style={{ color: 'var(--color-text-on-light)' }}>Carteira & Crédito</h2>
               {fund.portfolio ? (
@@ -299,8 +290,8 @@ export default function FundoDetalhe() {
             </div>
           )}
 
-          {/* TAB 4 — Rentabilidade */}
-          {activeTab === 4 && (
+          {/* TAB 3 — Rentabilidade */}
+          {activeTab === 3 && (
             <div>
               <h2 className="font-bold text-xl mb-4" style={{ color: 'var(--color-text-on-light)' }}>Rentabilidade por classe de cota</h2>
               <p className="text-xs mb-10" style={{ color: 'rgb(var(--ink-rgb) / 0.45)' }}>
@@ -357,34 +348,47 @@ export default function FundoDetalhe() {
             </div>
           )}
 
-          {/* TAB 5 — Documentos */}
-          {activeTab === 5 && (
+          {/* TAB 4 — Documentos */}
+          {activeTab === 4 && (
             <div style={{ maxWidth: 'clamp(320px, 50vw, 760px)' }}>
-              <h2 className="font-bold text-xl mb-10" style={{ color: 'var(--color-text-on-light)' }}>Documentos</h2>
-              <div className="divide-y" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}>
-                {fund.documents.map((doc, i) => (
-                  <div key={i} className="flex items-center justify-between py-5 border-t first:border-t-0" style={{ borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}>
-                    <div>
+              <h2 className="font-bold text-xl mb-6" style={{ color: 'var(--color-text-on-light)' }}>Documentos</h2>
+              {fund.documents.length > 0 ? (
+                <div>
+                  {fund.documents.map((doc, i) => (
+                    <div
+                      key={i}
+                      className="grid grid-cols-[1fr_auto_auto] items-center gap-6 py-4 border-b"
+                      style={{ borderColor: 'rgb(var(--ink-rgb) / 0.10)' }}
+                    >
                       <p className="text-sm font-semibold" style={{ color: 'var(--color-text-on-light)' }}>{doc.name}</p>
-                      {doc.date && <p className="text-xs mt-0.5" style={{ color: 'rgb(var(--ink-rgb) / 0.4)' }}>{doc.date}</p>}
+                      <p className="text-xs whitespace-nowrap" style={{ color: 'rgb(var(--ink-rgb) / 0.4)' }}>{doc.date ?? '—'}</p>
+                      {doc.url ? (
+                        <a
+                          href={withBase(doc.url)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-semibold uppercase tracking-wider px-4 py-2 border-2 transition-all duration-200 hover:bg-solar-navy hover:text-white"
+                          style={{ borderColor: 'var(--color-text-on-light)', color: 'var(--color-text-on-light)' }}
+                        >
+                          Download
+                        </a>
+                      ) : (
+                        <span className="text-xs" style={{ color: 'rgb(var(--ink-rgb) / 0.35)' }}>Sob solicitação</span>
+                      )}
                     </div>
-                    {doc.url ? (
-                      <a
-                        href={withBase(doc.url)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs font-semibold uppercase tracking-wider px-4 py-2 border transition-all duration-200 hover:bg-solar-navy hover:border-solar-navy hover:text-white flex-shrink-0"
-                        style={{ borderColor: 'var(--color-text-on-light)', color: 'var(--color-text-on-light)' }}
-                      >
-                        Download
-                      </a>
-                    ) : (
-                      <span className="text-xs flex-shrink-0" style={{ color: 'rgb(var(--ink-rgb) / 0.35)' }}>Sob solicitação</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <p className="text-xs mt-8 leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.4)' }}>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-10 text-center border" style={{ background: 'var(--color-surface-cream)', borderColor: 'rgb(var(--ink-rgb) / 0.08)' }}>
+                  <p className="text-sm" style={{ color: 'rgb(var(--ink-rgb) / 0.45)' }}>
+                    Nenhum documento publicado para este fundo até o momento.
+                  </p>
+                  <Link to="/contato" className="inline-flex mt-4 text-sm font-semibold" style={{ color: 'var(--color-brand)' }}>
+                    Fale com a Solar →
+                  </Link>
+                </div>
+              )}
+              <p className="text-xs mt-6 leading-relaxed" style={{ color: 'rgb(var(--ink-rgb) / 0.4)' }}>
                 Documentos oficiais serão publicados aqui assim que disponibilizados pelo administrador.
               </p>
             </div>
