@@ -6,19 +6,16 @@ import { withBase } from '../lib/assetUrl'
 const team = [
   {
     name: 'Leonardo Ciasca',
-    role: 'Fundador & Sócio Gestor',
     initials: 'LC',
     bio: '25+ anos no mercado financeiro em crédito, Middle Market e Corporate. Sócio na Goal Capital, Diretor na Global Capital e 7 anos no HSBC. MBA pela USP; Mestrado em Política & Estratégia.',
   },
   {
     name: 'Diego Moreno',
-    role: 'Sócio',
     initials: 'DM',
     bio: '20+ anos em crédito, private equity e investment banking. CFO do BrSurgery, Head Healthcare LatAm na Fosun e VP de Equity Research no BofA Merrill Lynch. Administração e Finanças pela FEA-USP.',
   },
   {
     name: 'Luiz Simione',
-    role: 'Sócio',
     initials: 'LS',
     bio: 'Décadas de experiência em finanças na Ásia e América Latina. MD e Global Head of Forfaiting no HSBC (18 anos), CEO Ásia no Bradesco, Managing Partner na Cambury International. MBA pelo IMD; programa de liderança no INSEAD.',
   },
@@ -139,13 +136,7 @@ export default function Sobre() {
                 >
                   {p.initials}
                 </div>
-                <h3 className="font-bold text-base mb-1 text-white">{p.name}</h3>
-                <p
-                  className="text-xs font-semibold uppercase tracking-wider mb-5"
-                  style={{ color: 'var(--color-brand)' }}
-                >
-                  {p.role}
-                </p>
+                <h3 className="font-bold text-base mb-5 text-white">{p.name}</h3>
                 <p className="text-sm font-light leading-relaxed" style={{ color: 'rgb(var(--paper-rgb) / 0.5)' }}>
                   {p.bio}
                 </p>
